@@ -20,6 +20,13 @@ export default {
       return [];
     }
   },
+  getShows() {
+    if (store.getters.has_jwt) {
+      apiClient.defaults.headers.common["Authorization"] =
+        store.getters.raw_jwt;
+      return apiClient.get("/shows");
+    }
+  },
   subscribe(input) {
     if (store.getters.has_jwt) {
       apiClient.defaults.headers.common["Authorization"] =
