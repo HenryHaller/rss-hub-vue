@@ -13,7 +13,8 @@ const apiClient = axios.create({
 export default {
   getEpisodes() {
     if (store.getters.has_jwt) {
-      apiClient.defaults.headers.common["Authorization"] = store.getters.jwt;
+      apiClient.defaults.headers.common["Authorization"] =
+        store.getters.raw_jwt;
       return apiClient.get("/episodes");
     } else {
       return [];
@@ -21,7 +22,8 @@ export default {
   },
   subscribe(input) {
     if (store.getters.has_jwt) {
-      apiClient.defaults.headers.common["Authorization"] = store.getters.jwt;
+      apiClient.defaults.headers.common["Authorization"] =
+        store.getters.raw_jwt;
       return apiClient.post("/shows", input);
     } else {
       return false;

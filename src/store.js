@@ -26,7 +26,7 @@ export default new Vuex.Store({
         return false;
       }
     },
-    jwt(state) {
+    raw_jwt(state) {
       return state["jwt"];
     }
   }

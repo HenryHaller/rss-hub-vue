@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Login</h1>
     <form @submit.prevent="onSubmit">
       <input type="email" v-model="email" />
       <input type="password" v-model="password" />
+      <input type="password" v-model="password_confirm" />
       <input type="submit" />
     </form>
   </div>
@@ -11,15 +11,13 @@
 
 <script>
 import UserService from "@/services/UserService.js";
-
 export default {
-  name: "login",
-  beforeCreate() {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      this.$store.commit("SET_JWT", jwt);
-      this.$router.push({ name: "episodes" });
-    }
+  data() {
+    return {
+      email: null,
+      password: null,
+      password_confirm: null
+    };
   },
   methods: {
     onSubmit() {
@@ -27,19 +25,19 @@ export default {
         email: this.email,
         password: this.password
       };
-      UserService.login(credentials);
-      if (this.$store.getters.has_jwt) {
-        this.$router.push({ name: "episodes" });
+      if (this.password === this.password_confirm) {
+        UserService.register(credentials).then(response => {
+          console.log(response);
+          if (response.data.auth_token) {
+            this.$store.commit("SET_JWT", response.data.auth_token);
+            this.$router.push({ name: "episodes" });
+          }
+        });
       }
       this.email = null;
       this.password = null;
+      this.password_confirm = null;
     }
-  },
-  data() {
-    return {
-      email: null,
-      password: null
-    };
   }
 };
 </script>
