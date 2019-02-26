@@ -10,14 +10,21 @@ export default new Vuex.Store({
   mutations: {
     SET_JWT(state, jwt) {
       state.jwt = jwt;
-      localStorage.setItem("jwt", jwt);
     },
     CLEAR_JWT(state) {
       state.jwt = "";
-      localStorage.removeItem("jwt");
     }
   },
-  actions: {},
+  actions: {
+    setJWT({ commit }, jwt) {
+      localStorage.setItem("jwt", jwt);
+      commit("SET_JWT", jwt);
+    },
+    clearJWT({ commit }) {
+      localStorage.removeItem("jwt");
+      commit("CLEAR_JWT");
+    }
+  },
   getters: {
     has_jwt(state) {
       if (state["jwt"].length > 0) {
