@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    jwt: ""
+    jwt: "",
+    episodes: [],
+    shows: []
   },
   mutations: {
     SET_JWT(state, jwt) {
@@ -13,10 +15,17 @@ export default new Vuex.Store({
     },
     CLEAR_JWT(state) {
       state.jwt = "";
+    },
+    ADD_EPISODES(state, episodes) {
+      state.episodes = state.episodes.push(episodes);
+    },
+    SET_SHOWS(state, shows) {
+      state.shows = shows;
     }
   },
   actions: {
     setJWT({ commit }, jwt) {
+      jwt = jwt.jwt;
       localStorage.setItem("jwt", jwt);
       commit("SET_JWT", jwt);
     },
@@ -33,8 +42,8 @@ export default new Vuex.Store({
         return false;
       }
     },
-    raw_jwt(state) {
-      return state["jwt"];
+    encoded_jwt(state) {
+      return state.jwt;
     }
   }
 });
