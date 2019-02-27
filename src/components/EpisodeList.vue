@@ -19,16 +19,14 @@ export default {
     EpisodeCard
   },
   mounted() {
-    this.$nextTick().then(() => {
-      RSSHubService.getEpisodes()
-        .then(response => {
-          this.$store.dispatch("setEpisodes", response.data);
-          this.episodes = this.$store.getters.episodes;
-        })
-        .catch(err => {
-          console.log("Your Error is " + err);
-        });
-    });
+    RSSHubService.getEpisodes()
+      .then(response => {
+        this.$store.dispatch("setEpisodes", response.data);
+        this.episodes = this.$store.getters.episodes;
+      })
+      .catch(err => {
+        console.log("Your Error is " + err);
+      });
 
     // window.setInterval(updateEpisodes, 1000);
   },
