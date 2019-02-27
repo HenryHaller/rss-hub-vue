@@ -16,8 +16,8 @@ export default new Vuex.Store({
     CLEAR_JWT(state) {
       state.jwt = "";
     },
-    ADD_EPISODES(state, episodes) {
-      state.episodes = state.episodes.push(episodes);
+    SET_EPISODES(state, episodes) {
+      state.episodes = episodes;
     },
     SET_SHOWS(state, shows) {
       state.shows = shows;
@@ -32,6 +32,22 @@ export default new Vuex.Store({
     clearJWT({ commit }) {
       localStorage.removeItem("jwt");
       commit("CLEAR_JWT");
+    },
+    setEpisodes({ commit }, episodes) {
+      // let localEpisodes = localStorage.getItem("episodes");
+      // if (localEpisodes === null) {
+      //   localEpisodes = [];
+      // }
+      // episodes = episodes.concat(localEpisodes);
+      // if (episodes.length > 20) {
+      //   episodes = episodes.slice(0, 19);
+      // }
+
+      // localStorage.setItem("episodes", episodes);
+      commit("SET_EPISODES", episodes);
+    },
+    setShows({ commit }, shows) {
+      commit("SET_SHOWS", shows);
     }
   },
   getters: {
@@ -44,6 +60,9 @@ export default new Vuex.Store({
     },
     encoded_jwt(state) {
       return state.jwt;
+    },
+    episodes(state) {
+      return state.episodes;
     }
   }
 });
