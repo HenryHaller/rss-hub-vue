@@ -30,10 +30,10 @@ export default {
 
     // window.setInterval(updateEpisodes, 1000);
   },
-  data() {
-    return {
-      episodes: this.$store.getters.episodes
-    };
+  computed: {
+    episodes() {
+      return this.$store.getters.episodes;
+    }
   },
   name: "EpisodeList"
 };

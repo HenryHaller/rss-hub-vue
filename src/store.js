@@ -28,11 +28,15 @@ export default new Vuex.Store({
       state.shows = state.shows.filter(function(value, index, array) {
         return value.id !== show_id;
       });
+    },
+
+    DELETE_EPISODES_BY_SHOW_ID(state, show_id) {
       state.episodes = state.episodes.filter(function(value, index, array) {
         return value.show_id !== show_id;
       });
     }
   },
+
   actions: {
     setJWT({ commit }, jwt) {
       jwt = jwt.jwt;
@@ -61,6 +65,7 @@ export default new Vuex.Store({
     },
     deleteShow({ commit }, show_id) {
       commit("DELETE_SHOW", show_id);
+      commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
     }
   },
   getters: {
