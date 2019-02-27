@@ -15,7 +15,24 @@ export default {
       let input = {
         rss_url: this.rss_url
       };
-      RSSHubService.subscribe(input);
+      RSSHubService.subscribe(input)
+        .then(
+          setTimeout(() => {
+            RSSHubService.getEpisodes()
+              .then(response => {
+                console.log(response.data);
+                this.$store.dispatch("setEpisodes", response.data);
+              })
+              .catch(err => {
+                console.log(
+                  "Error in fetching episodes after subscribing: " + err
+                );
+              });
+          }, 2000)
+        )
+        .catch(err => {
+          console.log("Error is subscribing: " + err);
+        });
       this.rss_url = null;
     }
   },

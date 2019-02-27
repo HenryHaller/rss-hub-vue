@@ -22,7 +22,7 @@ export default {
     RSSHubService.getEpisodes()
       .then(response => {
         this.$store.dispatch("setEpisodes", response.data);
-        this.episodes = this.$store.getters.episodes;
+        // this.episodes = this.$store.getters.episodes;
       })
       .catch(err => {
         console.log("Your Error is " + err);

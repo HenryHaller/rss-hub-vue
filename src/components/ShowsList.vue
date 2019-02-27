@@ -30,7 +30,6 @@ export default {
     RSSHubService.getShows()
       .then(response => {
         this.$store.dispatch("setShows", response.data);
-        // this.shows = this.$store.getters.shows;
       })
       .catch(err => {
         console.log("Your Error is " + err);
