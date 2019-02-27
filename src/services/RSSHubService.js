@@ -35,7 +35,18 @@ export default {
     } else {
       return false;
     }
+  },
+
+  unSubscribe(show_id) {
+    if (store.getters.has_jwt) {
+      apiClient.defaults.headers.common["Authorization"] =
+        store.getters.encoded_jwt;
+      return apiClient.delete(`/shows/${show_id}`);
+    } else {
+      return false;
+    }
   }
+
   // getEvent(id) {
   //   return apiClient.get("/shows" + id);
   // }

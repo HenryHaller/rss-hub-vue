@@ -21,6 +21,16 @@ export default new Vuex.Store({
     },
     SET_SHOWS(state, shows) {
       state.shows = shows;
+    },
+
+    DELETE_SHOW(state, show_id) {
+      //matching values will get returned
+      state.shows = state.shows.filter(function(value, index, array) {
+        return value.id !== show_id;
+      });
+      state.episodes = state.episodes.filter(function(value, index, array) {
+        return value.show_id !== show_id;
+      });
     }
   },
   actions: {
@@ -48,6 +58,9 @@ export default new Vuex.Store({
     },
     setShows({ commit }, shows) {
       commit("SET_SHOWS", shows);
+    },
+    deleteShow({ commit }, show_id) {
+      commit("DELETE_SHOW", show_id);
     }
   },
   getters: {
@@ -63,6 +76,9 @@ export default new Vuex.Store({
     },
     episodes(state) {
       return state.episodes;
+    },
+    shows(state) {
+      return state.shows;
     }
   }
 });

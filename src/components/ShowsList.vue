@@ -5,6 +5,7 @@
       :title="show.title"
       :id="show.id"
       :key="show.id"
+      v-on:delete-me="unSubscribe"
     />
   </div>
 </template>
@@ -17,18 +18,26 @@ export default {
   components: {
     ShowCard
   },
+  methods: {
+    unSubscribe(show) {
+      this.$store.dispatch("deleteShow", show.id);
+      RSSHubService.unSubscribe(show.id).catch(err => {
+        console.log(`error while deleting ${show.id} ` + err);
+      });
+    }
+  },
   mounted() {
     RSSHubService.getShows()
       .then(response => {
-        this.shows = response.data;
-        console.log(response);
+        this.$store.dispatch("setShows", response.data);
+        this.shows = this.$store.getters.shows;
       })
       .catch(err => {
         console.log("Your Error is " + err);
       });
   },
   data() {
-    return { shows: [] };
+    return { shows: this.$store.getters.shows };
   }
 };
 </script>

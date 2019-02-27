@@ -18,7 +18,7 @@ export default {
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
       this.$store.commit("SET_JWT", jwt);
-      this.$router.push({ name: "episodes" });
+      this.$router.push({ name: "Episodes" });
     }
   }
 };

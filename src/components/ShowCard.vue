@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     onClick() {
-      console.log("I want to delete " + this.title + this.id);
+      this.$emit("delete-me", this);
     }
   }
 };

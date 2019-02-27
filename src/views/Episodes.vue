@@ -15,7 +15,7 @@ import LogoutButton from "@/components/LogoutButton.vue";
 import ShowsList from "@/components/ShowsList.vue";
 
 export default {
-  name: "episodes",
+  name: "Episodes",
   components: {
     EpisodeList,
     SubscribeForm,
@@ -35,7 +35,7 @@ export default {
       });
       this.$store.commit("SET_JWT", jwt);
     } else {
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: "Home" });
     }
   }
 };
