@@ -13,6 +13,8 @@
       <button @click="showSubscribeModal = true" class="green-button">
         Add Feed
       </button>
+      <LogoutButton class="logout-button" />
+
       <button @click="showUnSubscribeModal = true" class="red-button">
         Delete Feed
       </button>
@@ -21,7 +23,6 @@
       v-show="showUnSubscribeModal"
       v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
     />
-    <LogoutButton class="logout-button" />
   </div>
 </template>
 
@@ -61,8 +62,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.header {
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .episode-list {
-  height: 70vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -76,8 +84,10 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 60vw;
   height: 4em;
+  margin-bottom: 10px;
+
   button {
     height: 100%;
     padding: 15px;
@@ -95,27 +105,11 @@ h1 {
   }
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .episodes {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-}
-
-.logout-button {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 25%;
-  box-shadow: 1px 1px;
-  background-color: black;
-  color: white;
 }
 </style>
