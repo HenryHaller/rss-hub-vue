@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
 .logout {
-  padding: 10px;
+  padding: 0 10px;
   border-radius: 25%;
   box-shadow: 1px 1px;
   background-color: black;

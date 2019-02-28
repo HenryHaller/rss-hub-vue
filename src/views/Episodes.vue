@@ -1,28 +1,34 @@
 <template>
-  <div v-if="loggedIn" class="episodes">
-    <div class="header">
-      <h1>Latest Episodes</h1>
-    </div>
+  <div v-if="loggedIn">
+    <div class="episodes">
+      <div class="header">
+        <h1>RSSHub</h1>
+      </div>
 
-    <SubscribeForm
-      v-show="showSubscribeModal"
-      v-on:close-subscribe-modal="showSubscribeModal = false"
-    />
-    <EpisodeList class="episode-list" />
-    <div class="management-buttons">
-      <button @click="showSubscribeModal = true" class="green-button">
-        Add Feed
-      </button>
-      <LogoutButton class="logout-button" />
+      <EpisodeList class="episode-list" />
 
-      <button @click="showUnSubscribeModal = true" class="red-button">
-        Delete Feed
-      </button>
+      <div class="management-buttons">
+        <button @click="showUnSubscribeModal = true" class="red-button">
+          -
+        </button>
+
+        <LogoutButton class="logout-button" />
+
+        <button @click="showSubscribeModal = true" class="green-button">
+          +
+        </button>
+      </div>
     </div>
-    <ShowsList
-      v-show="showUnSubscribeModal"
-      v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
-    />
+    <div>
+      <ShowsList
+        v-show="showUnSubscribeModal"
+        v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
+      />
+      <SubscribeForm
+        v-show="showSubscribeModal"
+        v-on:close-subscribe-modal="showSubscribeModal = false"
+      />
+    </div>
   </div>
 </template>
 
@@ -63,34 +69,37 @@ export default {
 
 <style scoped lang="scss">
 .header {
-  width: 100vw;
+  position: sticky;
+  top: 0;
   background-color: black;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 .episode-list {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  grid-gap: 2em 0;
+  padding: 0 2vw;
 }
 h1 {
-  margin-bottom: 0;
-  margin-top: 5px;
+  margin: 5px 0;
   color: moccasin;
 }
 .management-buttons {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 60vw;
-  height: 4em;
-  margin-bottom: 10px;
+  height: 3em;
+  position: sticky;
+  bottom: 0px;
+  height: 100%;
+  background: black;
 
   button {
-    height: 100%;
-    padding: 15px;
+    padding: 0 30px;
+    height: 70%;
     border-radius: 25%;
     box-shadow: 2px 2px;
     color: white;
@@ -103,13 +112,18 @@ h1 {
   .red-button {
     background-color: red;
   }
+
+  .red-button,
+  .green-button {
+    font-size: 32px;
+  }
 }
 
 .episodes {
+  width: 100vw;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 4em 1fr 4em;
+  grid-gap: 27px 0;
 }
 </style>

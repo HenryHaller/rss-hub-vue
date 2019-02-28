@@ -2,9 +2,11 @@
   <div>
     <a :href="episode.url">
       <div class="episode">
-        <div class="show-title-div">{{ showTitle }}</div>
+        <div class="show-title-div">"{{ showTitle }}"</div>
         <div class="episode-title-div">
-          <p class="episode-title">{{ episode.title }}</p>
+          <p class="episode-title">
+            <span>{{ episode.title }}</span>
+          </p>
         </div>
       </div>
     </a>
@@ -47,6 +49,9 @@ a {
   .episode-title {
     text-align: center;
     margin: 0 0;
+    span {
+      font-style: italic;
+    }
   }
 
   .show-title-div {
@@ -56,7 +61,7 @@ a {
   }
 
   .episode-title-div {
-    width: 45%;
+    width: 65%;
     display: flex;
     // flex-direction: column;
     justify-content: center;
