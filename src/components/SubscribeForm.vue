@@ -8,7 +8,7 @@
           <input type="text" v-model="rss_url" name="rss_url" />
           <div class="buttons">
             <input type="submit" />
-            <button>Close</button>
+            <button @click.prevent="close">Close</button>
           </div>
         </form>
       </div>
@@ -20,6 +20,10 @@
 import RSSHubService from "@/services/RSSHubService.js";
 export default {
   methods: {
+    close() {
+      console.log("close button was clicked");
+      this.$emit("close-subscribe-modal");
+    },
     onSubmit() {
       let input = {
         rss_url: this.rss_url
@@ -43,6 +47,7 @@ export default {
           console.log("Error is subscribing: " + err);
         });
       this.rss_url = null;
+      this.$emit("close-subscribe-modal");
     }
   },
   data() {

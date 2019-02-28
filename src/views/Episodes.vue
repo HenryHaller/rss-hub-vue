@@ -6,7 +6,7 @@
     </h1>
     <SubscribeForm
       v-show="showSubscribeModal"
-      @close="showSubscribeModal = false"
+      v-on:close-subscribe-modal="showSubscribeModal = false"
     />
     <ShowsList />
     <LogoutButton />
