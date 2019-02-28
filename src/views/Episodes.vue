@@ -4,7 +4,7 @@
       <h1>Latest Episodes</h1>
       <div class="management-buttons">
         <button @click="showSubscribeModal = true">Add a Feed</button>
-        <button @click="showSubscribeModal = true">Delete a Feed</button>
+        <button @click="showUnSubscribeModal = true">Delete a Feed</button>
       </div>
     </div>
 
@@ -13,7 +13,10 @@
       v-on:close-subscribe-modal="showSubscribeModal = false"
     />
     <EpisodeList />
-    <ShowsList />
+    <ShowsList
+      v-show="showUnSubscribeModal"
+      v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
+    />
     <LogoutButton />
   </div>
 </template>
@@ -35,7 +38,8 @@ export default {
   data() {
     return {
       loggedIn: false,
-      showSubscribeModal: false
+      showSubscribeModal: false,
+      showUnSubscribeModal: false
     };
   },
   beforeCreate() {
