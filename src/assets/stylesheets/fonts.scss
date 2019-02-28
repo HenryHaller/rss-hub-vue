@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=News+Cycle");
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+@import url("https://fonts.googleapis.com/css?family=Cutive+Mono");
+
+$body-font: "Fira Sans", sans-serif;
+$headers-font: "News Cycle", sans-serif;
+$title-font: "Cutive Mono", "monospace";
+h1,
+h2,
+h3,
+h4 {
+  font-family: $headers-font;
+}
+
+body {
+  font-family: $body-font;
+}

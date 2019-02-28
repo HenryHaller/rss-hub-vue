@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h3>
-      <a :href="episode.url">{{ episode.title }}</a>
-    </h3>
+    <a :href="episode.url">{{ episode.title }}</a>
   </div>
 </template>
 

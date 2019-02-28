@@ -24,7 +24,7 @@ export default {
           console.log(response);
           if (response.data.auth_token) {
             this.$store.dispatch("setJWT", { jwt: response.data.auth_token });
-            this.$router.push({ name: "episodes" });
+            this.$router.push({ name: "Episodes" });
           }
         })
         .catch(err => {

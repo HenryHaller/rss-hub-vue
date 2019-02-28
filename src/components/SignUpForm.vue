@@ -1,10 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <input type="email" v-model="email">
-      <input type="password" v-model="password">
-      <input type="password" v-model="password_confirm">
-      <input type="submit">
+      <input type="email" v-model="email" />
+      <input type="password" v-model="password" />
+      <input type="password" v-model="password_confirm" />
+      <input type="submit" />
     </form>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
           console.log(response);
           if (response.data.auth_token) {
             this.$store.dispatch("setJWT", { jwt: response.data.auth_token });
-            this.$router.push({ name: "episodes" });
+            this.$router.push({ name: "Episodes" });
           }
         });
       }

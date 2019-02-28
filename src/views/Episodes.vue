@@ -1,7 +1,13 @@
 <template>
   <div v-if="loggedIn">
-    <h1>Latest Episodes</h1>
-    <SubscribeForm />
+    <h1>
+      Latest Episodes
+      <button @click="showSubscribeModal = true">Add Subscription</button>
+    </h1>
+    <SubscribeForm
+      v-show="showSubscribeModal"
+      @close="showSubscribeModal = false"
+    />
     <ShowsList />
     <LogoutButton />
     <EpisodeList />
@@ -24,7 +30,8 @@ export default {
   },
   data() {
     return {
-      loggedIn: false
+      loggedIn: false,
+      showSubscribeModal: false
     };
   },
   beforeCreate() {
@@ -41,4 +48,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
