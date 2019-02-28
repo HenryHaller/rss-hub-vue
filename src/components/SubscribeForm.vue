@@ -21,7 +21,6 @@ import RSSHubService from "@/services/RSSHubService.js";
 export default {
   methods: {
     close() {
-      console.log("close button was clicked");
       this.$emit("close-subscribe-modal");
     },
     onSubmit() {

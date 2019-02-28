@@ -1,16 +1,20 @@
 <template>
   <div v-if="loggedIn">
-    <h1>
-      Latest Episodes
-      <button @click="showSubscribeModal = true">Add Subscription</button>
-    </h1>
+    <div class="header">
+      <h1>Latest Episodes</h1>
+      <div class="management-buttons">
+        <button @click="showSubscribeModal = true">Add a Feed</button>
+        <button @click="showSubscribeModal = true">Delete a Feed</button>
+      </div>
+    </div>
+
     <SubscribeForm
       v-show="showSubscribeModal"
       v-on:close-subscribe-modal="showSubscribeModal = false"
     />
+    <EpisodeList />
     <ShowsList />
     <LogoutButton />
-    <EpisodeList />
   </div>
 </template>
 
@@ -48,4 +52,20 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.management-buttons {
+  display: flex;
+  align-items: center;
+  height: 4em;
+  button {
+    height: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
