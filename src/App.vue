@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="main">
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -8,11 +10,23 @@
 
 <style lang="scss">
 @import "src/assets/stylesheets/application.scss";
+$background-lighter: #0b3337;
+$background-darker: #13262f;
+
 .main {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  background-image: linear-gradient(
+    $background-darker,
+    $background-lighter,
+    $background-darker
+  );
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
