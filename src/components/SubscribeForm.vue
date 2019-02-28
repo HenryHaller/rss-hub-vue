@@ -33,7 +33,6 @@ export default {
           setTimeout(() => {
             RSSHubService.getEpisodes()
               .then(response => {
-                console.log(response.data);
                 this.$store.dispatch("setEpisodes", response.data);
               })
               .catch(err => {
@@ -41,7 +40,14 @@ export default {
                   "Error in fetching episodes after subscribing: " + err
                 );
               });
-          }, 2000)
+            RSSHubService.getShows()
+              .then(response => {
+                this.$store.dispatch("setShows", response.data);
+              })
+              .catch(err => {
+                console.log("Your Error is " + err);
+              });
+          }, 3000)
         )
         .catch(err => {
           console.log("Error is subscribing: " + err);

@@ -66,8 +66,13 @@ export default new Vuex.Store({
     deleteShow({ commit }, show_id) {
       commit("DELETE_SHOW", show_id);
       commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
+    },
+    appendShow({ commit, state }, show) {
+      const shows = state.shows.append(show);
+      commit("SET_SHOWS", shows);
     }
   },
+
   getters: {
     has_jwt(state) {
       if (state["jwt"].length > 0) {

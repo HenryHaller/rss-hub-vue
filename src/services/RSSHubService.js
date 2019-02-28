@@ -36,7 +36,6 @@ export default {
       return false;
     }
   },
-
   unSubscribe(show_id) {
     if (store.getters.has_jwt) {
       apiClient.defaults.headers.common["Authorization"] =
