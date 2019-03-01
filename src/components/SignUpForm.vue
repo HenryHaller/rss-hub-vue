@@ -1,10 +1,21 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit">
-      <input type="email" v-model="email" />
-      <input type="password" v-model="password" />
-      <input type="password" v-model="password_confirm" />
-      <input type="submit" />
+    <form class="home-form" @submit.prevent="onSubmit">
+      <div class="label-group">
+        <label for="email">Email</label>
+        <input type="email" v-model="email" />
+      </div>
+
+      <div class="label-group">
+        <label for="password">Password</label>
+        <input type="password" v-model="password" />
+      </div>
+
+      <div class="label-group">
+        <label for="password-confirm">Confirm Password</label>
+        <input type="password" v-model="password_confirm" />
+      </div>
+      <input type="submit" value="Sign Up" />
     </form>
   </div>
 </template>

@@ -1,9 +1,15 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit">
-      <input type="email" v-model="email" />
-      <input type="password" v-model="password" />
-      <input type="submit" />
+    <form class="home-form" @submit.prevent="onSubmit">
+      <div class="label-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" v-model="email" />
+      </div>
+      <div class="label-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" v-model="password" />
+      </div>
+      <input type="submit" value="Login" />
     </form>
   </div>
 </template>
@@ -21,7 +27,6 @@ export default {
       };
       UserService.login(credentials)
         .then(response => {
-          console.log(response);
           if (response.data.auth_token) {
             this.$store.dispatch("setJWT", { jwt: response.data.auth_token });
             this.$router.push({ name: "Episodes" });

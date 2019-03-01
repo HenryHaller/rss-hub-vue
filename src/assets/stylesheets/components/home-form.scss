@@ -1,0 +1,17 @@
+form.home-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+  background-color: paleturquoise;
+  padding: 20px 40px;
+  border-radius: 20%;
+  grid-gap: 10px 0px;
+  div.label-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

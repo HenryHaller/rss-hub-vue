@@ -1,8 +1,13 @@
 <template>
   <div class="home">
-    <h1>RSS Hub</h1>
-    <LoginForm />
-    <SignUpForm />
+    <div class="header">
+      <h1>RSS Hub</h1>
+    </div>
+    <div class="forms">
+      <LoginForm />
+      <SignUpForm />
+    </div>
+    <footer>Copyright 2019 Henry Haller</footer>
   </div>
 </template>
 
@@ -24,4 +29,43 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+h1 {
+  margin: 5px 0;
+  color: moccasin;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: moccasin;
+}
+
+.home {
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 4em 1fr 4em;
+  grid-gap: 27px 0;
+}
+</style>

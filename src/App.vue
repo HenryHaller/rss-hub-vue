@@ -17,6 +17,7 @@ $background-darker: #13262f;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   background-image: linear-gradient(
     $background-darker,
     $background-lighter,
