@@ -8,7 +8,7 @@ export default {
     onClick() {
       console.log("logout button clicked");
       this.$store.dispatch("clearJWT");
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: "Login" });
     }
   }
 };
