@@ -4,8 +4,8 @@
       <h1>RSS Hub</h1>
     </div>
     <div class="forms">
-      <LoginForm />
-      <SignUpForm />
+      <LoginForm/>
+      <SignUpForm/>
     </div>
     <footer>Copyright 2019 Henry Haller</footer>
   </div>
@@ -20,6 +20,7 @@ export default {
   components: { LoginForm, SignUpForm },
   name: "login",
   beforeCreate() {
+    document.title = "RSSHub";
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
       this.$store.commit("SET_JWT", jwt);

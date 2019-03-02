@@ -50,6 +50,7 @@ export default {
     };
   },
   beforeCreate() {
+    document.title = "Episodes";
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
       this.$nextTick(() => {
