@@ -1,10 +1,12 @@
+import RSSHubService from "../../services/RSSHubService";
+
 export default {
   namespaced: true,
   state: {
     episodes: [],
     shows: []
   },
-  mustations: {
+  mutations: {
     SET_EPISODES(state, episodes) {
       state.episodes = episodes;
     },
@@ -26,6 +28,14 @@ export default {
     }
   },
   actions: {
+    fetchEpisodes({ commit }) {
+      return new Promise((resolve, reject) => {
+        RSSHubService.getEpisodes().then(response => {
+          commit("SET_EPISODES", response.data);
+          resolve();
+        });
+      });
+    },
     setEpisodes({ commit }, episodes) {
       commit("SET_EPISODES", episodes);
     },

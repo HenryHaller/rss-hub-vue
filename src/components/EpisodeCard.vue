@@ -2,7 +2,7 @@
   <div>
     <a :href="episode.url">
       <div class="episode">
-        <div class="show-title-div">"{{ showTitle }}"</div>
+        <div class="show-title-div">"{{ episode.show_title }}"</div>
         <div class="episode-title-div">
           <p class="episode-title">
             <span>{{ episode.title }}</span>
@@ -20,17 +20,6 @@ export default {
     title: String,
     url: String,
     episode: Object
-  },
-  computed: {
-    showTitle() {
-      if (this.$store.getters.shows.length > 0) {
-        const shows = this.$store.getters.shows;
-        const show = shows.filter(show => show.id === this.episode.show_id)[0];
-        return show.title;
-      } else {
-        return "";
-      }
-    }
   }
 };
 </script>

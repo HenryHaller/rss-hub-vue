@@ -5,14 +5,18 @@
         <h1>RSSHub</h1>
       </div>
 
-      <EpisodeList class="episode-list"/>
+      <EpisodeList class="episode-list" />
 
       <div class="management-buttons">
-        <button @click="showUnSubscribeModal = true" class="red-button">-</button>
+        <button @click="showUnSubscribeModal = true" class="red-button">
+          -
+        </button>
 
-        <LogoutButton class="logout-button"/>
+        <LogoutButton class="logout-button" />
 
-        <button @click="showSubscribeModal = true" class="green-button">+</button>
+        <button @click="showSubscribeModal = true" class="green-button">
+          +
+        </button>
       </div>
     </div>
     <div>
@@ -56,7 +60,6 @@ export default {
       this.$nextTick(() => {
         this.loggedIn = true;
       });
-      this.$store.commit("SET_JWT", jwt);
     } else {
       this.$router.push({ name: "Login" });
     }

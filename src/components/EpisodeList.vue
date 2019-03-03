@@ -12,28 +12,46 @@
 
 <script>
 import EpisodeCard from "@/components/EpisodeCard.vue";
-import RSSHubService from "@/services/RSSHubService.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     EpisodeCard
   },
-  mounted() {
-    RSSHubService.getEpisodes()
-      .then(response => {
-        this.$store.dispatch("setEpisodes", response.data);
-        // this.episodes = this.$store.getters.episodes;
-      })
+  methods: {
+    ...mapActions({
+      fetchEpisodes: "RSSHub/fetchEpisodes"
+    })
+  },
+  created() {
+    this.loading = true;
+    this.fetchEpisodes()
+      .then(() => (this.loading = false))
       .catch(err => {
-        console.log("Your Error is " + err);
+        console.log(
+          "error calling fetch episodes from created() in episode list " + err
+        );
       });
+    // RSSHubService.getEpisodes()
+    //   .then(response => {
+    //     this.$store.dispatch("setEpisodes", response.data);
+    //     // this.episodes = this.$store.getters.episodes;
+    //   })
+    //   .catch(err => {
+    //     console.log("Your Error is " + err);
+    //   });
 
     // window.setInterval(updateEpisodes, 1000);
   },
   computed: {
-    episodes() {
-      return this.$store.getters.episodes;
-    }
+    ...mapGetters("RSSHub", {
+      episodes: "episodes"
+    })
+  },
+  data() {
+    return {
+      loading: false
+    };
   },
   name: "EpisodeList"
 };
