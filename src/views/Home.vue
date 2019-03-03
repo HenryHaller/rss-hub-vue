@@ -4,8 +4,8 @@
       <h1>RSS Hub</h1>
     </div>
     <div class="forms">
-      <LoginForm />
-      <SignUpForm />
+      <LoginForm/>
+      <SignUpForm/>
     </div>
     <footer>Copyright 2019 Henry Haller</footer>
   </div>
