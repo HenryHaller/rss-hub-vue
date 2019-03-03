@@ -3,7 +3,7 @@ import store from "../store";
 import router from "../router";
 
 const apiClient = axios.create({
-  baseURL: `https://api-dev.rsshub.online`,
+  baseURL: process.env.VUE_APP_API_SERVER,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -36,7 +36,6 @@ export default {
   },
   register(credentials) {
     apiClient.post("/signup", credentials).then(response => {
-      console.log(response);
       if (response.data.auth_token) {
         store.dispatch("setJWT", { jwt: response.data.auth_token });
         router.push({ name: "Episodes" });

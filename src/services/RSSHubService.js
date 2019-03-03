@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../store";
 
 const apiClient = axios.create({
-  baseURL: `https://api-dev.rsshub.online`,
+  baseURL: process.env.VUE_APP_API_SERVER,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
