@@ -18,48 +18,67 @@
 
 <script>
 import ShowCard from "@/components/ShowCard.vue";
-import RSSHubService from "@/services/RSSHubService.js";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      loading: false
+    };
+  },
   name: "ShowsList",
   components: {
     ShowCard
   },
   methods: {
+    ...mapActions({
+      fetchShows: "RSSHub/fetchShows",
+      deleteShow: "RSSHub/deleteShow"
+    }),
     close() {
       this.$emit("close-unsubscribe-modal");
     },
     unSubscribe(show) {
-      this.$store.dispatch("deleteShow", show.id);
-      RSSHubService.unSubscribe(show.id)
-        .then(() => {
-          RSSHubService.getEpisodes()
-            .then(response => {
-              this.$store.dispatch("setEpisodes", response.data);
-            })
-            .catch(err => {
-              console.log(
-                "Error in fetching episodes after subscribing: " + err
-              );
-            });
-        })
+      this.loading = true;
+      this.deleteShow(show.id)
+        .then(() => (this.loading = false))
         .catch(err => {
-          console.log(`error while deleting ${show.id} ` + err);
+          console.log(
+            "error calling fetch shows from created() in shows list " + err
+          );
         });
+
+      // this.$store.dispatch("deleteShow", show.id);
+      // RSSHubService.unSubscribe(show.id)
+      //   .then(() => {
+      //     RSSHubService.getEpisodes()
+      //       .then(response => {
+      //         this.$store.dispatch("setEpisodes", response.data);
+      //       })
+      //       .catch(err => {
+      //         console.log(
+      //           "Error in fetching episodes after subscribing: " + err
+      //         );
+      //       });
+      //   })
+      //   .catch(err => {
+      //     console.log(`error while deleting ${show.id} ` + err);
+      //   });
     }
   },
-  mounted() {
-    RSSHubService.getShows()
-      .then(response => {
-        this.$store.dispatch("setShows", response.data);
-      })
+  created() {
+    this.loading = true;
+    this.fetchShows()
+      .then(() => (this.loading = false))
       .catch(err => {
-        console.log("Your Error is " + err);
+        console.log(
+          "error calling fetch shows from created() in shows list " + err
+        );
       });
   },
   computed: {
-    shows() {
-      return this.$store.getters.shows;
-    }
+    ...mapGetters({
+      shows: "RSSHub/shows"
+    })
   }
   // data() {
   //   return { shows: this.$store.getters.shows };

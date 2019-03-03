@@ -36,15 +36,29 @@ export default {
         });
       });
     },
+
+    fetchShows({ commit }) {
+      return new Promise((resolve, reject) => {
+        RSSHubService.getShows().then(response => {
+          commit("SET_SHOWS", response.data);
+          resolve();
+        });
+      });
+    },
+    deleteShow({ commit }, show_id) {
+      return new Promise((resolve, reject) => {
+        RSSHubService.unSubscribe(show_id).then(response => {
+          commit("SET_EPISODES", response.data);
+          commit("DELETE_SHOW", show_id);
+          resolve();
+        });
+      });
+    },
     setEpisodes({ commit }, episodes) {
       commit("SET_EPISODES", episodes);
     },
     setShows({ commit }, shows) {
       commit("SET_SHOWS", shows);
-    },
-    deleteShow({ commit }, show_id) {
-      commit("DELETE_SHOW", show_id);
-      commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
     },
     appendShow({ commit, state }, show) {
       const shows = state.shows.append(show);
