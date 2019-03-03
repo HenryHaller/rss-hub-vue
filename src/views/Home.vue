@@ -23,6 +23,7 @@ export default {
     document.title = "RSSHub";
     if (process.env.NODE_ENV === "development")
       document.title += "(development)";
+    if (process.env.NODE_ENV === "local") document.title += "(local)";
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
       this.$store.commit("SET_JWT", jwt);
