@@ -1,4 +1,6 @@
 import axios from "axios";
+import store from "../store";
+import router from "../router";
 
 const apiClient = axios.create({
   baseURL: `https://api-dev.rsshub.online`,
@@ -11,7 +13,18 @@ const apiClient = axios.create({
 
 export default {
   login(credentials) {
-    return apiClient.post("/auth/login", credentials);
+    apiClient
+      .post("/auth/login", credentials)
+      .then(response => {
+        if (response.data.auth_token) {
+          store.dispatch("setJWT", { jwt: response.data.auth_token });
+          router.push({ name: "Episodes" });
+        }
+      })
+      .catch(err => {
+        console.log("Your error was: " + err);
+      });
+
     // .then(response => {
     //   console.log(response.data);
     //   const auth_token = response.data.auth_token;
@@ -22,7 +35,13 @@ export default {
     // });
   },
   register(credentials) {
-    return apiClient.post("/signup", credentials);
+    apiClient.post("/signup", credentials).then(response => {
+      console.log(response);
+      if (response.data.auth_token) {
+        store.dispatch("setJWT", { jwt: response.data.auth_token });
+        router.push({ name: "Episodes" });
+      }
+    });
   }
   //     .then(response => {
   //       console.log(response.data);

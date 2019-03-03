@@ -25,16 +25,7 @@ export default {
         email: this.email,
         password: this.password
       };
-      UserService.login(credentials)
-        .then(response => {
-          if (response.data.auth_token) {
-            this.$store.dispatch("setJWT", { jwt: response.data.auth_token });
-            this.$router.push({ name: "Episodes" });
-          }
-        })
-        .catch(err => {
-          console.log("Your error was: " + err);
-        });
+      UserService.login(credentials);
       this.email = null;
       this.password = null;
     }

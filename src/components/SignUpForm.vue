@@ -38,13 +38,7 @@ export default {
         password: this.password
       };
       if (this.password === this.passwordConfirm) {
-        UserService.register(credentials).then(response => {
-          console.log(response);
-          if (response.data.auth_token) {
-            this.$store.dispatch("setJWT", { jwt: response.data.auth_token });
-            this.$router.push({ name: "Episodes" });
-          }
-        });
+        UserService.register(credentials);
       }
       this.email = null;
       this.password = null;
