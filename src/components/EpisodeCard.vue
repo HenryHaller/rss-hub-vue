@@ -17,8 +17,6 @@
 export default {
   name: "EpisodeCard",
   props: {
-    title: String,
-    url: String,
     episode: Object
   }
 };
