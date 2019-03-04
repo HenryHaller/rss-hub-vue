@@ -54,6 +54,18 @@ export default {
         });
       });
     },
+    subscribeShow({ commit, dispatch }, input) {
+      return new Promise((resolve, reject) => {
+        RSSHubService.subscribe(input)
+          .then(() => {
+            dispatch("fetchShows");
+            resolve();
+          })
+          .catch(err => {
+            console.log("error in subscribing to a show " + err + input);
+          });
+      });
+    },
     setEpisodes({ commit }, episodes) {
       commit("SET_EPISODES", episodes);
     },

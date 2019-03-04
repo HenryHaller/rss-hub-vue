@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="episodes.length > 0">
     <EpisodeCard
       v-for="episode in episodes"
       :key="episode.id"
@@ -8,6 +8,7 @@
       :title="episode.title"
     />
   </div>
+  <div v-else>There are no episodes.</div>
 </template>
 
 <script>
@@ -24,14 +25,30 @@ export default {
     })
   },
   created() {
-    this.loading = true;
-    this.fetchEpisodes()
-      .then(() => (this.loading = false))
-      .catch(err => {
-        console.log(
-          "error calling fetch episodes from created() in episode list " + err
-        );
-      });
+    const update = () => {
+      this.loading = true;
+      this.fetchEpisodes()
+        .then(() => (this.loading = false))
+        .catch(err => {
+          console.log(
+            "error calling fetch episodes from created() in episode list " + err
+          );
+        });
+    };
+    update();
+
+    let interval;
+
+    if (process.env.NODE_ENV === "development") {
+      interval = 3000;
+    } else {
+      interval = 15000;
+    }
+
+    const update_interval_key = window.setInterval(update, interval);
+
+    localStorage.setItem("update_interval_key", update_interval_key);
+
     // RSSHubService.getEpisodes()
     //   .then(response => {
     //     this.$store.dispatch("setEpisodes", response.data);

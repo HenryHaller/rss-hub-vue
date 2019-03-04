@@ -46,23 +46,6 @@ export default {
             "error calling fetch shows from created() in shows list " + err
           );
         });
-
-      // this.$store.dispatch("deleteShow", show.id);
-      // RSSHubService.unSubscribe(show.id)
-      //   .then(() => {
-      //     RSSHubService.getEpisodes()
-      //       .then(response => {
-      //         this.$store.dispatch("setEpisodes", response.data);
-      //       })
-      //       .catch(err => {
-      //         console.log(
-      //           "Error in fetching episodes after subscribing: " + err
-      //         );
-      //       });
-      //   })
-      //   .catch(err => {
-      //     console.log(`error while deleting ${show.id} ` + err);
-      //   });
     }
   },
   created() {

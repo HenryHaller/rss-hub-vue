@@ -17,40 +17,20 @@
 </template>
 
 <script>
-import RSSHubService from "@/services/RSSHubService.js";
+import { mapActions } from "vuex";
 export default {
   methods: {
     close() {
       this.$emit("close-subscribe-modal");
     },
+    ...mapActions({
+      subscribe: "RSSHub/subscribeShow"
+    }),
     onSubmit() {
       let input = {
         rss_url: this.rss_url
       };
-      RSSHubService.subscribe(input)
-        .then(
-          setTimeout(() => {
-            RSSHubService.getEpisodes()
-              .then(response => {
-                this.$store.dispatch("setEpisodes", response.data);
-              })
-              .catch(err => {
-                console.log(
-                  "Error in fetching episodes after subscribing: " + err
-                );
-              });
-            RSSHubService.getShows()
-              .then(response => {
-                this.$store.dispatch("setShows", response.data);
-              })
-              .catch(err => {
-                console.log("Your Error is " + err);
-              });
-          }, 3000)
-        )
-        .catch(err => {
-          console.log("Error is subscribing: " + err);
-        });
+      this.subscribe(input);
       this.rss_url = null;
       this.$emit("close-subscribe-modal");
     }

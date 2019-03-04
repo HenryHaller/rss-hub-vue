@@ -7,6 +7,8 @@ export default {
   methods: {
     onClick() {
       console.log("logout button clicked");
+      const update_interval_key = localStorage.getItem("update_interval_key");
+      clearInterval(update_interval_key);
       localStorage.clear();
       this.$router.push({ name: "Login" });
     }
