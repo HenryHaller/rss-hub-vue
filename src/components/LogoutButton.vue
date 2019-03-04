@@ -7,7 +7,7 @@ export default {
   methods: {
     onClick() {
       console.log("logout button clicked");
-      this.$store.dispatch("clearJWT");
+      localStorage.clear();
       this.$router.push({ name: "Login" });
     }
   }
