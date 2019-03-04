@@ -82,6 +82,7 @@ export default {
   grid-auto-flow: row;
   grid-gap: 2em 0;
   padding: 0 2vw;
+  align-content: space-around;
 }
 h1 {
   margin: 5px 0;
