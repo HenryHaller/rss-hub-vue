@@ -37,11 +37,13 @@ a {
     text-align: center;
     margin: 0 0;
     span {
-      font-style: italic;
+      // font-style: italic;
     }
   }
 
   .show-title-div {
+    width: 35%;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
