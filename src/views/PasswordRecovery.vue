@@ -13,9 +13,9 @@
           v-model="passwordConfirm"
         />
       </div>
+      <div v-show="!passwordsMatch">Passwords Must Match</div>
       <input type="submit" value="Reset Password" />
     </form>
-    <div v-show="!passwordsMatch">Passwords Must Match</div>
   </div>
 </template>
 
