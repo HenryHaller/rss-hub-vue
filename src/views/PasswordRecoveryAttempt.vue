@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="full-page-grid">
+    <Header title="RSSHub" />
     <form class="home-form" @submit.prevent="onSubmit">
       <div class="label-group">
         <label for="password">New Password</label>
@@ -16,12 +17,20 @@
       <div v-show="!passwordsMatch">Passwords Must Match</div>
       <input type="submit" value="Reset Password" />
     </form>
+    <Footer text="Copyright 2019 Henry Haller" />
   </div>
 </template>
 
 <script>
 import UserService from "@/services/UserService";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
+  components: {
+    Header,
+    Footer
+  },
   data() {
     return {
       password: null,

@@ -1,22 +1,16 @@
 <template>
   <div v-if="loggedIn">
-    <div class="episodes">
-      <div class="header">
-        <h1>RSSHub</h1>
-      </div>
+    <div class="full-page-grid">
+      <Header title="RSSHub"/>
 
-      <EpisodeList class="episode-list" />
+      <EpisodeList class="episode-list"/>
 
       <div class="management-buttons">
-        <button @click="showUnSubscribeModal = true" class="red-button">
-          -
-        </button>
+        <button @click="showUnSubscribeModal = true" class="red-button">-</button>
 
-        <LogoutButton class="logout-button" />
+        <LogoutButton class="logout-button"/>
 
-        <button @click="showSubscribeModal = true" class="green-button">
-          +
-        </button>
+        <button @click="showSubscribeModal = true" class="green-button">+</button>
       </div>
     </div>
     <div>
@@ -37,6 +31,7 @@ import EpisodeList from "@/components/EpisodeList.vue";
 import SubscribeForm from "@/components/SubscribeForm.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import ShowsList from "@/components/ShowsList.vue";
+import Header from "@/components/Header.vue";
 
 export default {
   name: "Episodes",
@@ -44,7 +39,8 @@ export default {
     EpisodeList,
     SubscribeForm,
     ShowsList,
-    LogoutButton
+    LogoutButton,
+    Header
   },
   data() {
     return {
@@ -68,14 +64,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
-  position: sticky;
-  top: 0;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
 .episode-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -83,10 +71,6 @@ export default {
   grid-gap: 2em 0;
   padding: 0 2vw;
   align-content: space-around;
-}
-h1 {
-  margin: 5px 0;
-  color: moccasin;
 }
 .management-buttons {
   display: flex;
@@ -118,13 +102,5 @@ h1 {
   .green-button {
     font-size: 32px;
   }
-}
-
-.episodes {
-  width: 100vw;
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: 4em 1fr 4em;
-  grid-gap: 27px 0;
 }
 </style>

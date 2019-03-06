@@ -1,10 +1,21 @@
 <template>
-  <div>Activating Your account. Please wait.</div>
+  <div class="full-page-grid">
+    <Header title="RSSHub" />
+    <div>Activating Your account. Please wait.</div>
+    <Footer text="Copyright 2019 Henry Haller" />
+  </div>
 </template>
 
 <script>
 import UserService from "@/services/UserService";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
+  components: {
+    Header,
+    Footer
+  },
   mounted() {
     let vars = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(

@@ -3,3 +3,10 @@
 body {
   margin: 0;
 }
+
+.full-page-grid {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 4em 1fr 4em;
+  grid-gap: 27px 0;
+}

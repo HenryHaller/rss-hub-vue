@@ -1,25 +1,32 @@
 <template>
-  <div class="home">
-    <div class="header">
-      <h1>RSS Hub</h1>
-    </div>
+  <div class="full-page-grid">
+    <Header title="RSSHub"/>
     <div class="forms">
-      <LoginForm />
-      <SignUpForm />
-      <PasswordRecoveryRequest />
+      <LoginForm/>
+      <SignUpForm/>
+      <PasswordRecoveryRequest/>
     </div>
-    <footer>Copyright 2019 Henry Haller</footer>
+    <Footer text="Copyright 2019 Henry Haller"/>
   </div>
 </template>
 
 <script>
 import LoginForm from "@/components/LoginForm.vue";
 import SignUpForm from "@/components/SignUpForm.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+
 import PasswordRecoveryRequest from "@/components/PasswordRecoveryRequest.vue";
 
 // @ is an alias to /src
 export default {
-  components: { LoginForm, SignUpForm, PasswordRecoveryRequest },
+  components: {
+    LoginForm,
+    SignUpForm,
+    PasswordRecoveryRequest,
+    Header,
+    Footer
+  },
   name: "login",
   beforeCreate() {
     document.title = "RSSHub";
@@ -54,23 +61,5 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
-
-footer {
-  position: sticky;
-  bottom: 0;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: moccasin;
-}
-
-.home {
-  width: 100vw;
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: 4em 1fr 4em;
-  grid-gap: 27px 0;
 }
 </style>
