@@ -1,5 +1,5 @@
 <template>
-  <div v-if="episodes.length > 0">
+  <div v-if="episodes.length > 0" class="episode-list">
     <EpisodeCard
       v-for="episode in episodes"
       :key="episode.id"
@@ -8,7 +8,9 @@
       :title="episode.title"
     />
   </div>
-  <div v-else>There are no episodes.</div>
+  <div class="no-shows" v-else>
+    You have no episodes. Try subscribing to some shows?
+  </div>
 </template>
 
 <script>
@@ -48,17 +50,6 @@ export default {
     const update_interval_key = window.setInterval(update, interval);
 
     localStorage.setItem("update_interval_key", update_interval_key);
-
-    // RSSHubService.getEpisodes()
-    //   .then(response => {
-    //     this.$store.dispatch("setEpisodes", response.data);
-    //     // this.episodes = this.$store.getters.episodes;
-    //   })
-    //   .catch(err => {
-    //     console.log("Your Error is " + err);
-    //   });
-
-    // window.setInterval(updateEpisodes, 1000);
   },
   computed: {
     ...mapGetters("RSSHub", {
@@ -74,5 +65,21 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.episode-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  grid-gap: 2em 0;
+  padding: 0 2vw;
+  align-content: space-around;
+}
+
+.no-shows {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  color: moccasin;
+}
+</style>

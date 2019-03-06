@@ -1,27 +1,30 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header title="RSSHub" />
+      <Header title="RSSHub"/>
 
-      <EpisodeList class="episode-list" />
+      <EpisodeList/>
 
       <footer class="management-buttons">
-        <button
-          @click="showUnSubscribeModal = true"
-          v-bind:class="{ disabled: !hasShows, red: hasShows }"
-        >
-          -
-        </button>
+        <div class="scale-in">
+          <button
+            @click="showUnSubscribeModal = true"
+            v-bind:class="{ disabled: !hasShows, red: hasShows }"
+            :disabled="!hasShows"
+          >-</button>
+        </div>
 
-        <LogoutButton class="logout-button" />
+        <div class="scale-in">
+          <LogoutButton class="logout-button"/>
+        </div>
 
-        <button
-          @click="showSubscribeModal = true"
-          class="green"
-          v-bind:class="{ bounce: !hasShows }"
-        >
-          +
-        </button>
+        <div class="scale-in">
+          <button
+            @click="showSubscribeModal = true"
+            class="green"
+            v-bind:class="{ bounce: !hasShows && !showSubscribeModal }"
+          >+</button>
+        </div>
       </footer>
     </div>
     <div>
@@ -94,14 +97,10 @@ export default {
   opacity: 0;
 }
 
-.episode-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-flow: row;
-  grid-gap: 2em 0;
-  padding: 0 2vw;
-  align-content: space-around;
+div.scale-in {
+  animation: 2s ease-out 0s 1 appear2;
 }
+
 .management-buttons {
   display: flex;
   align-items: center;
@@ -112,13 +111,17 @@ export default {
   background: black;
 
   button {
-    animation: 2s ease-out 0s 1 appear2;
+    font-size: 32px;
     padding: 0 30px;
     height: 70%;
     border-radius: 25%;
     box-shadow: 2px 2px;
     color: white;
     font-weight: bold;
+  }
+
+  button.bounce {
+    animation: 1s ease-out 2s infinite bounce;
   }
 
   .disabled {
@@ -129,17 +132,8 @@ export default {
     background-color: green;
   }
 
-  .bounce {
-    animation: 1s ease-out 2s infinite bounce;
-  }
-
   .red {
     background-color: red;
-  }
-
-  .red,
-  .green {
-    font-size: 32px;
   }
 }
 </style>
