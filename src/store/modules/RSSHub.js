@@ -83,6 +83,13 @@ export default {
     },
     shows(state) {
       return state.shows;
+    },
+    hasShows(state) {
+      if (state.shows.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };

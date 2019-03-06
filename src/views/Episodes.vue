@@ -1,16 +1,27 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header title="RSSHub"/>
+      <Header title="RSSHub" />
 
-      <EpisodeList class="episode-list"/>
+      <EpisodeList class="episode-list" />
 
       <footer class="management-buttons">
-        <button @click="showUnSubscribeModal = true" class="red-button">-</button>
+        <button
+          @click="showUnSubscribeModal = true"
+          v-bind:class="{ disabled: !hasShows, red: hasShows }"
+        >
+          -
+        </button>
 
-        <LogoutButton class="logout-button"/>
+        <LogoutButton class="logout-button" />
 
-        <button @click="showSubscribeModal = true" class="green-button">+</button>
+        <button
+          @click="showSubscribeModal = true"
+          class="green"
+          v-bind:class="{ bounce: !hasShows }"
+        >
+          +
+        </button>
       </footer>
     </div>
     <div>
@@ -39,6 +50,8 @@ import LogoutButton from "@/components/LogoutButton.vue";
 import ShowsList from "@/components/modals/ShowsList.vue";
 import Header from "@/components/Header.vue";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "Episodes",
   components: {
@@ -63,6 +76,11 @@ export default {
       //   this.loggedIn = true;
       // });
     }
+  },
+  computed: {
+    ...mapGetters("RSSHub", {
+      hasShows: "hasShows"
+    })
   }
 };
 </script>
@@ -102,16 +120,25 @@ export default {
     color: white;
     font-weight: bold;
   }
-  .green-button {
+
+  .disabled {
+    background-color: grey;
+  }
+
+  .green {
     background-color: green;
   }
 
-  .red-button {
+  .bounce {
+    animation: 1s ease-out 2s infinite bounce;
+  }
+
+  .red {
     background-color: red;
   }
 
-  .red-button,
-  .green-button {
+  .red,
+  .green {
     font-size: 32px;
   }
 }
