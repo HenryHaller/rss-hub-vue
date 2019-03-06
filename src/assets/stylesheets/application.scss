@@ -46,17 +46,29 @@ a {
   align-items: center;
 }
 
-.modal-content {
-  padding: 0vh 2vw;
-  height: 21vh;
-  width: 93vw;
-  opacity: 1;
+.modal-pad {
+  height: 85vh;
+  width: 85vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   background-color: green;
-  border-radius: 3%;
+  border-radius: 4%;
+  align-items: center;
+}
+
+.modal-content {
+  //   padding: 25vh 2vw;
+  //   width: 93vw;
+  //   opacity: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 8fr 1fr;
+  width: 75%;
+  height: 100%;
+  //   background-color: green;
+  //   border-radius: 3%;
 }
 
 @keyframes appear {

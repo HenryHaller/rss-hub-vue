@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <span>{{ title }}</span>
+  <div class="show-card">
+    <div></div>
+    <div class="title-box">{{ title }}</div>
     <button type="submit" @click="onClick">Delete</button>
   </div>
 </template>
@@ -20,4 +21,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.show-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr;
+  margin-bottom: 1vh;
+  .title-box {
+    justify-self: center;
+  }
+}
+</style>

@@ -2,15 +2,21 @@
   <div>
     <div class="modal-background"></div>
     <div class="modal">
-      <div class="modal-content">
-        <ShowCard
-          v-for="show in shows"
-          :title="show.title"
-          :id="show.id"
-          :key="show.id"
-          v-on:delete-me="unSubscribe"
-        />
-        <button @click="close">Close</button>
+      <div class="modal-pad">
+        <div class="modal-content">
+          <div class="show-list">
+            <ShowCard
+              v-for="show in shows"
+              :title="show.title"
+              :id="show.id"
+              :key="show.id"
+              v-on:delete-me="unSubscribe"
+            />
+          </div>
+          <div class="close-button">
+            <button @click="close" class="close-button">Close</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -70,6 +76,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.show-list {
+  align-self: center;
+}
+
+.close-button {
+  justify-self: center;
+  align-self: center;
+}
+// .close-button {
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+// }
 // form {
 //   height: 100%;
 //   width: 100%;

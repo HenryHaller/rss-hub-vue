@@ -2,15 +2,17 @@
   <div>
     <div class="modal-background"></div>
     <div class="modal">
-      <div class="modal-content">
-        <form @submit.prevent="onSubmit">
-          <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
-          <input type="text" v-model="rss_url" name="rss_url">
-          <div class="buttons">
-            <input type="submit">
-            <button @click.prevent="close">Close</button>
-          </div>
-        </form>
+      <div class="modal-pad">
+        <div class="modal-content">
+          <form @submit.prevent="onSubmit">
+            <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
+            <input type="text" v-model="rss_url" name="rss_url">
+            <div class="buttons">
+              <input type="submit">
+              <button @click.prevent="close">Close</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
