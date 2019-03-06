@@ -6,7 +6,7 @@
     <div class="forms">
       <LoginForm />
       <SignUpForm />
-      <PasswordRecovery />
+      <PasswordRecoveryRequest />
     </div>
     <footer>Copyright 2019 Henry Haller</footer>
   </div>
@@ -15,11 +15,11 @@
 <script>
 import LoginForm from "@/components/LoginForm.vue";
 import SignUpForm from "@/components/SignUpForm.vue";
-import PasswordRecovery from "@/components/PasswordRecovery.vue";
+import PasswordRecoveryRequest from "@/components/PasswordRecoveryRequest.vue";
 
 // @ is an alias to /src
 export default {
-  components: { LoginForm, SignUpForm, PasswordRecovery },
+  components: { LoginForm, SignUpForm, PasswordRecoveryRequest },
   name: "login",
   beforeCreate() {
     document.title = "RSSHub";

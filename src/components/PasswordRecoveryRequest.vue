@@ -14,7 +14,7 @@
 import UserService from "@/services/UserService.js";
 
 export default {
-  name: "PasswordRecovery",
+  name: "PasswordRecoveryRequest",
   methods: {
     onSubmit() {
       let credentials = {

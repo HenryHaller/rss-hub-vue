@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import Episodes from "./views/Episodes.vue";
 import PendingActivation from "./views/PendingActivation.vue";
 import Activate from "./views/Activate.vue";
-import PasswordRecovery from "./views/PasswordRecovery.vue";
+import PasswordRecoveryAttempt from "./views/PasswordRecoveryAttempt.vue";
 
 Vue.use(Router);
 
@@ -35,7 +35,7 @@ export default new Router({
     {
       path: "/recover",
       name: "Recover",
-      component: PasswordRecovery
+      component: PasswordRecoveryAttempt
     }
   ]
 });
