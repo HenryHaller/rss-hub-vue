@@ -1,31 +1,33 @@
 <template>
-  <div v-if="loggedIn">
+  <div>
     <div class="full-page-grid">
-      <Header title="RSSHub" />
+      <Header title="RSSHub"/>
 
-      <EpisodeList class="episode-list" />
+      <EpisodeList class="episode-list"/>
 
-      <div class="management-buttons">
-        <button @click="showUnSubscribeModal = true" class="red-button">
-          -
-        </button>
+      <footer class="management-buttons">
+        <button @click="showUnSubscribeModal = true" class="red-button">-</button>
 
-        <LogoutButton class="logout-button" />
+        <LogoutButton class="logout-button"/>
 
-        <button @click="showSubscribeModal = true" class="green-button">
-          +
-        </button>
-      </div>
+        <button @click="showSubscribeModal = true" class="green-button">+</button>
+      </footer>
     </div>
     <div>
-      <ShowsList
-        v-show="showUnSubscribeModal"
-        v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
-      />
-      <SubscribeForm
-        v-show="showSubscribeModal"
-        v-on:close-subscribe-modal="showSubscribeModal = false"
-      />
+      <transition name="fade" mode="out-in">
+        <ShowsList
+          v-show="showUnSubscribeModal"
+          v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
+          key="one"
+        />
+      </transition>
+      <transition name="fade" mode="out-in">
+        <SubscribeForm
+          v-show="showSubscribeModal"
+          v-on:close-subscribe-modal="showSubscribeModal = false"
+          key="one"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -48,7 +50,6 @@ export default {
   },
   data() {
     return {
-      loggedIn: false,
       showSubscribeModal: false,
       showUnSubscribeModal: false
     };
@@ -56,18 +57,25 @@ export default {
   beforeCreate() {
     document.title = "Episodes";
     let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      this.$nextTick(() => {
-        this.loggedIn = true;
-      });
-    } else {
+    if (!jwt) {
       this.$router.push({ name: "Login" });
+      // this.$nextTick(() => {
+      //   this.loggedIn = true;
+      // });
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 .episode-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -80,13 +88,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 3em;
   position: sticky;
   bottom: 0px;
   height: 100%;
   background: black;
 
   button {
+    animation: 2s ease-out 0s 1 appear2;
     padding: 0 30px;
     height: 70%;
     border-radius: 25%;

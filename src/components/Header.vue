@@ -25,6 +25,7 @@ header {
   align-items: center;
   justify-content: space-around;
   h1 {
+    animation: 1s ease-out 0s 1 appear;
     margin: 5px 0;
     color: moccasin;
   }
