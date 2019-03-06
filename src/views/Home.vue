@@ -11,12 +11,11 @@
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm.vue";
-import SignUpForm from "@/components/SignUpForm.vue";
+import LoginForm from "@/components/forms/LoginForm.vue";
+import SignUpForm from "@/components/forms/SignUpForm.vue";
+import PasswordRecoveryRequest from "@/components/forms/PasswordRecoveryRequestForm.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-
-import PasswordRecoveryRequest from "@/components/PasswordRecoveryRequest.vue";
 
 // @ is an alias to /src
 export default {
