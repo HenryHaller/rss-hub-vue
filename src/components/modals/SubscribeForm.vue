@@ -5,9 +5,9 @@
       <div class="modal-content">
         <form @submit.prevent="onSubmit">
           <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
-          <input type="text" v-model="rss_url" name="rss_url" />
+          <input type="text" v-model="rss_url" name="rss_url">
           <div class="buttons">
-            <input type="submit" />
+            <input type="submit">
             <button @click.prevent="close">Close</button>
           </div>
         </form>
@@ -59,41 +59,5 @@ form {
     display: flex;
     justify-content: space-between;
   }
-}
-.modal-background {
-  background-color: lightgrey;
-  opacity: 0.5;
-  z-index: 10;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-
-.modal {
-  z-index: 11;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  padding: 0vh 2vw;
-  height: 21vh;
-  width: 93vw;
-  opacity: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: green;
-  border-radius: 3%;
 }
 </style>

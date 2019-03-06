@@ -1,16 +1,20 @@
 <template>
   <div v-if="loggedIn">
     <div class="full-page-grid">
-      <Header title="RSSHub"/>
+      <Header title="RSSHub" />
 
-      <EpisodeList class="episode-list"/>
+      <EpisodeList class="episode-list" />
 
       <div class="management-buttons">
-        <button @click="showUnSubscribeModal = true" class="red-button">-</button>
+        <button @click="showUnSubscribeModal = true" class="red-button">
+          -
+        </button>
 
-        <LogoutButton class="logout-button"/>
+        <LogoutButton class="logout-button" />
 
-        <button @click="showSubscribeModal = true" class="green-button">+</button>
+        <button @click="showSubscribeModal = true" class="green-button">
+          +
+        </button>
       </div>
     </div>
     <div>
@@ -28,9 +32,9 @@
 
 <script>
 import EpisodeList from "@/components/EpisodeList.vue";
-import SubscribeForm from "@/components/SubscribeForm.vue";
+import SubscribeForm from "@/components/modals/SubscribeForm.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
-import ShowsList from "@/components/ShowsList.vue";
+import ShowsList from "@/components/modals/ShowsList.vue";
 import Header from "@/components/Header.vue";
 
 export default {

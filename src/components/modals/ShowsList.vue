@@ -86,40 +86,4 @@ export default {
 //     justify-content: space-between;
 //   }
 // }
-.modal-background {
-  background-color: lightgrey;
-  opacity: 0.5;
-  z-index: 10;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-
-.modal {
-  z-index: 11;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  padding: 0vh 2vw;
-  height: 21vh;
-  width: 93vw;
-  opacity: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: green;
-  border-radius: 3%;
-}
 </style>
