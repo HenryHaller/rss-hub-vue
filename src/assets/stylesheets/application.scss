@@ -10,3 +10,10 @@ body {
   grid-template-rows: 4em 1fr 4em;
   grid-gap: 27px 0;
 }
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}

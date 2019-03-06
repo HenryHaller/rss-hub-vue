@@ -1,22 +1,24 @@
 <template>
   <div class="full-page-grid">
     <Header title="RSSHub" />
-    <form class="home-form" @submit.prevent="onSubmit">
-      <div class="label-group">
-        <label for="password">New Password</label>
-        <input type="password" name="password" v-model="password" />
-      </div>
-      <div class="label-group">
-        <label for="passwordConfirm">Confirm Password</label>
-        <input
-          type="password"
-          name="passwordConfirm"
-          v-model="passwordConfirm"
-        />
-      </div>
-      <div v-show="!passwordsMatch">Passwords Must Match</div>
-      <input type="submit" value="Reset Password" />
-    </form>
+    <div class="forms">
+      <form class="home-form" @submit.prevent="onSubmit">
+        <div class="label-group">
+          <label for="password">New Password</label>
+          <input type="password" name="password" v-model="password" />
+        </div>
+        <div class="label-group">
+          <label for="passwordConfirm">Confirm Password</label>
+          <input
+            type="password"
+            name="passwordConfirm"
+            v-model="passwordConfirm"
+          />
+        </div>
+        <div v-show="!passwordsMatch">Passwords Must Match</div>
+        <input type="submit" value="Reset Password" />
+      </form>
+    </div>
     <Footer text="Copyright 2019 Henry Haller" />
   </div>
 </template>
@@ -59,7 +61,7 @@ export default {
 
         UserService.attemptRecovery(recovery_credentials)
           .then(response => {
-            console.log(response);
+            // console.log(response);
             if (response.status === 200) {
               this.$router.push({ name: "Login" });
             }

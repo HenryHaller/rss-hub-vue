@@ -1,12 +1,12 @@
 <template>
   <div class="full-page-grid">
-    <Header title="RSSHub"/>
+    <Header title="RSSHub" />
     <div class="forms">
-      <LoginForm/>
-      <SignUpForm/>
-      <PasswordRecoveryRequest/>
+      <LoginForm />
+      <SignUpForm />
+      <PasswordRecoveryRequest />
     </div>
-    <Footer text="Copyright 2019 Henry Haller"/>
+    <Footer text="Copyright 2019 Henry Haller" />
   </div>
 </template>
 
@@ -41,25 +41,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-h1 {
-  margin: 5px 0;
-  color: moccasin;
-}
-
-.forms {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-</style>
+<style scoped lang="scss"></style>

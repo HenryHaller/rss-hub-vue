@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <form class="home-form" @submit.prevent="onSubmit">
-      <div class="label-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" v-model="email" />
-      </div>
-      <input type="submit" value="Recover Password" />
-    </form>
-  </div>
+  <form class="home-form" @submit.prevent="onSubmit">
+    <div class="label-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" v-model="email">
+    </div>
+    <input type="submit" value="Recover Password">
+  </form>
 </template>
 
 <script>
@@ -20,7 +18,6 @@ export default {
       let credentials = {
         email: this.email
       };
-      console.log(credentials);
       UserService.requestRecovery(credentials).catch(err => {
         console.log(err);
       });
