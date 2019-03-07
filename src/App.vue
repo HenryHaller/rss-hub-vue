@@ -1,10 +1,9 @@
 <template>
   <div id="app" class="main">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
-<script></script>
 
 <style lang="scss">
 @import "src/assets/stylesheets/application.scss";
