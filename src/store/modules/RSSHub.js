@@ -38,17 +38,20 @@ export default {
     updating({ commit }) {
       commit("UPDATING");
     },
-    fetchEpisodes({ commit }) {
+    notUpdating({ commit }) {
+      commit("NOT_UPDATING");
+    },
+    fetchEpisodes({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         RSSHubService.getEpisodes().then(response => {
           commit("SET_EPISODES", response.data);
-          commit("NOT_UPDATING");
+          dispatch("notUpdating");
           resolve();
         });
       });
     },
 
-    fetchShows({ commit }) {
+    fetchShows({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         RSSHubService.getShows().then(response => {
           commit("SET_SHOWS", response.data);

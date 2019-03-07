@@ -44,9 +44,10 @@ export default {
       this.$emit("close-unsubscribe-modal");
     },
     unSubscribe(show) {
-      this.loading = true;
       this.deleteShow(show.id)
-        .then(() => (this.loading = false))
+        .then(() => {
+          this.$emit("delete-show");
+        })
         .catch(err => {
           console.log(
             "error calling fetch shows from created() in shows list " + err

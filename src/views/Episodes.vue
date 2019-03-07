@@ -9,7 +9,10 @@
         <div class="scale-in">
           <button
             @click="showUnSubscribeModal = true"
-            v-bind:class="{ disabled: !hasShows, red: hasShows }"
+            v-bind:class="{
+              disabled: !hasShows,
+              red: hasShows
+            }"
             :disabled="!hasShows"
           >
             -
@@ -24,7 +27,9 @@
           <button
             @click="showSubscribeModal = true"
             class="green"
-            v-bind:class="{ bounce: !hasShows && !showSubscribeModal }"
+            v-bind:class="{
+              bounce: !hasShows && !showSubscribeModal && !updating
+            }"
           >
             +
           </button>
@@ -34,8 +39,13 @@
     <div>
       <transition name="fade" mode="out-in">
         <ShowsList
-          v-show="showUnSubscribeModal && hasShows"
+          v-show="showUnSubscribeModal"
           v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
+          v-on:delete-show="
+            if (!hasShows) {
+              showUnSubscribeModal = false;
+            }
+          "
           key="one"
         />
       </transition>
@@ -86,7 +96,9 @@ export default {
   },
   computed: {
     ...mapGetters("RSSHub", {
-      hasShows: "hasShows"
+      hasShows: "hasShows",
+      updating: "updating",
+      episodes: "episodes"
     })
   }
 };
@@ -111,6 +123,7 @@ export default {
   background: black;
 
   button {
+    transition: background-color 2.5s;
     font-size: 32px;
     padding: 0 30px;
     height: 70%;
