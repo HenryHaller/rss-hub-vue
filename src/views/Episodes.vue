@@ -34,7 +34,7 @@
     <div>
       <transition name="fade" mode="out-in">
         <ShowsList
-          v-show="showUnSubscribeModal"
+          v-show="showUnSubscribeModal && hasShows"
           v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
           key="one"
         />
