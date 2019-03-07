@@ -1,5 +1,7 @@
 <template>
-  <footer>{{ text }}</footer>
+  <footer>
+    <div class="scale-in">{{ text }}</div>
+  </footer>
 </template>
 
 <script>

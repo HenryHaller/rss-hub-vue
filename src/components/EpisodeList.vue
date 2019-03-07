@@ -1,5 +1,5 @@
 <template>
-  <div v-if="episodes.length > 0" class="episode-list">
+  <div v-if="!updating && episodes.length > 0" class="episode-list">
     <EpisodeCard
       v-for="episode in episodes"
       :key="episode.id"
@@ -7,6 +7,9 @@
       :url="episode.url"
       :title="episode.title"
     />
+  </div>
+  <div class="no-shows" v-else-if="updating">
+    <div class="rotate-forever big-size">&#x27F3;</div>
   </div>
   <div class="no-shows" v-else>
     You have no episodes. Try subscribing to some shows?
@@ -28,14 +31,11 @@ export default {
   },
   created() {
     const update = () => {
-      this.loading = true;
-      this.fetchEpisodes()
-        .then(() => (this.loading = false))
-        .catch(err => {
-          console.log(
-            "error calling fetch episodes from created() in episode list " + err
-          );
-        });
+      this.fetchEpisodes().catch(err => {
+        console.log(
+          "error calling fetch episodes from created() in episode list " + err
+        );
+      });
     };
     update();
 
@@ -53,19 +53,20 @@ export default {
   },
   computed: {
     ...mapGetters("RSSHub", {
-      episodes: "episodes"
+      episodes: "episodes",
+      shows: "shows",
+      updating: "updating"
     })
-  },
-  data() {
-    return {
-      loading: false
-    };
   },
   name: "EpisodeList"
 };
 </script>
 
 <style scoped>
+.big-size {
+  font-size: 64px;
+}
+
 .episode-list {
   display: grid;
   grid-template-columns: 1fr;

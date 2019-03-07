@@ -4,9 +4,16 @@ export default {
   namespaced: true,
   state: {
     episodes: [],
-    shows: []
+    shows: [],
+    updating: true
   },
   mutations: {
+    UPDATING(state) {
+      state.updating = true;
+    },
+    NOT_UPDATING(state) {
+      state.updating = false;
+    },
     SET_EPISODES(state, episodes) {
       state.episodes = episodes;
     },
@@ -28,10 +35,14 @@ export default {
     }
   },
   actions: {
+    updating({ commit }) {
+      commit("UPDATING");
+    },
     fetchEpisodes({ commit }) {
       return new Promise((resolve, reject) => {
         RSSHubService.getEpisodes().then(response => {
           commit("SET_EPISODES", response.data);
+          commit("NOT_UPDATING");
           resolve();
         });
       });
@@ -55,10 +66,14 @@ export default {
       });
     },
     subscribeShow({ commit, dispatch }, input) {
+      dispatch("updating");
       return new Promise((resolve, reject) => {
         RSSHubService.subscribe(input)
           .then(() => {
-            dispatch("fetchShows");
+            setTimeout(() => {
+              dispatch("fetchShows");
+              dispatch("fetchEpisodes");
+            }, 2000);
             resolve();
           })
           .catch(err => {
@@ -90,6 +105,9 @@ export default {
       } else {
         return false;
       }
+    },
+    updating(state) {
+      return state.updating;
     }
   }
 };

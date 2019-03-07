@@ -6,9 +6,9 @@
         <div class="modal-content">
           <form @submit.prevent="onSubmit">
             <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
-            <input type="text" v-model="rss_url" name="rss_url">
+            <input type="text" v-model="rss_url" name="rss_url" />
             <div class="buttons">
-              <input type="submit">
+              <input type="submit" />
               <button @click.prevent="close">Close</button>
             </div>
           </form>
@@ -26,13 +26,13 @@ export default {
       this.$emit("close-subscribe-modal");
     },
     ...mapActions({
-      subscribe: "RSSHub/subscribeShow"
+      subscribeShow: "RSSHub/subscribeShow"
     }),
     onSubmit() {
       let input = {
         rss_url: this.rss_url
       };
-      this.subscribe(input);
+      this.subscribeShow(input);
       this.rss_url = null;
       this.$emit("close-subscribe-modal");
     }

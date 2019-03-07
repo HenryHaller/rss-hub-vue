@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header title="RSSHub"/>
+      <Header title="RSSHub" />
 
-      <EpisodeList/>
+      <EpisodeList />
 
       <footer class="management-buttons">
         <div class="scale-in">
@@ -11,11 +11,13 @@
             @click="showUnSubscribeModal = true"
             v-bind:class="{ disabled: !hasShows, red: hasShows }"
             :disabled="!hasShows"
-          >-</button>
+          >
+            -
+          </button>
         </div>
 
         <div class="scale-in">
-          <LogoutButton class="logout-button"/>
+          <LogoutButton class="logout-button" />
         </div>
 
         <div class="scale-in">
@@ -23,7 +25,9 @@
             @click="showSubscribeModal = true"
             class="green"
             v-bind:class="{ bounce: !hasShows && !showSubscribeModal }"
-          >+</button>
+          >
+            +
+          </button>
         </div>
       </footer>
     </div>
@@ -95,10 +99,6 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-}
-
-div.scale-in {
-  animation: 2s ease-out 0s 1 appear2;
 }
 
 .management-buttons {
