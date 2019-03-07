@@ -5,8 +5,10 @@
       <div class="modal-pad">
         <div class="modal-content">
           <div class="upper-modal">
-            <UpdatePasswordForm />
-            <LogoutButton />
+            <div class="upper-content">
+              <UpdatePasswordForm />
+              <LogoutButton />
+            </div>
           </div>
           <div class="lower-modal">
             <button @click="close" class="close-button">Close</button>
@@ -35,8 +37,17 @@ export default {
 
 <style scoped lang="scss">
 .upper-modal {
-  justify-self: center;
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  .upper-content {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 .lower-modal {
   justify-self: center;
