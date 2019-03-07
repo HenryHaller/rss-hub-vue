@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header title="RSSHub" />
+      <Header title="RSSHub"/>
 
-      <EpisodeList />
+      <EpisodeList/>
 
       <footer class="management-buttons">
         <div class="scale-in">
@@ -14,13 +14,11 @@
               red: hasShows
             }"
             :disabled="!hasShows"
-          >
-            -
-          </button>
+          >-</button>
         </div>
 
         <div class="scale-in">
-          <LogoutButton class="logout-button" />
+          <button @click="showOptionsModal = true" class="black">&#9881;</button>
         </div>
 
         <div class="scale-in">
@@ -30,13 +28,17 @@
             v-bind:class="{
               bounce: !hasShows && !showSubscribeModal && !updating
             }"
-          >
-            +
-          </button>
+          >+</button>
         </div>
       </footer>
     </div>
     <div>
+      <transition name="fade" mode="out-in">
+        <OptionsModal
+          v-show="showOptionsModal"
+          v-on:close-options-modal="showOptionsModal = false"
+        />
+      </transition>
       <transition name="fade" mode="out-in">
         <ShowsList
           v-show="showUnSubscribeModal"
@@ -63,7 +65,7 @@
 <script>
 import EpisodeList from "@/components/EpisodeList.vue";
 import SubscribeForm from "@/components/modals/SubscribeForm.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
+import OptionsModal from "@/components/modals/OptionsModal.vue";
 import ShowsList from "@/components/modals/ShowsList.vue";
 import Header from "@/components/Header.vue";
 
@@ -75,13 +77,14 @@ export default {
     EpisodeList,
     SubscribeForm,
     ShowsList,
-    LogoutButton,
+    OptionsModal,
     Header
   },
   data() {
     return {
       showSubscribeModal: false,
-      showUnSubscribeModal: false
+      showUnSubscribeModal: false,
+      showOptionsModal: false
     };
   },
   beforeCreate() {
@@ -147,6 +150,10 @@ export default {
 
   .red {
     background-color: red;
+  }
+
+  .black {
+    background-color: black;
   }
 }
 </style>

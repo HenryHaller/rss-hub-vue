@@ -1,5 +1,5 @@
 <template>
-  <button type="submit" @click="onClick" class="logout">&#9881;</button>
+  <button type="submit" @click="onClick" class="logout">Logout</button>
 </template>
 
 <script>
@@ -16,11 +16,15 @@ export default {
 </script>
 
 <style scoped>
-.logout {
-  padding: 0 10px;
-  border-radius: 25%;
+/* .logout {
   box-shadow: 1px 1px;
   background-color: black;
+  font-size: 32px;
+  padding: 0 30px;
+  height: 70%;
+  border-radius: 25%;
+  box-shadow: 2px 2px;
   color: white;
-}
+  font-weight: bold;
+} */
 </style>
