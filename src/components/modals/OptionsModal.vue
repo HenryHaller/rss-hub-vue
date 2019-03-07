@@ -5,8 +5,8 @@
       <div class="modal-pad">
         <div class="modal-content">
           <div class="upper-modal">
-            <UpdatePasswordForm/>
-            <LogoutButton/>
+            <UpdatePasswordForm />
+            <LogoutButton />
           </div>
           <div class="lower-modal">
             <button @click="close" class="close-button">Close</button>
@@ -19,7 +19,7 @@
 
 <script>
 import LogoutButton from "@/components/LogoutButton.vue";
-import UpdatePasswordForm from "@/components/UpdatePasswordForm.vue";
+import UpdatePasswordForm from "@/components/forms/UpdatePasswordForm.vue";
 export default {
   components: {
     LogoutButton,

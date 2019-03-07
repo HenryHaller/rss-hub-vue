@@ -2,20 +2,20 @@
   <div>
     <form class="home-form" @submit.prevent="onSubmit">
       <div class="label-group">
-        <label for="email">Email</label>
-        <input type="email" v-model="email" />
-      </div>
-
-      <div class="label-group">
-        <label for="password">Password</label>
+        <label for="password">Current Password</label>
         <input type="password" v-model="password" />
       </div>
 
       <div class="label-group">
-        <label for="password-confirm">Confirm Password</label>
-        <input type="password" v-model="passwordConfirm" />
+        <label for="newPassword">New Password</label>
+        <input type="password" v-model="newPassword" />
       </div>
-      <input type="submit" value="Sign Up" />
+
+      <div class="label-group">
+        <label for="newPasswordConfirm">Confirm new Password</label>
+        <input type="password" v-model="newPasswordConfirm" />
+      </div>
+      <input type="submit" value="Reset Password" />
       <div v-show="!passwordsMatch">Passwords Must Match</div>
     </form>
   </div>
@@ -23,31 +23,36 @@
 
 <script>
 import UserService from "@/services/UserService.js";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      email: null,
       password: null,
-      passwordConfirm: null
+      newPassword: null,
+      newPasswordConfirm: null
     };
   },
   methods: {
     onSubmit() {
       let credentials = {
-        email: this.email,
-        password: this.password
+        current_password: this.password,
+        new_password: this.newPassword,
+        email: this.decoded_jwt.user_email
       };
-      if (this.password === this.passwordConfirm) {
-        UserService.register(credentials);
+      if (this.newPassword === this.newPasswordConfirm) {
+        UserService.updatePassword(credentials);
       }
-      this.email = null;
       this.password = null;
-      this.passwordConfirm = null;
+      this.newPassword = null;
+      this.newPasswordConfirm = null;
     }
   },
   computed: {
+    ...mapGetters({
+      decoded_jwt: "User/decoded_jwt"
+    }),
     passwordsMatch() {
-      if (this.password === this.passwordConfirm) {
+      if (this.newPassword === this.newPasswordConfirm) {
         return true;
       } else {
         return false;
