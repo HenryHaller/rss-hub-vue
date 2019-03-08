@@ -97,7 +97,13 @@ export default {
   },
   getters: {
     episodes(state) {
-      return state.episodes;
+      const episodes = state.episodes;
+      let i = 0;
+      episodes.forEach(episode => {
+        episode.position = i;
+        i++;
+      });
+      return episodes;
     },
     shows(state) {
       return state.shows;
