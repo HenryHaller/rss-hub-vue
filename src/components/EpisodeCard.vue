@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <a :href="episode.url">
-      <div class="episode">
-        <div class="show-title-div">"{{ episode.show_title }}"</div>
-        <div class="episode-title-div">
-          <p class="episode-title">
-            <span>{{ episode.title }}</span>
-          </p>
+  <transition name="ep">
+    <div>
+      <a :href="episode.url">
+        <div class="episode">
+          <div class="show-title-div">"{{ episode.show_title }}"</div>
+          <div class="episode-title-div">
+            <p class="episode-title">
+              <span>{{ episode.title }}</span>
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
-  </div>
+      </a>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -18,14 +20,22 @@ export default {
   name: "EpisodeCard",
   props: {
     episode: Object
-  },
-  beforeCreate() {
-    console.log(this.$props);
   }
 };
 </script>
 
 <style scoped lang="scss">
+.ep-enter-active {
+  transition: opacity 4s;
+}
+.ep-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.ep-leave-to {
+  opacity: 1;
+}
+
 a {
   text-decoration: none;
   color: silver;

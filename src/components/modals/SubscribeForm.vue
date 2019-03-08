@@ -26,13 +26,18 @@ export default {
       this.$emit("close-subscribe-modal");
     },
     ...mapActions({
-      subscribeShow: "RSSHub/subscribeShow"
+      subscribeShow: "RSSHub/subscribeShow",
+      updating: "RSSHub/updating",
+      notUpdating: "RSSHub/notUpdating"
     }),
     onSubmit() {
       let input = {
         rss_url: this.rss_url
       };
-      this.subscribeShow(input);
+      this.updating();
+      this.subscribeShow(input).then(() => {
+        this.notUpdating();
+      });
       this.rss_url = null;
       this.$emit("close-subscribe-modal");
     }

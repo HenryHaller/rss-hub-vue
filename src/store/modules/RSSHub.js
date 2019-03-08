@@ -5,7 +5,7 @@ export default {
   state: {
     episodes: [],
     shows: [],
-    updating: true
+    updating: false
   },
   mutations: {
     UPDATING(state) {
@@ -45,7 +45,6 @@ export default {
       return new Promise((resolve, reject) => {
         RSSHubService.getEpisodes().then(response => {
           commit("SET_EPISODES", response.data);
-          dispatch("notUpdating");
           resolve();
         });
       });
@@ -59,6 +58,7 @@ export default {
         });
       });
     },
+
     deleteShow({ commit }, show_id) {
       return new Promise((resolve, reject) => {
         RSSHubService.unSubscribe(show_id).then(response => {
@@ -68,15 +68,13 @@ export default {
         });
       });
     },
+
     subscribeShow({ commit, dispatch }, input) {
-      dispatch("updating");
       return new Promise((resolve, reject) => {
         RSSHubService.subscribe(input)
           .then(() => {
-            setTimeout(() => {
-              dispatch("fetchShows");
-              dispatch("fetchEpisodes");
-            }, 2000);
+            dispatch("fetchShows");
+            dispatch("fetchEpisodes");
             resolve();
           })
           .catch(err => {

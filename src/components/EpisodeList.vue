@@ -1,22 +1,25 @@
 <template>
-  <div
-    v-if="!updating && !localUpdating && episodes.length > 0"
-    class="episode-list"
-  >
-    <EpisodeCard
-      v-for="episode in episodes"
-      :key="episode.id"
-      :episode="episode"
-      :url="episode.url"
-      :title="episode.title"
-    />
-  </div>
-  <div class="no-shows" v-else-if="localUpdating || updating">
-    <div class="rotate-forever big-size">&#x27F3;</div>
-  </div>
-  <div class="no-shows" v-else>
-    You have no episodes. Try subscribing to some shows?
-  </div>
+  <transition name="fade" mode="out-in">
+    <div
+      v-if="!updating && !localUpdating && episodes.length > 0"
+      class="episode-list"
+      key="episodeList"
+    >
+      <EpisodeCard
+        v-for="episode in episodes"
+        :key="episode.id"
+        :episode="episode"
+        :url="episode.url"
+        :title="episode.title"
+      />
+    </div>
+    <div class="no-shows" v-else-if="localUpdating || updating" key="rotating">
+      <div class="rotate-forever big-size">&#x27F3;</div>
+    </div>
+    <div class="no-shows" v-else key="empty">
+      You have no episodes. Try subscribing to some shows?
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -95,5 +98,13 @@ export default {
   flex-direction: column;
   align-items: center;
   color: moccasin;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
