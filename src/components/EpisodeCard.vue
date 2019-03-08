@@ -18,6 +18,9 @@ export default {
   name: "EpisodeCard",
   props: {
     episode: Object
+  },
+  beforeCreate() {
+    console.log(this.$props);
   }
 };
 </script>

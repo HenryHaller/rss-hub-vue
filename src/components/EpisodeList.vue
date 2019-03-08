@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!updating && episodes.length > 0" class="episode-list">
+  <div
+    v-if="!updating && !localUpdating && episodes.length > 0"
+    class="episode-list"
+  >
     <EpisodeCard
       v-for="episode in episodes"
       :key="episode.id"
@@ -8,7 +11,7 @@
       :title="episode.title"
     />
   </div>
-  <div class="no-shows" v-else-if="updating">
+  <div class="no-shows" v-else-if="localUpdating || updating">
     <div class="rotate-forever big-size">&#x27F3;</div>
   </div>
   <div class="no-shows" v-else>
@@ -23,6 +26,11 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     EpisodeCard
+  },
+  data() {
+    return {
+      localUpdating: true
+    };
   },
   methods: {
     ...mapActions({
@@ -50,6 +58,11 @@ export default {
     const update_interval_key = window.setInterval(update, interval);
 
     localStorage.setItem("update_interval_key", update_interval_key);
+
+    setTimeout(() => {
+      console.log("this.localupdating: " + this.localUpdating);
+      this.localUpdating = false;
+    }, 2200);
   },
   computed: {
     ...mapGetters("RSSHub", {
