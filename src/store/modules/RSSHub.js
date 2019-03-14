@@ -1,4 +1,5 @@
 import RSSHubService from "../../services/RSSHubService";
+import router from "@/router";
 
 export default {
   namespaced: true,
@@ -45,21 +46,19 @@ export default {
       return new Promise((resolve, reject) => {
         RSSHubService.getEpisodes()
           .then(response => {
-            if (response.message == "Signature has expired") {
+            commit("SET_EPISODES", response.data);
+            resolve();
+          })
+          .catch(err => {
+            console.log("error in fetching episodes: " + err);
+            if (err.response.data.message == "Signature has expired") {
               const update_interval_key = localStorage.getItem(
                 "update_interval_key"
               );
               clearInterval(update_interval_key);
               localStorage.clear();
-              this.$router.push({ name: "Login" });
-            } else {
-              commit("SET_EPISODES", response.data);
+              router.push({ name: "Login" });
             }
-            resolve();
-          })
-          .catch(err => {
-            // console.log(response);
-            console.log("error in fetching episodes: " + err);
           });
       });
     },
