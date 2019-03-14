@@ -50,7 +50,7 @@
         />
       </transition>
       <transition name="fade" mode="out-in">
-        <ShowsList
+        <ShowsModal
           v-show="showUnSubscribeModal"
           v-on:close-unsubscribe-modal="showUnSubscribeModal = false"
           v-on:delete-show="
@@ -62,7 +62,7 @@
         />
       </transition>
       <transition name="fade" mode="out-in">
-        <SubscribeForm
+        <SubscribeModal
           v-show="showSubscribeModal"
           v-on:close-subscribe-modal="showSubscribeModal = false"
           key="one"
@@ -74,9 +74,9 @@
 
 <script>
 import EpisodeList from "@/components/EpisodeList.vue";
-import SubscribeForm from "@/components/modals/SubscribeForm.vue";
+import SubscribeModal from "@/components/modals/SubscribeModal.vue";
 import OptionsModal from "@/components/modals/OptionsModal.vue";
-import ShowsList from "@/components/modals/ShowsList.vue";
+import ShowsModal from "@/components/modals/ShowsModal.vue";
 import Header from "@/components/Header.vue";
 
 import { mapGetters } from "vuex";
@@ -85,8 +85,8 @@ export default {
   name: "Episodes",
   components: {
     EpisodeList,
-    SubscribeForm,
-    ShowsList,
+    SubscribeModal,
+    ShowsModal,
     OptionsModal,
     Header
   },
@@ -118,14 +118,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
 .management-buttons {
   display: flex;
   align-items: center;

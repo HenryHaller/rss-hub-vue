@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import LoginForm from "@/components/forms/LoginForm.vue";
-import SignUpForm from "@/components/forms/SignUpForm.vue";
-import PasswordRecoveryRequest from "@/components/forms/PasswordRecoveryRequestForm.vue";
+import LoginForm from "@/components/forms/account/LoginForm.vue";
+import SignUpForm from "@/components/forms/account/SignUpForm.vue";
+import PasswordRecoveryRequest from "@/components/forms/account/PasswordRecoveryRequestForm.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 

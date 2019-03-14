@@ -21,7 +21,7 @@
 
 <script>
 import LogoutButton from "@/components/LogoutButton.vue";
-import UpdatePasswordForm from "@/components/forms/UpdatePasswordForm.vue";
+import UpdatePasswordForm from "@/components/forms/account/UpdatePasswordForm.vue";
 export default {
   components: {
     LogoutButton,

@@ -16,9 +16,7 @@
     <div class="no-shows" v-else-if="localUpdating || updating" key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
-    <div class="no-shows" v-else key="empty">
-      You have no episodes. Try subscribing to some shows?
-    </div>
+    <div class="no-shows" v-else key="empty">You have no episodes. Try subscribing to some shows?</div>
   </transition>
 </template>
 
@@ -63,7 +61,6 @@ export default {
     localStorage.setItem("update_interval_key", update_interval_key);
 
     setTimeout(() => {
-      console.log("this.localupdating: " + this.localUpdating);
       this.localUpdating = false;
     }, 2200);
   },
@@ -79,10 +76,6 @@ export default {
 </script>
 
 <style scoped>
-.big-size {
-  font-size: 64px;
-}
-
 .episode-list {
   display: grid;
   grid-template-columns: 1fr;
