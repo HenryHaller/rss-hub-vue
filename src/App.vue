@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="main">
+    <flash-message class="flash-messages"></flash-message>
     <router-view/>
   </div>
 </template>
-
 
 <style lang="scss">
 @import "src/assets/stylesheets/application.scss";
@@ -20,5 +20,12 @@ $background-darker: #13262f;
     $background-lighter,
     $background-darker
   );
+}
+
+.flash-messages {
+  position: absolute;
+  z-index: 25;
+  top: 0.5em;
+  right: 1em;
 }
 </style>

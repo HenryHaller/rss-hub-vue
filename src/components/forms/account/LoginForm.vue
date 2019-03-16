@@ -26,7 +26,7 @@ export default {
         email: this.email,
         password: this.password
       };
-      UserService.login(credentials);
+      UserService.login(credentials, this.flash);
       this.email = null;
       this.password = null;
     }
