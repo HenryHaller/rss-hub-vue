@@ -6,9 +6,13 @@ export default {
   state: {
     episodes: [],
     shows: [],
-    updating: false
+    updating: false,
+    lastModified: ""
   },
   mutations: {
+    SET_LAST_MODIFIED(state, lastModified) {
+      state.lastModified = lastModified;
+    },
     UPDATING(state) {
       state.updating = true;
     },
@@ -42,11 +46,15 @@ export default {
     notUpdating({ commit }) {
       commit("NOT_UPDATING");
     },
-    fetchEpisodes({ commit, dispatch }) {
+    fetchEpisodes({ commit, state }) {
       return new Promise((resolve, reject) => {
         RSSHubService.getEpisodes()
           .then(response => {
-            commit("SET_EPISODES", response.data);
+            // console.log(response);
+            if (state.lastModified !== response.headers["last-modified"]) {
+              commit("SET_EPISODES", response.data);
+              commit("SET_LAST_MODIFIED", response.headers["last-modified"]);
+            }
             resolve();
           })
           .catch(err => {
@@ -72,11 +80,16 @@ export default {
       });
     },
 
-    deleteShow({ commit }, show_id) {
+    deleteShow({ commit, dispatch }, show_id) {
+      dispatch("updating");
+      commit("SET_LAST_MODIFIED", "");
+
       return new Promise((resolve, reject) => {
         RSSHubService.unSubscribe(show_id).then(response => {
-          commit("SET_EPISODES", response.data);
+          // commit("SET_EPISODES", response.data);
+          dispatch("fetchEpisodes");
           commit("DELETE_SHOW", show_id);
+          dispatch("notUpdating");
           resolve();
         });
       });
@@ -84,16 +97,16 @@ export default {
 
     subscribeShow({ commit, dispatch }, { input, flash }) {
       return new Promise((resolve, reject) => {
+        dispatch("updating");
         RSSHubService.subscribe(input)
-          .then(() => {
-            dispatch("fetchShows");
+          .then(response => {
             dispatch("fetchEpisodes");
+            dispatch("fetchShows");
+            dispatch("notUpdating");
+            commit("SET_LAST_MODIFIED", "");
             resolve();
           })
           .catch(err => {
-            flash("Subscribing Error", "error", {
-              timeout: 2000
-            });
             dispatch("notUpdating");
             console.log(
               "error in subscribing to a show " + err + input.rss_url

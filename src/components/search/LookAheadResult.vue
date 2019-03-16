@@ -6,7 +6,7 @@
     </div>
     <button @click.prevent="subscribe">Subscribe</button>
     <div class="thumbnail">
-      <img :src="result.thumbnail">
+      <img :src="result.thumbnail" />
     </div>
   </li>
 </template>
@@ -22,26 +22,24 @@ export default {
   },
   methods: {
     ...mapActions({
-      subscribeShow: "RSSHub/subscribeShow",
-      updating: "RSSHub/updating",
-      notUpdating: "RSSHub/notUpdating"
+      subscribeShow: "RSSHub/subscribeShow"
+      // updating: "RSSHub/updating",
+      // notUpdating: "RSSHub/notUpdating"
     }),
 
     subscribe() {
       ListenNotesService.podcastLookup(this.result.id)
         .then(response => {
           // console.log(response);
-          this.updating();
+          // this.updating();
           const params = {
             rss_url: response.data.rss
           };
-          this.subscribeShow({ input: params, flash: this.flash }).then(
-            response => {
-              this.flash(`Subscribed to ${response.data.title}`, "info", {
-                timeout: 2000
-              });
-            }
-          );
+          this.flash(`Subscribed to ${response.data.title}`, "info", {
+            timeout: 2000
+          });
+
+          this.subscribeShow({ input: params, flash: this.flash });
           // .catch(err => {
           //   this.flash(" failed to subscribe" + err.response);
           // })
@@ -50,6 +48,10 @@ export default {
           // });
         })
         .catch(err => {
+          this.flash("Subscribing Error", "error", {
+            timeout: 2000
+          });
+
           console.log(`directory lookup for ${this.result.id} ` + err);
         });
     }
