@@ -27,5 +27,8 @@ export default {
   },
   search(params) {
     return lnClient.get("/api/v1/search?" + encodeOBJ(params));
+  },
+  podcastLookup(id) {
+    return lnClient.get(`/api/v1/podcasts/${id}`);
   }
 };

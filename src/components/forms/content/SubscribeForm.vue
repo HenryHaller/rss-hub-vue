@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit">
     <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
-    <input type="text" v-model="rss_url" name="rss_url" />
-    <input type="submit" value="Submit Link" />
+    <input type="text" v-model="rss_url" name="rss_url">
+    <input type="submit" value="Submit Link">
   </form>
 </template>
 
@@ -21,7 +21,7 @@ export default {
         rss_url: this.rss_url
       };
       this.updating();
-      this.subscribeShow(input).then(() => {
+      this.subscribeShow({ input, flash: this.flash }).finally(() => {
         this.notUpdating();
       });
       this.rss_url = null;

@@ -4,13 +4,13 @@
       <h3 class="form.title">Login</h3>
       <div class="label-group">
         <label for="email">Email</label>
-        <input type="email" name="email" v-model="email" />
+        <input type="email" name="email" v-model="email">
       </div>
       <div class="label-group">
         <label for="password">Password</label>
-        <input type="password" name="password" v-model="password" />
+        <input type="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Login" />
+      <input type="submit" value="Login">
     </form>
   </div>
 </template>
@@ -26,7 +26,21 @@ export default {
         email: this.email,
         password: this.password
       };
-      UserService.login(credentials, this.flash);
+      UserService.login(credentials)
+        .then(response => {
+          if (response.data.auth_token) {
+            localStorage.setItem("jwt", response.data.auth_token);
+            this.$router.push({ name: "Episodes" });
+            return response;
+          }
+        })
+        .catch(err => {
+          this.flash("Login Failed", "error", {
+            timeout: 2000
+          });
+          console.log("Your error was: " + err);
+          // console.log(err.response);
+        });
       this.email = null;
       this.password = null;
     }

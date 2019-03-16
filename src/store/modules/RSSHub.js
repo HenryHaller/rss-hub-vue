@@ -82,7 +82,7 @@ export default {
       });
     },
 
-    subscribeShow({ commit, dispatch }, input) {
+    subscribeShow({ commit, dispatch }, { input, flash }) {
       return new Promise((resolve, reject) => {
         RSSHubService.subscribe(input)
           .then(() => {
@@ -91,7 +91,13 @@ export default {
             resolve();
           })
           .catch(err => {
-            console.log("error in subscribing to a show " + err + input);
+            flash("Subscribing Error", "error", {
+              timeout: 2000
+            });
+            dispatch("notUpdating");
+            console.log(
+              "error in subscribing to a show " + err + input.rss_url
+            );
           });
       });
     },

@@ -1,25 +1,10 @@
 import apiClient from "./apiClient";
-import router from "../router";
 
 export default {
-  login(credentials, flash) {
-    apiClient
-      .post("/auth/login", credentials)
-      .then(response => {
-        if (response.data.auth_token) {
-          localStorage.setItem("jwt", response.data.auth_token);
-          router.push({ name: "Episodes" });
-          return response;
-        }
-      })
-      .catch(err => {
-        flash("Login Failed", "error", {
-          timeout: 2000
-        });
-        console.log("Your error was: " + err);
-        // console.log(err.response);
-      });
+  login(credentials) {
+    return apiClient.post("/auth/login", credentials);
   },
+
   register(credentials) {
     apiClient.post("/signup", credentials);
   },
