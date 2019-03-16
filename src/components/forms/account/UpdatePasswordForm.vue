@@ -1,6 +1,8 @@
 <template>
   <div>
     <form class="home-form" @submit.prevent="onSubmit">
+      <h3 class="form.title">Update Password</h3>
+
       <div class="label-group">
         <label for="password">Current Password</label>
         <input type="password" v-model="password" />

@@ -1,6 +1,7 @@
 <template>
   <div>
     <form class="home-form" @submit.prevent="onSubmit">
+      <h3 class="form.title">Login</h3>
       <div class="label-group">
         <label for="email">Email</label>
         <input type="email" name="email" v-model="email" />

@@ -1,21 +1,23 @@
 <template>
   <div>
     <form class="home-form" @submit.prevent="onSubmit">
+      <h3 class="form.title">Sign Up</h3>
+
       <div class="label-group">
         <label for="email">Email</label>
-        <input type="email" v-model="email">
+        <input type="email" v-model="email" />
       </div>
 
       <div class="label-group">
         <label for="password">Password</label>
-        <input type="password" v-model="password">
+        <input type="password" v-model="password" />
       </div>
 
       <div class="label-group">
         <label for="password-confirm">Confirm Password</label>
-        <input type="password" v-model="passwordConfirm">
+        <input type="password" v-model="passwordConfirm" />
       </div>
-      <input type="submit" value="Sign Up">
+      <input type="submit" value="Sign Up" />
       <div v-show="!passwordsMatch">Passwords Must Match</div>
     </form>
   </div>

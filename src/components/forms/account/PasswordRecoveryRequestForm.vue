@@ -1,10 +1,11 @@
 <template>
   <form class="home-form" @submit.prevent="onSubmit">
+    <h3 class="form.title">Recover Password</h3>
     <div class="label-group">
       <label for="email">Email</label>
-      <input type="email" name="email" v-model="email">
+      <input type="email" name="email" v-model="email" />
     </div>
-    <input type="submit" value="Recover Password">
+    <input type="submit" value="Recover Password" />
   </form>
 </template>
 

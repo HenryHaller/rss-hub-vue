@@ -1,15 +1,17 @@
 <template>
   <form class="home-form" @submit.prevent="onSubmit">
+    <h3 class="form.title">Recover Password</h3>
+
     <div class="label-group">
       <label for="password">New Password</label>
-      <input type="password" name="password" v-model="password">
+      <input type="password" name="password" v-model="password" />
     </div>
     <div class="label-group">
       <label for="passwordConfirm">Confirm Password</label>
-      <input type="password" name="passwordConfirm" v-model="passwordConfirm">
+      <input type="password" name="passwordConfirm" v-model="passwordConfirm" />
     </div>
     <div v-show="!passwordsMatch">Passwords Must Match</div>
-    <input type="submit" value="Reset Password">
+    <input type="submit" value="Reset Password" />
   </form>
 </template>
 
