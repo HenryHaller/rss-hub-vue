@@ -1,14 +1,18 @@
 <template>
-  <li>
+  <div class="look-ahead-candidate">
     <div class="publisher-title">
-      <div v-html="result.publisher_highlighted"></div>
-      <div v-html="result.title_highlighted"></div>
+      <div v-html="candidate.publisher_highlighted"></div>
+      <div v-html="candidate.title_highlighted"></div>
     </div>
-    <button @click.prevent="subscribe">Subscribe</button>
+    <div class="subscribe">
+      <button class="subscribe-button" @click.prevent="subscribe">
+        Subscribe
+      </button>
+    </div>
     <div class="thumbnail">
-      <img :src="result.thumbnail" />
+      <img :src="candidate.thumbnail" />
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -18,20 +22,16 @@ import ListenNotesService from "@/services/ListenNotesService.js";
 
 export default {
   props: {
-    result: Object
+    candidate: Object
   },
   methods: {
     ...mapActions({
       subscribeShow: "RSSHub/subscribeShow"
-      // updating: "RSSHub/updating",
-      // notUpdating: "RSSHub/notUpdating"
     }),
 
     subscribe() {
-      ListenNotesService.podcastLookup(this.result.id)
+      ListenNotesService.podcastLookup(this.candidate.id)
         .then(response => {
-          // console.log(response);
-          // this.updating();
           const params = {
             rss_url: response.data.rss
           };
@@ -40,39 +40,40 @@ export default {
           });
 
           this.subscribeShow({ input: params, flash: this.flash });
-          // .catch(err => {
-          //   this.flash(" failed to subscribe" + err.response);
-          // })
-          // .finally(() => {
-          //   this.notUpdating();
-          // });
         })
         .catch(err => {
           this.flash("Subscribing Error", "error", {
             timeout: 2000
           });
 
-          console.log(`directory lookup for ${this.result.id} ` + err);
+          console.log(`directory lookup for ${this.candidate.id} ` + err);
         });
+      this.$emit("close-subscribe-modal");
     }
   }
-  // created() {
-  //   console.log(this.result);
-  // }
 };
 </script>
 
 <style scoped lang="scss">
 div.publisher-title {
+  flex: 0 0 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // align-items: center;
 }
 
-li {
+div.subscribe {
+  flex: 0 0 20%;
+}
+
+div.thumbnail {
+  flex: 0 0 20%;
+  justify-content: flex-end;
   display: flex;
-  justify-content: space-between;
+}
+
+div.look-ahead-candidate {
+  display: flex;
   align-items: center;
 }
 

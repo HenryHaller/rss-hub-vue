@@ -5,16 +5,12 @@
       <div class="modal-pad">
         <div class="modal-content">
           <div class="upper-modal" v-if="inputToggle">
-            <ListenNotesForm />
-            <button @click="inputToggle = !inputToggle">
-              Add by Direct Link
-            </button>
+            <ListenNotesForm v-on:close-subscribe-modal="close"/>
+            <button @click="inputToggle = !inputToggle">Add by Direct Link</button>
           </div>
           <div class="upper-modal" v-else>
-            <SubscribeForm />
-            <button @click="inputToggle = !inputToggle">
-              Search for Shows
-            </button>
+            <SubscribeForm/>
+            <button @click="inputToggle = !inputToggle">Search for Shows</button>
           </div>
           <div class="lower-modal buttons">
             <button @click.prevent="close">Close</button>

@@ -11,10 +11,17 @@
     </form>
     <div class="results-area">
       <transition name="fade" mode="out-in">
-        <ResultList v-if="candidates.length > 0" :results="candidates" />
-      </transition>
-      <transition name="fade" mode="out-in">
-        <div class="rotate-forever big-size" v-if="pending > 0">&#x27F3;</div>
+        <div class="big-size" v-if="pending > 0">
+          <div class="rotate-forever">&#x27F3;</div>
+        </div>
+        <div v-else>
+          <LookAheadResult
+            v-for="candidate in candidates"
+            :key="candidate.key"
+            :candidate="candidate"
+            v-on:close-subscribe-modal="close"
+          />
+        </div>
       </transition>
     </div>
   </div>
@@ -22,10 +29,11 @@
 
 <script>
 import lnClient from "@/services/ListenNotesService.js";
-import ResultList from "@/components/search/LookAheadResultList";
+import LookAheadResult from "@/components/search/LookAheadResult.vue";
+
 export default {
   components: {
-    ResultList
+    LookAheadResult
   },
   name: "ListenNotesForm",
   data() {
@@ -35,6 +43,11 @@ export default {
       candidates: [],
       pending: 0
     };
+  },
+  methods: {
+    close() {
+      this.$emit("close-subscribe-modal");
+    }
   },
   watch: {
     searchString: function(searchString) {
@@ -80,5 +93,11 @@ export default {
 
 .results-area {
   width: 95%;
+}
+
+div.big-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
