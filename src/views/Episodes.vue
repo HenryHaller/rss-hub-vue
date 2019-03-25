@@ -99,8 +99,8 @@ export default {
   },
   beforeCreate() {
     document.title = "Episodes";
-    let jwt = localStorage.getItem("jwt");
-    if (!jwt) {
+    const jwt = this.$store.getters["User/jwt"];
+    if (jwt == "") {
       this.$router.push({ name: "Login" });
       // this.$nextTick(() => {
       //   this.loggedIn = true;

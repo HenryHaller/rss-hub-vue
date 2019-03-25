@@ -7,9 +7,13 @@ export default {
     episodes: [],
     shows: [],
     updating: false,
-    lastModified: ""
+    lastModified: "",
+    updateIntervalKey: ""
   },
   mutations: {
+    SET_UPDATE_INTERVAL_KEY(state, updateIntervalKey) {
+      state.updateIntervalKey = updateIntervalKey;
+    },
     SET_LAST_MODIFIED(state, lastModified) {
       state.lastModified = lastModified;
     },
@@ -40,6 +44,9 @@ export default {
     }
   },
   actions: {
+    setUpdateIntervalKey({ commit }, update_interval_key) {
+      commit("SET_UPDATE_INTERVAL_KEY", update_interval_key);
+    },
     updating({ commit }) {
       commit("UPDATING");
     },
@@ -129,9 +136,13 @@ export default {
       commit("SET_EPISODES", []);
       commit("SET_SHOWS", []);
       commit("SET_LAST_MODIFIED", "");
+      commit("SET_UPDATE_INTERVAL_KEY", "");
     }
   },
   getters: {
+    updateIntervalKey(state) {
+      return state.updateIntervalKey;
+    },
     episodes(state) {
       return state.episodes;
     },

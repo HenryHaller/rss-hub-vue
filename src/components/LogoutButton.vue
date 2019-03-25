@@ -6,11 +6,14 @@
 export default {
   methods: {
     onClick() {
-      const update_interval_key = localStorage.getItem("update_interval_key");
+      const update_interval_key = this.$store.getters[
+        "RSSHub/updateIntervalKey"
+      ];
       clearInterval(update_interval_key);
-      localStorage.clear();
+      // localStorage.clear();
       // debugger;
       this.$store.dispatch("RSSHub/clearEverything");
+      this.$store.dispatch("User/clearJWT");
       this.$router.push({ name: "Login" });
     }
   }

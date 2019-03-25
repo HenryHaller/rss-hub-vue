@@ -16,7 +16,9 @@
     <div class="no-shows" v-else-if="localUpdating || updating" key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
-    <div class="no-shows" v-else key="empty">You have no episodes. Try subscribing to some shows?</div>
+    <div class="no-shows" v-else key="empty">
+      You have no episodes. Try subscribing to some shows?
+    </div>
   </transition>
 </template>
 
@@ -35,7 +37,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchEpisodes: "RSSHub/fetchEpisodes"
+      fetchEpisodes: "RSSHub/fetchEpisodes",
+      setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     })
   },
   created() {
@@ -57,8 +60,9 @@ export default {
     }
 
     const update_interval_key = window.setInterval(update, interval);
+    this.setUpdateIntervalKey(update_interval_key);
 
-    localStorage.setItem("update_interval_key", update_interval_key);
+    // localStorage.setItem("update_interval_key", update_interval_key);
 
     setTimeout(() => {
       this.localUpdating = false;
