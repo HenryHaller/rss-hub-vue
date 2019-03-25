@@ -83,12 +83,13 @@ export default {
     deleteShow({ commit, dispatch }, show_id) {
       dispatch("updating");
       commit("SET_LAST_MODIFIED", "");
+      commit("DELETE_SHOW", show_id);
+      commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
 
       return new Promise((resolve, reject) => {
         RSSHubService.unSubscribe(show_id).then(response => {
           // commit("SET_EPISODES", response.data);
           dispatch("fetchEpisodes");
-          commit("DELETE_SHOW", show_id);
           dispatch("notUpdating");
           resolve();
         });
@@ -123,6 +124,11 @@ export default {
     appendShow({ commit, state }, show) {
       const shows = state.shows.append(show);
       commit("SET_SHOWS", shows);
+    },
+    clearEverything({ commit }) {
+      commit("SET_EPISODES", []);
+      commit("SET_SHOWS", []);
+      commit("SET_LAST_MODIFIED", "");
     }
   },
   getters: {
