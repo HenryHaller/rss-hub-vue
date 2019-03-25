@@ -2,7 +2,7 @@
   <form @submit.prevent="onSubmit">
     <label for="rss_url">Soundcloud Homepage or RSS Feed</label>
     <input type="text" v-model="rss_url" name="rss_url" />
-    <input type="submit" value="Submit Link" />
+    <input type="submit" value="Submit Link" @click="close" />
   </form>
 </template>
 
@@ -11,6 +11,9 @@ import { mapActions } from "vuex";
 
 export default {
   methods: {
+    close() {
+      this.$emit("close-subscribe-modal");
+    },
     ...mapActions({
       subscribeShow: "RSSHub/subscribeShow",
       updating: "RSSHub/updating",
