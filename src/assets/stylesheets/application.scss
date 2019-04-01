@@ -131,7 +131,7 @@ div.scale-in {
 }
 
 div.rotate-forever {
-  animation: 2.5s ease-out 0s infinite spinner;
+  animation: 2.5s linear 0s infinite spinner;
 }
 
 span.ln-search-highlight {

@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div
-      v-if="!updating && !localUpdating && episodes.length > 0"
+      v-if="!initialUpdating && episodes.length > 0"
       class="episode-list"
       key="episodeList"
     >
@@ -13,11 +13,11 @@
         :title="episode.title"
       />
     </div>
-    <div class="no-shows" v-else-if="localUpdating || updating" key="rotating">
-      <div class="rotate-forever big-size">&#x27F3;</div>
-    </div>
-    <div class="no-shows" v-else key="empty">
+    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
       You have no episodes. Try subscribing to some shows?
+    </div>
+    <div class="no-shows" v-else key="rotating">
+      <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
   </transition>
 </template>
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      localUpdating: true
+      initialUpdating: true
     };
   },
   methods: {
@@ -43,11 +43,15 @@ export default {
   },
   created() {
     const update = () => {
-      this.fetchEpisodes().catch(err => {
-        console.log(
-          "error calling fetch episodes from created() in episode list " + err
-        );
-      });
+      this.fetchEpisodes()
+        .then(() => {
+          this.initialUpdating = false;
+        })
+        .catch(err => {
+          console.log(
+            "error calling fetch episodes from created() in episode list " + err
+          );
+        });
     };
     update();
 
@@ -64,15 +68,15 @@ export default {
 
     // localStorage.setItem("update_interval_key", update_interval_key);
 
-    setTimeout(() => {
-      this.localUpdating = false;
-    }, 2200);
+    // setTimeout(() => {
+    //   this.initialUpdating = false;
+    // }, 2200);
   },
   computed: {
     ...mapGetters("RSSHub", {
       episodes: "episodes",
-      shows: "shows",
-      updating: "updating"
+      shows: "shows"
+      // updating: "updating"
     })
   },
   name: "EpisodeList"

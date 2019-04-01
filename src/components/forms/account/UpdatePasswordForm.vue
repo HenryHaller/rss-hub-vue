@@ -25,7 +25,7 @@
 
 <script>
 import UserService from "@/services/UserService.js";
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -38,11 +38,22 @@ export default {
     onSubmit() {
       let credentials = {
         current_password: this.password,
-        new_password: this.newPassword,
-        email: this.decoded_jwt.user_email
+        new_password: this.newPassword
+        // email: this.decoded_jwt.user_email
       };
       if (this.newPassword === this.newPasswordConfirm) {
-        UserService.updatePassword(credentials);
+        UserService.updatePassword(credentials)
+          .then(response => {
+            if (response.status == 204) {
+              this.flash("Password Updated", "info", {
+                timeout: 2000
+              });
+            }
+          })
+          .catch(err => {
+            this.flash("Password could not be updated.", "error");
+            console.log("error updating password: " + err);
+          });
       }
       this.password = null;
       this.newPassword = null;
@@ -50,9 +61,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      decoded_jwt: "User/decoded_jwt"
-    }),
+    // ...mapGetters({
+    //   decoded_jwt: "User/decoded_jwt"
+    // }),
     passwordsMatch() {
       if (this.newPassword === this.newPasswordConfirm) {
         return true;

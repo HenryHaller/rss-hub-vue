@@ -40,7 +40,17 @@ export default {
         password: this.password
       };
       if (this.password === this.passwordConfirm) {
-        UserService.register(credentials);
+        UserService.register(credentials)
+          .then(response => {
+            this.flash("Please Verify Your Email");
+          })
+          .catch(err => {
+            if (err.response.data.message === "Duplicate Key") {
+              this.flash("That Email Already has an Account", "error");
+            } else {
+              this.flash("Account Creation Error");
+            }
+          });
       }
       this.email = null;
       this.password = null;

@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import UserService from "@/services/UserService";
+
 export default {
   methods: {
     onClick() {
@@ -12,9 +14,20 @@ export default {
       clearInterval(update_interval_key);
       // localStorage.clear();
       // debugger;
-      this.$store.dispatch("RSSHub/clearEverything");
-      this.$store.dispatch("User/clearJWT");
-      this.$router.push({ name: "Login" });
+
+      UserService.logout()
+        .then(response => {
+          if (response.status == 204) {
+            this.$store.dispatch("RSSHub/clearEverything");
+            this.flash("Logged out", "info", {
+              timeout: 2000
+            });
+            this.$router.push({ name: "Login" });
+          }
+        })
+        .catch(err => {
+          console.log("log out err: " + err);
+        });
     }
   }
 };

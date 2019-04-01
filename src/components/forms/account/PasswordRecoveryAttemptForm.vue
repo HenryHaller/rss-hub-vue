@@ -48,7 +48,10 @@ export default {
         UserService.attemptRecovery(recovery_credentials)
           .then(response => {
             // console.log(response);
-            if (response.status === 200) {
+            if (response.status === 204) {
+              this.flash("Password Updated", "info", {
+                timeout: 2000
+              });
               this.$router.push({ name: "Login" });
             }
           })

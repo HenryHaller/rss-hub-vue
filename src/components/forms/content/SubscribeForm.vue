@@ -24,9 +24,7 @@ export default {
         rss_url: this.rss_url
       };
       // this.updating();
-      this.subscribeShow({ input, flash: this.flash }).finally(() => {
-        // this.notUpdating();
-      });
+      this.subscribeShow({ input, flash: this.flash });
       this.rss_url = null;
       this.$emit("close-subscribe-modal");
     }

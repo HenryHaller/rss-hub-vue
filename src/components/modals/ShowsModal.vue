@@ -46,6 +46,9 @@ export default {
     unSubscribe(show) {
       this.deleteShow(show.id)
         .then(() => {
+          this.flash(`Deleted ${show.title}`, "info", {
+            timeout: 2000
+          });
           this.$emit("delete-show");
         })
         .catch(err => {

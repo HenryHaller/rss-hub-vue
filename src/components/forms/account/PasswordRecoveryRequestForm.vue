@@ -19,10 +19,20 @@ export default {
       let credentials = {
         email: this.email
       };
-      UserService.requestRecovery(credentials).catch(err => {
-        console.log(err);
-      });
-      this.email = null;
+      UserService.requestRecovery(credentials)
+        .then(response => {
+          if (response.status == 204) {
+            this.flash("Recovery Email Sent", "info");
+          }
+        })
+        .catch(err => {
+          if (err.response.data.message === "Record invalid") {
+            this.flash("Account Not Found", "error");
+          } else {
+            this.flash("Account Recovery Error", "error");
+          }
+        });
+      // this.email = null;
     }
   },
   data() {

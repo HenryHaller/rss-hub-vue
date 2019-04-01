@@ -4,13 +4,13 @@
       <h3 class="form.title">Login</h3>
       <div class="label-group">
         <label for="email">Email</label>
-        <input type="email" name="email" v-model="email" />
+        <input type="email" name="email" v-model="email">
       </div>
       <div class="label-group">
         <label for="password">Password</label>
-        <input type="password" name="password" v-model="password" />
+        <input type="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Login" />
+      <input type="submit" value="Login">
     </form>
   </div>
 </template>
@@ -28,9 +28,13 @@ export default {
       };
       UserService.login(credentials)
         .then(response => {
-          if (response.data.auth_token) {
+          if (response.status == 200) {
+            // console.log(response);
             // localStorage.setItem("jwt", response.data.auth_token);
-            this.$store.dispatch("User/setJWT", response.data.auth_token);
+            // this.$store.dispatch("User/setJWT", response.data.auth_token);
+            this.flash("Logging in!", "info", {
+              timeout: 2000
+            });
             this.$router.push({ name: "Episodes" });
             // return response;
           }
@@ -40,7 +44,7 @@ export default {
             timeout: 2000
           });
           console.log("Your error was: " + err);
-          // console.log(err.response);
+          console.log(err.response);
         });
       this.email = null;
       this.password = null;

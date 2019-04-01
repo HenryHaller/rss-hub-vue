@@ -1,12 +1,17 @@
 import apiClient from "./apiClient";
+import store from "../store/index";
 
 export default {
   login(credentials) {
     return apiClient.post("/auth/login", credentials);
   },
 
+  logout() {
+    return apiClient.delete("/auth/logout");
+  },
+
   register(credentials) {
-    apiClient.post("/signup", credentials);
+    return apiClient.post("/signup", credentials);
   },
 
   requestRecovery(credentials) {
@@ -18,9 +23,6 @@ export default {
   },
 
   updatePassword(credentials) {
-    apiClient.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwt"
-    );
     return apiClient.post("/auth/update_password", credentials);
   },
 
