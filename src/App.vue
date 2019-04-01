@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="main">
+  <div class="main">
     <flash-message class="flash-messages"></flash-message>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
