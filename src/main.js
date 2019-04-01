@@ -6,6 +6,7 @@ import store from "@/store/index";
 Vue.config.productionTip = false;
 
 import VueFlashMessage from "vue-flash-message";
+import './registerServiceWorker'
 Vue.use(VueFlashMessage);
 require("vue-flash-message/dist/vue-flash-message.min.css");
 
