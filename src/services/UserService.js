@@ -1,9 +1,12 @@
 import apiClient from "./apiClient";
-import store from "../store/index";
 
 export default {
   login(credentials) {
     return apiClient.post("/auth/login", credentials);
+  },
+
+  checkLogin() {
+    return apiClient.get("/auth/check_login");
   },
 
   logout() {
