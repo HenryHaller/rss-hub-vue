@@ -1,25 +1,29 @@
 import apiClient from "./apiClient";
-import store from "../store/index";
 
 export default {
-  getEpisodes() {
-    apiClient.defaults.headers.common["Authorization"] =
-      store.getters["User/jwt"];
-    return apiClient.get("/episodes");
+  getShowEpisodes(id, page) {
+    const params = {
+      page
+    };
+    return apiClient.get(`/shows/${id}`, {
+      params
+    });
+  },
+  getEpisodes(page) {
+    const params = {
+      page
+    };
+    return apiClient.get("/episodes", {
+      params
+    });
   },
   getShows() {
-    apiClient.defaults.headers.common["Authorization"] =
-      store.getters["User/jwt"];
     return apiClient.get("/shows");
   },
   subscribe(input) {
-    apiClient.defaults.headers.common["Authorization"] =
-      store.getters["User/jwt"];
     return apiClient.post("/shows", input);
   },
   unSubscribe(show_id) {
-    apiClient.defaults.headers.common["Authorization"] =
-      store.getters["User/jwt"];
     return apiClient.delete(`/shows/${show_id}`);
   }
 

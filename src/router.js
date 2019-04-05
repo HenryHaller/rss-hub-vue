@@ -22,6 +22,7 @@ export default new Router({
       name: "Episodes",
       component: Episodes
     },
+    { path: "/show/:id", name: "Show", component: Episodes },
     {
       path: "/pending_activation",
       name: "PendingActivation",

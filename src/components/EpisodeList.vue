@@ -1,6 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div
+      v-on:scroll="loadNextPage"
       v-if="!initialUpdating && episodes.length > 0"
       class="episode-list"
       key="episodeList"
@@ -32,51 +33,52 @@ export default {
   },
   data() {
     return {
-      initialUpdating: true
+      initialUpdating: true,
+      page: 1,
+      showId: this.$route.params.id
     };
   },
   methods: {
     ...mapActions({
+      clearEverything: "RSSHub/clearEverything",
       fetchEpisodes: "RSSHub/fetchEpisodes",
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
-    })
-  },
-  created() {
-    const update = () => {
-      this.fetchEpisodes()
-        .then(() => {
-          this.initialUpdating = false;
-        })
-        .catch(err => {
-          console.log(
-            "error calling fetch episodes from created() in episode list " + err
-          );
-        });
-    };
-    update();
-
-    let interval;
-
-    if (process.env.NODE_ENV === "development") {
-      interval = 3000;
-    } else {
-      interval = 15000;
+    }),
+    loadNextPage(event) {
+      // console.log(event);
+      const target = event.target;
+      // console.log(target);
+      const scrollTop = target.scrollTop;
+      const clientHeight = target.clientHeight;
+      const scrollHeight = target.scrollHeight;
+      // console.log(
+      //   `scrollTop:${scrollTop} clientHeight:${clientHeight} scrollHeight:${scrollHeight}`
+      // );
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.$store.dispatch("RSSHub/updating");
+        this.page++;
+        this.updatePage();
+      }
+    },
+    updatePage() {
+      return this.$store.dispatch("RSSHub/fetchShowEpisodes", {
+        id: this.showId,
+        page: this.page
+      });
     }
-
-    const update_interval_key = window.setInterval(update, interval);
-    this.setUpdateIntervalKey(update_interval_key);
-
-    // localStorage.setItem("update_interval_key", update_interval_key);
-
-    // setTimeout(() => {
-    //   this.initialUpdating = false;
-    // }, 2200);
+  },
+  mounted() {
+    this.clearEverything();
+    this.updatePage().then(() => {
+      this.initialUpdating = false;
+    });
   },
   computed: {
+    episodes() {
+      return this.$store.getters["RSSHub/episodes"](this.$route.params.id);
+    },
     ...mapGetters("RSSHub", {
-      episodes: "episodes",
       shows: "shows"
-      // updating: "updating"
     })
   },
   name: "EpisodeList"
@@ -85,12 +87,14 @@ export default {
 
 <style scoped>
 .episode-list {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
   grid-auto-flow: row;
   grid-gap: 2em 0;
+  align-content: space-around; */
   padding: 0 2vw;
-  align-content: space-around;
+  overflow: auto;
+  height: 80vh;
 }
 
 .no-shows {

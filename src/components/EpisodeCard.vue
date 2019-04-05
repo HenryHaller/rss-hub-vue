@@ -43,31 +43,30 @@ a {
 
 .episode {
   display: flex;
-  justify-content: space-between;
-  p {
-  }
-  .episode-title {
-    text-align: center;
-    margin: 0 0;
-    span {
-      // font-style: italic;
-    }
-  }
+  align-items: center;
+  flex-direction: column;
+  // .episode-title {
+  //   text-align: center;
+  //   margin: 0 0;
+  //   span {
+  //     // font-style: italic;
+  //   }
+  // }
 
-  .show-title-div {
-    width: 35%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
+  // .show-title-div {
+  //   width: 35%;
+  //   align-items: center;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-around;
+  // }
 
-  .episode-title-div {
-    width: 65%;
-    display: flex;
-    // flex-direction: column;
-    justify-content: center;
-    // align-items: center;
-  }
+  // .episode-title-div {
+  //   width: 65%;
+  //   display: flex;
+  //   // flex-direction: column;
+  //   justify-content: center;
+  //   // align-items: center;
+  // }
 }
 </style>
