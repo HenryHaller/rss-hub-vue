@@ -1,6 +1,6 @@
 <template>
   <header v-bind:class="{ updating: titleUpdating }">
-    <router-link to="/">
+    <router-link :to="{ name: 'Episodes' }">
       <h1>{{ title }}</h1>
     </router-link>
   </header>

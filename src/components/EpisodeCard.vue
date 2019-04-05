@@ -1,16 +1,20 @@
 <template>
   <transition name="ep">
     <div>
-      <a :href="episode.url">
-        <div class="episode">
-          <div class="show-title-div">"{{ episode.show_title }}"</div>
-          <div class="episode-title-div">
+      <div class="episode">
+        <div class="show-title-div">
+          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }"
+            >"{{ episode.show_title }}"</router-link
+          >
+        </div>
+        <div class="episode-title-div">
+          <a :href="episode.url">
             <p class="episode-title">
               <span>{{ episode.title }}</span>
             </p>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
   </transition>
 </template>
@@ -37,36 +41,14 @@ export default {
 }
 
 a {
-  text-decoration: none;
   color: silver;
+  text-decoration: none;
 }
 
 .episode {
+  color: silver;
   display: flex;
   align-items: center;
   flex-direction: column;
-  // .episode-title {
-  //   text-align: center;
-  //   margin: 0 0;
-  //   span {
-  //     // font-style: italic;
-  //   }
-  // }
-
-  // .show-title-div {
-  //   width: 35%;
-  //   align-items: center;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-around;
-  // }
-
-  // .episode-title-div {
-  //   width: 65%;
-  //   display: flex;
-  //   // flex-direction: column;
-  //   justify-content: center;
-  //   // align-items: center;
-  // }
 }
 </style>

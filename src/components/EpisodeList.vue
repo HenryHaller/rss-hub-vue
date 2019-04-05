@@ -35,7 +35,7 @@ export default {
     return {
       initialUpdating: true,
       page: 1,
-      showId: this.$route.params.id
+      episodes: []
     };
   },
   methods: {
@@ -45,20 +45,24 @@ export default {
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     }),
     loadNextPage(event) {
-      // console.log(event);
       const target = event.target;
-      // console.log(target);
       const scrollTop = target.scrollTop;
       const clientHeight = target.clientHeight;
       const scrollHeight = target.scrollHeight;
-      // console.log(
-      //   `scrollTop:${scrollTop} clientHeight:${clientHeight} scrollHeight:${scrollHeight}`
-      // );
       if (scrollTop + clientHeight >= scrollHeight) {
         this.$store.dispatch("RSSHub/updating");
         this.page++;
-        this.updatePage();
+        this.localUpdate().then(() => {
+          this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
+        });
       }
+    },
+    localUpdate() {
+      this.$store.dispatch("RSSHub/updating");
+      return this.updatePage();
+    },
+    initialUpdate() {
+      return this.updatePage();
     },
     updatePage() {
       return this.$store.dispatch("RSSHub/fetchShowEpisodes", {
@@ -69,17 +73,29 @@ export default {
   },
   mounted() {
     this.clearEverything();
-    this.updatePage().then(() => {
+    this.initialUpdate().then(() => {
       this.initialUpdating = false;
+      this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
     });
   },
   computed: {
-    episodes() {
-      return this.$store.getters["RSSHub/episodes"](this.$route.params.id);
+    showId() {
+      return this.$route.params.id;
     },
-    ...mapGetters("RSSHub", {
-      shows: "shows"
-    })
+    shows() {
+      return this.$store.getters["RSSHub/shows"];
+    }
+  },
+  watch: {
+    "$route.params.id": function() {
+      this.initialUpdating = true;
+      setTimeout(() => {
+        this.initialUpdating = false;
+      }, 1000);
+      this.updatePage().then(() => {
+        this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
+      });
+    }
   },
   name: "EpisodeList"
 };

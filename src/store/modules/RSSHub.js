@@ -24,7 +24,7 @@ export default {
       state.episodes = {};
       state.feed = [];
     },
-    MERGE_EPISODES(state, episodes, showId) {
+    MERGE_EPISODES(state, { episodes, showId }) {
       const merge = (a1, a2) => {
         const a3 = a1.concat(a2);
         let result = [];
@@ -75,7 +75,7 @@ export default {
         return new Promise((resolve, reject) => {
           RSSHubService.getEpisodes(page)
             .then(response => {
-              commit("MERGE_EPISODES", response.data, id);
+              commit("MERGE_EPISODES", { episodes: response.data });
               resolve();
             })
             .catch(err => {
@@ -92,7 +92,7 @@ export default {
         return new Promise((resolve, reject) => {
           RSSHubService.getShowEpisodes(id, page)
             .then(response => {
-              commit("MERGE_EPISODES", response.data, id);
+              commit("MERGE_EPISODES", { episodes: response.data, showId: id });
               resolve();
             })
             .catch(err => {
@@ -167,7 +167,8 @@ export default {
       if (showId === undefined) {
         return state.feed;
       } else {
-        return state.episodes[showId];
+        console.log(showId, state.episodes, state.episodes[showId]);
+        return state.episodes[showId] || [];
       }
     },
     shows(state) {
