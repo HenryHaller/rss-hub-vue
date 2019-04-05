@@ -11,6 +11,7 @@
               :id="show.id"
               :key="show.id"
               v-on:delete-me="unSubscribe"
+              v-on:close-me="close"
             />
           </div>
           <div class="close-button">
@@ -73,9 +74,6 @@ export default {
       shows: "RSSHub/shows"
     })
   }
-  // data() {
-  //   return { shows: this.$store.getters.shows };
-  // }
 };
 </script>
 
@@ -88,25 +86,4 @@ export default {
   justify-self: center;
   align-self: center;
 }
-// .close-button {
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-// }
-// form {
-//   height: 100%;
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: space-around;
-//   input[type="text"] {
-//     width: 80%;
-//   }
-//   .buttons {
-//     width: 80%;
-//     display: flex;
-//     justify-content: space-between;
-//   }
-// }
 </style>

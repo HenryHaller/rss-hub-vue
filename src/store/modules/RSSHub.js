@@ -24,6 +24,9 @@ export default {
       state.episodes = {};
       state.feed = [];
     },
+    SOFT_RESET(state) {
+      state.feed = state.feed.slice(0, 25);
+    },
     MERGE_EPISODES(state, { episodes, showId }) {
       const merge = (a1, a2) => {
         const a3 = a1.concat(a2);
@@ -160,6 +163,9 @@ export default {
     },
     clearEverything({ commit }) {
       commit("RESET");
+    },
+    softReset({ commit }) {
+      commit("SOFT_RESET");
     }
   },
   getters: {
@@ -167,7 +173,6 @@ export default {
       if (showId === undefined) {
         return state.feed;
       } else {
-        console.log(showId, state.episodes, state.episodes[showId]);
         return state.episodes[showId] || [];
       }
     },

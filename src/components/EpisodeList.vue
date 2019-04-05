@@ -88,6 +88,8 @@ export default {
   },
   watch: {
     "$route.params.id": function() {
+      this.page = 1;
+      this.$store.dispatch("RSSHub/softReset");
       this.initialUpdating = true;
       setTimeout(() => {
         this.initialUpdating = false;
