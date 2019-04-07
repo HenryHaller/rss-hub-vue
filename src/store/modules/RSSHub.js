@@ -1,6 +1,5 @@
 import RSSHubService from "../../services/RSSHubService";
 import router from "@/router";
-import { mapActions } from "vuex";
 
 export default {
   namespaced: true,
@@ -26,6 +25,12 @@ export default {
     },
     SOFT_RESET(state) {
       state.feed = state.feed.slice(0, 25);
+      for (const showId in state.episodes) {
+        // necessary to use hasOwnProperty to avoid iterating objects part of state.episodes Prototype
+        if (state.episodes.hasOwnProperty(showId)) {
+          state.episodes[showId] = state.episodes[showId].slice(0, 25);
+        }
+      }
     },
     MERGE_EPISODES(state, { episodes, showId }) {
       const merge = (a1, a2) => {
@@ -120,12 +125,11 @@ export default {
       });
     },
 
-    deleteShow({ commit, dispatch, state }, show_id) {
-      dispatch("updating");
-      commit("DELETE_SHOW", show_id);
-      commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
-
+    unSubscribeShow({ commit, dispatch, state }, show_id) {
       return new Promise((resolve, reject) => {
+        dispatch("updating");
+        commit("DELETE_SHOW", show_id);
+        commit("DELETE_EPISODES_BY_SHOW_ID", show_id);
         RSSHubService.unSubscribe(show_id).then(response => {
           // commit("SET_EPISODES", response.data);
           if (state.feed.length < 25)
@@ -140,9 +144,20 @@ export default {
         dispatch("updating");
         RSSHubService.subscribe(input)
           .then(response => {
+            dispatch("updating");
             dispatch("clearEverything");
             dispatch("fetchShowEpisodes", { page: 1, showId: undefined });
             dispatch("fetchShows");
+            flash(
+              `Added ${response.data.episodesAdded} Episodes of ${
+                response.data.showTitle
+              }`,
+              "info",
+              {
+                timeout: 2000
+              },
+              "info"
+            );
             dispatch("notUpdating");
             resolve();
           })
@@ -169,12 +184,11 @@ export default {
     }
   },
   getters: {
-    episodes: state => showId => {
-      if (showId === undefined) {
-        return state.feed;
-      } else {
-        return state.episodes[showId] || [];
-      }
+    episodes(state) {
+      return state.episodes;
+    },
+    feed(state) {
+      return state.feed;
     },
     shows(state) {
       return state.shows;

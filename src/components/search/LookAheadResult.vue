@@ -35,7 +35,7 @@ export default {
           const params = {
             rss_url: response.data.rss
           };
-          this.flash(`Subscribed to ${response.data.title}`, "info", {
+          this.flash(`Subscribing to ${response.data.title}`, "info", {
             timeout: 2000
           });
 
@@ -45,7 +45,6 @@ export default {
           this.flash("Subscribing Error", "error", {
             timeout: 2000
           });
-
           console.log(`directory lookup for ${this.candidate.id} ` + err);
         });
       this.$emit("close-subscribe-modal");

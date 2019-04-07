@@ -39,18 +39,21 @@ export default {
   methods: {
     ...mapActions({
       fetchShows: "RSSHub/fetchShows",
-      deleteShow: "RSSHub/deleteShow"
+      unSubscribeShow: "RSSHub/unSubscribeShow"
     }),
     close() {
       this.$emit("close-unsubscribe-modal");
     },
     unSubscribe(show) {
-      this.deleteShow(show.id)
+      this.unSubscribeShow(show.id)
         .then(() => {
-          this.flash(`Deleted ${show.title}`, "info", {
+          this.$emit("delete-show", show.id);
+          if (this.$route.params.id == show.id) {
+            this.$router.push({ name: "Episodes" });
+          }
+          this.flash(`Unsubscribed ${show.title}`, "info", {
             timeout: 2000
           });
-          this.$emit("delete-show");
         })
         .catch(err => {
           console.log(

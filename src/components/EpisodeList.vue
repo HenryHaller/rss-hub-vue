@@ -14,9 +14,11 @@
         :title="episode.title"
       />
     </div>
-    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
-      You have no episodes. Try subscribing to some shows?
-    </div>
+    <div
+      class="no-shows"
+      v-else-if="!initialUpdating"
+      key="empty"
+    >You have no episodes. Try subscribing to some shows?</div>
     <div class="no-shows" v-else key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
@@ -34,13 +36,12 @@ export default {
   data() {
     return {
       initialUpdating: true,
-      page: 1,
-      episodes: []
+      page: 1
     };
   },
   methods: {
     ...mapActions({
-      clearEverything: "RSSHub/clearEverything",
+      softReset: "RSSHub/softReset",
       fetchEpisodes: "RSSHub/fetchEpisodes",
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     }),
@@ -52,16 +53,11 @@ export default {
       if (scrollTop + clientHeight >= scrollHeight) {
         this.$store.dispatch("RSSHub/updating");
         this.page++;
-        this.localUpdate().then(() => {
-          this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
-        });
+        this.localUpdate();
       }
     },
     localUpdate() {
       this.$store.dispatch("RSSHub/updating");
-      return this.updatePage();
-    },
-    initialUpdate() {
       return this.updatePage();
     },
     updatePage() {
@@ -72,13 +68,21 @@ export default {
     }
   },
   mounted() {
-    this.clearEverything();
-    this.initialUpdate().then(() => {
+    this.softReset();
+    this.updatePage().then(() => {
       this.initialUpdating = false;
-      this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
     });
   },
   computed: {
+    episodes() {
+      let current_page = this.page; // force this method to recompute when current page changes
+
+      if (this.$route.params.id === undefined) {
+        return this.$store.getters["RSSHub/feed"];
+      } else {
+        return this.$store.getters["RSSHub/episodes"][this.$route.params.id];
+      }
+    },
     showId() {
       return this.$route.params.id;
     },
@@ -94,9 +98,7 @@ export default {
       setTimeout(() => {
         this.initialUpdating = false;
       }, 1000);
-      this.updatePage().then(() => {
-        this.episodes = this.$store.getters["RSSHub/episodes"](this.showId);
-      });
+      this.updatePage();
     }
   },
   name: "EpisodeList"

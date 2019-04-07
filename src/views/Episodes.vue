@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header title="RSSHub"/>
+      <Header title="RSSHub" />
 
-      <EpisodeList/>
+      <EpisodeList />
 
       <footer class="management-buttons">
         <div class="scale-in">
@@ -14,11 +14,15 @@
               red: hasShows
             }"
             :disabled="!hasShows"
-          >-</button>
+          >
+            -
+          </button>
         </div>
 
         <div class="scale-in">
-          <button @click="showOptionsModal = true" class="black">&#9881;</button>
+          <button @click="showOptionsModal = true" class="black">
+            &#9881;
+          </button>
         </div>
 
         <div class="scale-in">
@@ -32,7 +36,9 @@
                 !updating &&
                 !showOptionsModal
             }"
-          >+</button>
+          >
+            +
+          </button>
         </div>
       </footer>
     </div>
