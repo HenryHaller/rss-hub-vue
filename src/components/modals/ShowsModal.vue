@@ -56,9 +56,7 @@ export default {
           });
         })
         .catch(err => {
-          console.log(
-            "error calling fetch shows from created() in shows list " + err
-          );
+          console.log("error unsubscribing from a show " + err);
         });
     }
   },

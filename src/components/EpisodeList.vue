@@ -14,11 +14,9 @@
         :title="episode.title"
       />
     </div>
-    <div
-      class="no-shows"
-      v-else-if="!initialUpdating"
-      key="empty"
-    >You have no episodes. Try subscribing to some shows?</div>
+    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
+      You have no episodes. Try subscribing to some shows?
+    </div>
     <div class="no-shows" v-else key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
@@ -27,7 +25,7 @@
 
 <script>
 import EpisodeCard from "@/components/EpisodeCard.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -75,12 +73,13 @@ export default {
   },
   computed: {
     episodes() {
-      let current_page = this.page; // force this method to recompute when current page changes
-
+      const feed = this.$store.getters["RSSHub/feed"];
       if (this.$route.params.id === undefined) {
-        return this.$store.getters["RSSHub/feed"];
+        return feed;
       } else {
-        return this.$store.getters["RSSHub/episodes"][this.$route.params.id];
+        return feed.filter(
+          item => item.show_id === parseInt(this.$route.params.id)
+        );
       }
     },
     showId() {

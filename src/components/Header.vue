@@ -10,10 +10,18 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Header",
-  props: {
-    title: String
-  },
   computed: {
+    title() {
+      if (this.$route.params.id === undefined) {
+        return "RSSHub";
+      } else {
+        const showId = parseInt(this.$route.params.id);
+        const targetShow = this.$store.getters["RSSHub/shows"].find(
+          show => show.id === showId
+        );
+        return targetShow.title;
+      }
+    },
     ...mapGetters("RSSHub", {
       titleUpdating: "updating"
     })
