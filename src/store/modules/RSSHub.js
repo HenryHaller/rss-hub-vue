@@ -19,17 +19,10 @@ export default {
     },
     RESET(state) {
       state.shows = [];
-      state.episodes = {};
       state.feed = [];
     },
     SOFT_RESET(state) {
       state.feed = state.feed.slice(0, 25);
-      for (const showId in state.episodes) {
-        // necessary to use hasOwnProperty to avoid iterating objects part of state.episodes Prototype
-        if (state.episodes.hasOwnProperty(showId)) {
-          state.episodes[showId] = state.episodes[showId].slice(0, 25);
-        }
-      }
     },
     MERGE_EPISODES(state, { episodes }) {
       const merge = (a1, a2) => {

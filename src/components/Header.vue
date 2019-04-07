@@ -1,7 +1,7 @@
 <template>
   <header v-bind:class="{ updating: titleUpdating }">
     <router-link :to="{ name: 'Episodes' }">
-      <h1>{{ title }}</h1>
+      <h1 v-html="title"></h1>
     </router-link>
   </header>
 </template>
@@ -15,10 +15,10 @@ export default {
       if (this.$route.params.id === undefined) {
         return "RSSHub";
       } else {
+        const shows = this.$store.getters["RSSHub/shows"];
+        if (shows.length === 0) return "&#x27F3;";
         const showId = parseInt(this.$route.params.id);
-        const targetShow = this.$store.getters["RSSHub/shows"].find(
-          show => show.id === showId
-        );
+        const targetShow = shows.find(show => show.id === showId);
         return targetShow.title;
       }
     },
