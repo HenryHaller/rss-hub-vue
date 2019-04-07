@@ -14,9 +14,11 @@
         :title="episode.title"
       />
     </div>
-    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
-      You have no episodes. Try subscribing to some shows?
-    </div>
+    <div
+      class="no-shows"
+      v-else-if="!initialUpdating"
+      key="empty"
+    >You have no episodes. Try subscribing to some shows?</div>
     <div class="no-shows" v-else key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
@@ -39,7 +41,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      softReset: "RSSHub/softReset",
       fetchEpisodes: "RSSHub/fetchEpisodes",
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     }),
@@ -66,7 +67,6 @@ export default {
     }
   },
   mounted() {
-    this.softReset();
     this.updatePage().then(() => {
       this.initialUpdating = false;
     });
@@ -91,8 +91,8 @@ export default {
   },
   watch: {
     "$route.params.id": function() {
+      this.$store.dispatch("RSSHub/resetFeed");
       this.page = 1;
-      this.$store.dispatch("RSSHub/softReset");
       this.initialUpdating = true;
       setTimeout(() => {
         this.initialUpdating = false;

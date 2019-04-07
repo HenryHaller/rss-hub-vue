@@ -21,8 +21,8 @@ export default {
       state.shows = [];
       state.feed = [];
     },
-    SOFT_RESET(state) {
-      state.feed = state.feed.slice(0, 25);
+    RESET_FEED(state) {
+      state.feed = [];
     },
     MERGE_EPISODES(state, { episodes }) {
       const merge = (a1, a2) => {
@@ -163,8 +163,8 @@ export default {
     clearEverything({ commit }) {
       commit("RESET");
     },
-    softReset({ commit }) {
-      commit("SOFT_RESET");
+    resetFeed({ commit }) {
+      commit("RESET_FEED");
     }
   },
   getters: {
