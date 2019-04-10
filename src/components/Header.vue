@@ -10,6 +10,11 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Header",
+  watch: {
+    "$route.params.id": function() {
+      document.title = this.title;
+    }
+  },
   computed: {
     title() {
       if (this.$route.params.id === undefined) {
