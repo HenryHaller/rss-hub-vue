@@ -3,9 +3,11 @@
     <div>
       <div class="episode">
         <div class="show-title-div">
-          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }"
-            >"{{ episode.show_title }}"</router-link
-          >
+          <p>
+            <router-link :to="{ name: 'Show', params: { id: episode.show_id } }"
+              >"{{ episode.show_title }}"</router-link
+            >
+          </p>
         </div>
         <div class="episode-title-div">
           <a :href="episode.url">
@@ -46,9 +48,22 @@ a {
 }
 
 .episode {
+  p {
+    text-align: center;
+  }
+  .episode-title-div {
+    flex: 1 1 50%;
+  }
+  .show-title-div {
+    flex: 1 1 25%;
+  }
+  p {
+    text-align: center;
+  }
+  width: 100%;
   color: silver;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  //flex-direction: column;
 }
 </style>

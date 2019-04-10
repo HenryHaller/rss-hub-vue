@@ -119,14 +119,9 @@ export default {
 
 <style scoped>
 .episode-list {
-  /* display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-flow: row;
-  grid-gap: 2em 0;
-  align-content: space-around; */
   padding: 0 2vw;
   overflow: auto;
-  height: 80vh;
+  height: calc(100vh - 20px - 8em);
 }
 
 .no-more-shows {
