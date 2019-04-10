@@ -13,6 +13,9 @@
         :url="episode.url"
         :title="episode.title"
       />
+      <div v-if="listExhausted" class="no-more-shows">
+       &#x1F6AB; 
+      </div>
     </div>
     <div
       class="no-shows"
@@ -36,7 +39,8 @@ export default {
   data() {
     return {
       initialUpdating: true,
-      page: 1
+      page: 1,
+      listExhausted: false
     };
   },
   methods: {
@@ -45,15 +49,17 @@ export default {
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     }),
     loadNextPage(event) {
-      const target = event.target;
-      const scrollTop = target.scrollTop;
-      const clientHeight = target.clientHeight;
-      const scrollHeight = target.scrollHeight;
-      if (scrollTop + clientHeight >= scrollHeight) {
-        this.$store.dispatch("RSSHub/updating");
-        this.page++;
-        this.localUpdate();
-      }
+      if (this.listExhausted === false) {
+          const target = event.target;
+          const scrollTop = target.scrollTop;
+          const clientHeight = target.clientHeight;
+          const scrollHeight = target.scrollHeight;
+          if (scrollTop + clientHeight >= scrollHeight) {
+            this.$store.dispatch("RSSHub/updating");
+           this.page++;
+           console.log(this.listExhausted);
+           this.localUpdate();
+      }}
     },
     localUpdate() {
       this.$store.dispatch("RSSHub/updating");
@@ -63,6 +69,12 @@ export default {
       return this.$store.dispatch("RSSHub/fetchShowEpisodes", {
         id: this.showId,
         page: this.page
+      }).then(response => {
+        console.log(response.data);
+        if (response.data.length === 0) {
+          this.flash("End of Results", 'info', {timeout: 2000});
+          this.listExhausted = true;
+        }
       });
     }
   },
@@ -92,7 +104,8 @@ export default {
   watch: {
     "$route.params.id": function() {
       this.$store.dispatch("RSSHub/resetFeed");
-      this.page = 1;
+      this.page = 1
+      this.listExhausted = false;
       this.initialUpdating = true;
       setTimeout(() => {
         this.initialUpdating = false;
@@ -114,6 +127,15 @@ export default {
   padding: 0 2vw;
   overflow: auto;
   height: 80vh;
+}
+
+.no-more-shows {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  color: red;
+  font-size: 48px;
 }
 
 .no-shows {

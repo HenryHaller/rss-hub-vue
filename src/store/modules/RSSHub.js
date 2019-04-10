@@ -68,7 +68,7 @@ export default {
           RSSHubService.getEpisodes(page)
             .then(response => {
               commit("MERGE_EPISODES", { episodes: response.data });
-              resolve();
+              resolve(response);
             })
             .catch(err => {
               console.log("error in fetching episodes: " + err);
@@ -85,7 +85,7 @@ export default {
           RSSHubService.getShowEpisodes(id, page)
             .then(response => {
               commit("MERGE_EPISODES", { episodes: response.data });
-              resolve();
+              resolve(response);
             })
             .catch(err => {
               console.log("error in fetching episodes: " + err);
