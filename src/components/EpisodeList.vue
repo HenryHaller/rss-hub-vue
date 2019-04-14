@@ -14,14 +14,12 @@
         :title="episode.title"
       />
       <div v-if="listExhausted" class="no-more-shows">
-       &#x1F6AB; 
+        &#x1F6AB;
       </div>
     </div>
-    <div
-      class="no-shows"
-      v-else-if="!initialUpdating"
-      key="empty"
-    >You have no episodes. Try subscribing to some shows?</div>
+    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
+      You have no episodes. Try subscribing to some shows?
+    </div>
     <div class="no-shows" v-else key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
@@ -50,32 +48,33 @@ export default {
     }),
     loadNextPage(event) {
       if (this.listExhausted === false) {
-          const target = event.target;
-          const scrollTop = target.scrollTop;
-          const clientHeight = target.clientHeight;
-          const scrollHeight = target.scrollHeight;
-          if (scrollTop + clientHeight >= scrollHeight) {
-            this.$store.dispatch("RSSHub/updating");
-           this.page++;
-           console.log(this.listExhausted);
-           this.localUpdate();
-      }}
+        const target = event.target;
+        const scrollTop = target.scrollTop;
+        const clientHeight = target.clientHeight;
+        const scrollHeight = target.scrollHeight;
+        if (scrollTop + clientHeight >= scrollHeight) {
+          this.$store.dispatch("RSSHub/updating");
+          this.page++;
+          this.localUpdate();
+        }
+      }
     },
     localUpdate() {
       this.$store.dispatch("RSSHub/updating");
       return this.updatePage();
     },
     updatePage() {
-      return this.$store.dispatch("RSSHub/fetchShowEpisodes", {
-        id: this.showId,
-        page: this.page
-      }).then(response => {
-        console.log(response.data);
-        if (response.data.length === 0) {
-          this.flash("End of Results", 'info', {timeout: 2000});
-          this.listExhausted = true;
-        }
-      });
+      return this.$store
+        .dispatch("RSSHub/fetchShowEpisodes", {
+          id: this.showId,
+          page: this.page
+        })
+        .then(response => {
+          if (response.data.length === 0) {
+            this.flash("End of Results", "info", { timeout: 2000 });
+            this.listExhausted = true;
+          }
+        });
     }
   },
   mounted() {
@@ -104,7 +103,7 @@ export default {
   watch: {
     "$route.params.id": function() {
       this.$store.dispatch("RSSHub/resetFeed");
-      this.page = 1
+      this.page = 1;
       this.listExhausted = false;
       this.initialUpdating = true;
       setTimeout(() => {
@@ -119,9 +118,13 @@ export default {
 
 <style scoped>
 .episode-list {
+  flex-direction: column;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
   padding: 0 2vw;
   overflow: auto;
-  height: calc(100vh - 20px - 8em);
+  min-height: calc(100vh - 20px - 8em);
 }
 
 .no-more-shows {
@@ -131,6 +134,8 @@ export default {
   align-items: center;
   color: red;
   font-size: 48px;
+  height: 256px;
+  width: 256px;
 }
 
 .no-shows {

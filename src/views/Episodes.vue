@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="full-page-grid">
-      <Header/>
+      <Header />
 
-      <EpisodeList/>
-
+      <div class="episodes-wrapper">
+        <EpisodeList />
+      </div>
       <footer class="management-buttons">
         <div class="scale-in">
           <button
@@ -14,11 +15,15 @@
               red: hasShows
             }"
             :disabled="!hasShows"
-          >-</button>
+          >
+            -
+          </button>
         </div>
 
         <div class="scale-in">
-          <button @click="showOptionsModal = true" class="black">&#9881;</button>
+          <button @click="showOptionsModal = true" class="black">
+            &#9881;
+          </button>
         </div>
 
         <div class="scale-in">
@@ -32,7 +37,9 @@
                 !updating &&
                 !showOptionsModal
             }"
-          >+</button>
+          >
+            +
+          </button>
         </div>
       </footer>
     </div>
@@ -104,6 +111,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.episodes-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .management-buttons {
   display: flex;
   align-items: center;
