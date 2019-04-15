@@ -2,8 +2,13 @@
   <transition name="ep">
     <div class="episode-box">
       <div class="icon-box">
-        <div class="episode-icon" :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"></div>
-        <h4 class="title-font" style="display: none">{{ episode.show_title }}</h4>
+        <div
+          class="episode-icon"
+          :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"
+        ></div>
+        <h4 class="title-font" style="display: none">
+          {{ episode.show_title }}
+        </h4>
       </div>
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
@@ -12,7 +17,9 @@
         </div>
         <div class="download-box">
           <a :href="episode.url">&#x2B73; Download &#x2B73;</a>
-          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }">All Episodes</router-link>
+          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }"
+            >All Episodes</router-link
+          >
         </div>
       </div>
     </div>
@@ -91,7 +98,7 @@ export default {
     @media screen and (min-width: 900px) {
       margin-top: 0.5rem;
       width: 100%;
-      padding: 0 2rem;
+      padding: 2rem;
     }
     h3 {
       margin-top: 0;
