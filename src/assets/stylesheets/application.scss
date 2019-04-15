@@ -4,7 +4,6 @@ body {
   margin: 0;
 }
 
-
 .forms {
   display: flex;
   flex-direction: column;
@@ -14,6 +13,11 @@ body {
 
 a {
   text-decoration: none;
+  color: silver;
+}
+
+a:hover {
+  font-weight: bold;
 }
 
 .modal-background {
