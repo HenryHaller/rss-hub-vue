@@ -45,11 +45,12 @@ export default {
 
 <style scoped lang="scss">
 .episode-box {
+  padding: 0 1rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  padding: 0.5rem;
   background-color: #333;
   display: flex;
   margin: 1rem 0;
@@ -58,13 +59,14 @@ export default {
     justify-content: center;
   }
   .icon-box {
+    margin: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 0.5rem 0 0.5rem 0;
     flex-direction: column;
     justify-content: space-around;
     .episode-icon {
+      color: silver;
       display: flex;
       flex-direction: column-reverse;
       span {
@@ -73,7 +75,6 @@ export default {
         background-color: #111;
       }
       border-radius: 50%;
-      margin: 1em;
       box-shadow: 0px -7px 3px 6px;
       background-size: auto 100%;
       background-repeat: no-repeat;
@@ -91,6 +92,7 @@ export default {
     height: 100%;
     @media screen and (min-width: 900px) {
       width: 100%;
+      padding: 0 1rem;
     }
     h3 {
       text-align: center;
@@ -104,6 +106,7 @@ export default {
       justify-content: space-around;
     }
     .description-text-box {
+      width: 100%;
       margin: 0 0 0.75rem 0;
       .description-text {
         width: 100%;
@@ -111,7 +114,7 @@ export default {
       }
     }
     color: silver;
-    padding: 0.5rem 1rem;
+    padding: 0 0 1rem 0;
     h3 {
       margin-top: 0.5rem;
     }

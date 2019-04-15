@@ -1,10 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <div
-      v-if="!initialUpdating && episodes.length > 0"
-      class="episode-list"
-      key="episodeList"
-    >
+    <div v-if="!initialUpdating && episodes.length > 0" class="episode-list" key="episodeList">
       <EpisodeCard
         v-for="episode in episodes"
         :key="episode.id"
@@ -14,9 +10,11 @@
       />
       <div v-if="listExhausted" class="no-more-shows">&#x1F6AB;</div>
     </div>
-    <div class="no-shows" v-else-if="!initialUpdating" key="empty">
-      You have no episodes. Try subscribing to some shows?
-    </div>
+    <div
+      class="no-shows"
+      v-else-if="!initialUpdating"
+      key="empty"
+    >You have no episodes. Try subscribing to some shows?</div>
     <div class="no-shows" v-else key="rotating">
       <div class="rotate-forever big-size">&#x27F3;</div>
     </div>
@@ -122,8 +120,8 @@ export default {
   flex-direction: column;
   display: flex;
   justify-content: center;
-  /* padding: 0 2vw; */
-  //overflow: auto;
+  padding: 0 2vw;
+  /* overflow: auto; */
   min-height: calc(100vh - 20px - 8em);
 }
 
