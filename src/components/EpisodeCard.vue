@@ -5,9 +5,8 @@
         <div
           class="episode-icon"
           :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"
-        >
-          <span class="show-title">{{ episode.show_title }}</span>
-        </div>
+        ></div>
+        <h4 class="title-font">{{ episode.show_title }}</h4>
       </div>
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
@@ -61,19 +60,20 @@ export default {
   .icon-box {
     margin: 1rem;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    h4 {
+      padding: 0.25rem;
+      width: 128px;
+      position: relative;
+      bottom: 16px;
+      margin: 0;
+      text-align: center;
+      color: silver;
+      background-color: #111;
+    }
     .episode-icon {
       color: silver;
-      display: flex;
-      flex-direction: column-reverse;
-      span {
-        white-space: pre;
-        color: silver;
-        background-color: #111;
-      }
       border-radius: 50%;
       box-shadow: 0px -7px 3px 6px;
       background-size: auto 100%;
@@ -90,11 +90,14 @@ export default {
   }
   .description-box {
     height: 100%;
+    margin-top: 0;
     @media screen and (min-width: 900px) {
+      margin-top: 0.5rem;
       width: 100%;
       padding: 0 1rem;
     }
     h3 {
+      margin-top: 0;
       text-align: center;
     }
     display: flex;
@@ -106,6 +109,9 @@ export default {
       justify-content: space-around;
     }
     .description-text-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
       margin: 0 0 0.75rem 0;
       .description-text {
         text-indent: 2rem;
@@ -114,9 +120,6 @@ export default {
     }
     color: silver;
     padding: 0 0 1rem 0;
-    h3 {
-      margin-top: 0.5rem;
-    }
   }
 }
 
