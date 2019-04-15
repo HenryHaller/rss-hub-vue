@@ -123,7 +123,7 @@ export default {
   display: flex;
   justify-content: center;
   padding: 0 2vw;
-  overflow: auto;
+  //overflow: auto;
   min-height: calc(100vh - 20px - 8em);
 }
 

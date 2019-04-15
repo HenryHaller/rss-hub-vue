@@ -1,48 +1,43 @@
 <template>
-  <div>
-    <div class="full-page-grid">
-      <Header />
+  <div class="episodes-view">
+    <Header />
 
-      <div class="episodes-wrapper">
-        <EpisodeList />
-      </div>
-      <footer class="management-buttons">
-        <div class="scale-in">
-          <button
-            @click="showUnSubscribeModal = true"
-            v-bind:class="{
-              disabled: !hasShows,
-              red: hasShows
-            }"
-            :disabled="!hasShows"
-          >
-            -
-          </button>
-        </div>
-
-        <div class="scale-in">
-          <button @click="showOptionsModal = true" class="black">
-            &#9881;
-          </button>
-        </div>
-
-        <div class="scale-in">
-          <button
-            @click="showSubscribeModal = true"
-            class="green"
-            v-bind:class="{
-              bounce:
-                !hasShows &&
-                !showSubscribeModal &&
-                !updating &&
-                !showOptionsModal
-            }"
-          >
-            +
-          </button>
-        </div>
-      </footer>
+    <div class="episodes-wrapper">
+      <EpisodeList />
     </div>
+    <footer class="management-buttons">
+      <div class="scale-in">
+        <button
+          @click="showUnSubscribeModal = true"
+          v-bind:class="{
+            disabled: !hasShows,
+            red: hasShows
+          }"
+          :disabled="!hasShows"
+        >
+          -
+        </button>
+      </div>
+
+      <div class="scale-in">
+        <button @click="showOptionsModal = true" class="black">
+          &#9881;
+        </button>
+      </div>
+
+      <div class="scale-in">
+        <button
+          @click="showSubscribeModal = true"
+          class="green"
+          v-bind:class="{
+            bounce:
+              !hasShows && !showSubscribeModal && !updating && !showOptionsModal
+          }"
+        >
+          +
+        </button>
+      </div>
+    </footer>
     <div>
       <transition name="fade" mode="out-in">
         <OptionsModal
@@ -111,6 +106,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.episode-view {
+  width: 100%;
+}
+
 .episodes-wrapper {
   display: flex;
   justify-content: center;

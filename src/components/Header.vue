@@ -36,6 +36,7 @@ export default {
 
 <style scoped lang="scss">
 header {
+  width: 100%;
   z-index: 10;
   position: sticky;
   top: 0;

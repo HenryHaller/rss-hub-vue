@@ -11,8 +11,15 @@
       </div>
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
-        <div class="description" v-html="episode.description"></div>
-        <div class="download-box"><a :href="episode.url">Download</a></div>
+        <div class="description-text-box">
+          <span class="description-text" v-html="episode.description"></span>
+        </div>
+        <div class="download-box">
+          <a :href="episode.url">Download</a>
+          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }">
+            All Episodes
+          </router-link>
+        </div>
       </div>
     </div>
   </transition>
@@ -53,7 +60,12 @@ a {
   text-decoration: none;
 }
 .icon-box {
-  padding: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .episode-box {
   border-radius: 10px;
@@ -79,15 +91,20 @@ a {
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
+  align-content: center;
   .download-box {
     display: flex;
+    justify-content: space-around;
+    // width: 100%;
+  }
+  .description-text-box {
+    display: flex;
     justify-content: center;
-    width: 100%;
+    margin-bottom: 0.75rem;
+    .description-text {
+      text-indent: 2rem;
+    }
   }
-  .description {
-    text-indent: 2rem;
-  }
-  text-align: left;
   color: silver;
   padding: 0.5rem 1rem;
   h3 {
