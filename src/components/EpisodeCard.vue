@@ -106,12 +106,10 @@ export default {
       justify-content: space-around;
     }
     .description-text-box {
-      width: 100%;
       margin: 0 0 0.75rem 0;
       .description-text {
-        width: 100%;
-        display: none;
         text-indent: 2rem;
+        word-break: break-all;
       }
     }
     color: silver;
