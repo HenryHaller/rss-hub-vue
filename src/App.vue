@@ -1,9 +1,19 @@
 <template>
   <div class="main">
+    <Header/>
     <flash-message class="flash-messages"></flash-message>
-    <router-view />
+    <router-view/>
   </div>
 </template>
+
+<script>
+import Header from "@/components/Header.vue";
+export default {
+  components: {
+    Header
+  }
+};
+</script>
 
 <style lang="scss">
 @import "src/assets/stylesheets/application.scss";

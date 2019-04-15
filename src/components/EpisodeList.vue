@@ -1,7 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
     <div
-      v-on:scroll="loadNextPage"
       v-if="!initialUpdating && episodes.length > 0"
       class="episode-list"
       key="episodeList"
@@ -13,9 +12,7 @@
         :url="episode.url"
         :title="episode.title"
       />
-      <div v-if="listExhausted" class="no-more-shows">
-        &#x1F6AB;
-      </div>
+      <div v-if="listExhausted" class="no-more-shows">&#x1F6AB;</div>
     </div>
     <div class="no-shows" v-else-if="!initialUpdating" key="empty">
       You have no episodes. Try subscribing to some shows?
@@ -46,13 +43,12 @@ export default {
       fetchEpisodes: "RSSHub/fetchEpisodes",
       setUpdateIntervalKey: "RSSHub/setUpdateIntervalKey"
     }),
-    loadNextPage(event) {
+    loadNextPage() {
       if (this.listExhausted === false) {
-        const target = event.target;
-        const scrollTop = target.scrollTop;
-        const clientHeight = target.clientHeight;
-        const scrollHeight = target.scrollHeight;
-        if (scrollTop + clientHeight >= scrollHeight) {
+        if (
+          window.innerHeight + Math.ceil(window.pageYOffset + 1) >=
+          document.body.offsetHeight
+        ) {
           this.$store.dispatch("RSSHub/updating");
           this.page++;
           this.localUpdate();
@@ -81,6 +77,10 @@ export default {
     this.updatePage().then(() => {
       this.initialUpdating = false;
     });
+    document.onscroll = this.loadNextPage;
+  },
+  destroyed() {
+    document.onscroll = null;
   },
   computed: {
     episodes() {
@@ -118,11 +118,11 @@ export default {
 
 <style scoped>
 .episode-list {
-  flex-direction: column;
   max-width: 1200px;
+  flex-direction: column;
   display: flex;
   justify-content: center;
-  padding: 0 2vw;
+  /* padding: 0 2vw; */
   //overflow: auto;
   min-height: calc(100vh - 20px - 8em);
 }

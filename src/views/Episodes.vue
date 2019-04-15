@@ -1,7 +1,5 @@
 <template>
   <div class="episodes-view">
-    <Header />
-
     <div class="episodes-wrapper">
       <EpisodeList />
     </div>
@@ -20,9 +18,7 @@
       </div>
 
       <div class="scale-in">
-        <button @click="showOptionsModal = true" class="black">
-          &#9881;
-        </button>
+        <button @click="showOptionsModal = true" class="black">&#9881;</button>
       </div>
 
       <div class="scale-in">
@@ -73,7 +69,6 @@ import EpisodeList from "@/components/EpisodeList.vue";
 import SubscribeModal from "@/components/modals/SubscribeModal.vue";
 import OptionsModal from "@/components/modals/OptionsModal.vue";
 import ShowsModal from "@/components/modals/ShowsModal.vue";
-import Header from "@/components/Header.vue";
 
 import { mapGetters } from "vuex";
 
@@ -83,8 +78,7 @@ export default {
     EpisodeList,
     SubscribeModal,
     ShowsModal,
-    OptionsModal,
-    Header
+    OptionsModal
   },
   data() {
     return {
@@ -107,7 +101,7 @@ export default {
 
 <style scoped lang="scss">
 .episode-view {
-  width: 100%;
+  max-width: 1200px;
 }
 
 .episodes-wrapper {

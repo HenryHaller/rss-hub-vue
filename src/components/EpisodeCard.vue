@@ -12,7 +12,7 @@
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
         <div class="description-text-box">
-          <span class="description-text" v-html="episode.description"></span>
+          <div class="description-text" v-html="episode.description"></div>
         </div>
         <div class="download-box">
           <a :href="episode.url">&#x2B73; Download &#x2B73;</a>
@@ -45,39 +45,22 @@ export default {
 
 <style scoped lang="scss">
 .episode-box {
-  .description-box {
-    h3 {
-      text-align: center;
-    }
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-    align-content: center;
-    .download-box {
-      display: flex;
-      justify-content: space-around;
-      // width: 100%;
-    }
-    .description-text-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 0.75rem;
-      .description-text {
-        text-indent: 2rem;
-      }
-    }
-    color: silver;
-    padding: 0.5rem 1rem;
-    h3 {
-      margin-top: 0.5rem;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0.5rem;
+  background-color: #333;
+  display: flex;
+  margin: 1rem 0;
+  @media screen and (min-width: 900px) {
+    flex-direction: row;
+    justify-content: center;
   }
-
   .icon-box {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     padding: 0.5rem 0 0.5rem 0;
     flex-direction: column;
     justify-content: space-around;
@@ -104,14 +87,34 @@ export default {
       //flex-direction: column;
     }
   }
-  border-radius: 10px;
-  padding: 0.5rem;
-  background-color: #333;
-  display: flex;
-  margin: 1rem 0;
-  @media screen and (max-width: 578px) {
+  .description-box {
+    height: 100%;
+    @media screen and (min-width: 900px) {
+      width: 100%;
+    }
+    h3 {
+      text-align: center;
+    }
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    .download-box {
+      display: flex;
+      justify-content: space-around;
+    }
+    .description-text-box {
+      margin: 0 0 0.75rem 0;
+      .description-text {
+        width: 100%;
+        text-indent: 2rem;
+      }
+    }
+    color: silver;
+    padding: 0.5rem 1rem;
+    h3 {
+      margin-top: 0.5rem;
+    }
   }
 }
 
@@ -124,5 +127,8 @@ export default {
 
 .ep-leave-to {
   opacity: 1;
+}
+p {
+  display: none;
 }
 </style>
