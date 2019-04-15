@@ -45,6 +45,7 @@ a:hover {
 }
 
 .modal-pad {
+  overflow: scroll;
   height: 85vh;
   width: 85vw;
   display: flex;
