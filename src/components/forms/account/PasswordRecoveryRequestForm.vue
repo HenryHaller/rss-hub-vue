@@ -1,11 +1,13 @@
 <template>
-  <form class="home-form" @submit.prevent="onSubmit">
-    <h3 class="form.title">Recover Password</h3>
-    <div class="label-group">
-      <label for="email">Email</label>
-      <input type="email" name="email" v-model="email" />
-    </div>
-    <input type="submit" value="Recover Password" />
+  <form
+    @submit.prevent="onSubmit"
+    class="d-flex flex-column align-items-center"
+  >
+    <fieldset class="form-group form-inline">
+      <label for="email" class="form-control-label">Email</label>
+      <input type="email" name="email" v-model="email" class="form-control" />
+    </fieldset>
+    <input type="submit" value="Recover Password" class="btn btn-primary" />
   </form>
 </template>
 

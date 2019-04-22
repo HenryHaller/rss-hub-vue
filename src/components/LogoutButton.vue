@@ -8,11 +8,6 @@ import UserService from "@/services/UserService";
 export default {
   methods: {
     onClick() {
-      const update_interval_key = this.$store.getters[
-        "RSSHub/updateIntervalKey"
-      ];
-      clearInterval(update_interval_key);
-      // localStorage.clear();
       // debugger;
 
       UserService.logout()
@@ -22,7 +17,7 @@ export default {
             this.flash("Logged out", "info", {
               timeout: 2000
             });
-            this.$router.push({ name: "Login" });
+            this.$router.push({ name: "Home" });
           }
         })
         .catch(err => {

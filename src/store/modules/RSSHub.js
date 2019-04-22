@@ -73,7 +73,7 @@ export default {
             .catch(err => {
               console.log("error in fetching episodes: " + err);
               if (err.response.data.message == "Signature has expired") {
-                router.push({ name: "Login" });
+                router.push({ name: "Home" });
               }
             })
             .finally(() => {
@@ -90,7 +90,7 @@ export default {
             .catch(err => {
               console.log("error in fetching episodes: " + err);
               if (err.response.data.message == "Signature has expired") {
-                router.push({ name: "Login" });
+                router.push({ name: "Home" });
               }
             })
             .finally(() => {

@@ -24,7 +24,11 @@ export default {
         if (shows.length === 0) return "&#x27F3;";
         const showId = parseInt(this.$route.params.id);
         const targetShow = shows.find(show => show.id === showId);
-        return targetShow.title;
+        try {
+          return targetShow.title;
+        } catch (err) {
+          return "RSSHub";
+        }
       }
     },
     ...mapGetters("RSSHub", {
@@ -36,7 +40,7 @@ export default {
 
 <style scoped lang="scss">
 header {
-  width: 100%;
+  text-align: center;
   z-index: 10;
   position: sticky;
   top: 0;
@@ -44,6 +48,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  min-height: 60px;
   h1 {
     animation: 1s ease-out 0s 1 appear;
     margin: 5px 0;

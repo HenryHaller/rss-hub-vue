@@ -1,24 +1,23 @@
 <template>
   <div>
-    <form class="home-form" @submit.prevent="onSubmit">
-      <h3 class="form.title">Sign Up</h3>
-
-      <div class="label-group">
-        <label for="email">Email</label>
-        <input type="email" v-model="email" />
-      </div>
-
-      <div class="label-group">
-        <label for="password">Password</label>
-        <input type="password" v-model="password" />
-      </div>
-
-      <div class="label-group">
-        <label for="password-confirm">Confirm Password</label>
-        <input type="password" v-model="passwordConfirm" />
-      </div>
-      <input type="submit" value="Sign Up" />
-      <div v-show="!passwordsMatch">Passwords Must Match</div>
+    <form
+      @submit.prevent="onSubmit"
+      class="d-flex flex-column align-items-center"
+    >
+      <fieldset class="form-group form-inline">
+        <label for="email" class="form-control-label">Email</label>
+        <input type="email" v-model="email" class="form-control" />
+        <label for="password" class="form-control-label">Password</label>
+        <input type="password" v-model="password" class="form-control" />
+        <label for="password-confirm" class="form-control-label"
+          >Confirm Password</label
+        >
+        <input type="password" v-model="passwordConfirm" class="form-control" />
+        <div v-show="!passwordsMatch" class="text-muted">
+          Passwords Must Match
+        </div>
+      </fieldset>
+      <input type="submit" value="Sign Up" class="btn btn-primary" />
     </form>
   </div>
 </template>

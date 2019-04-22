@@ -20,7 +20,7 @@ footer {
   justify-content: space-around;
   position: sticky;
   bottom: 0px;
-  height: 100%;
+  height: 60px;
   background: black;
   color: moccasin;
 }

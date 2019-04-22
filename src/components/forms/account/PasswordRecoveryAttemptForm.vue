@@ -4,14 +4,14 @@
 
     <div class="label-group">
       <label for="password">New Password</label>
-      <input type="password" name="password" v-model="password" />
+      <input type="password" name="password" v-model="password">
     </div>
     <div class="label-group">
       <label for="passwordConfirm">Confirm Password</label>
-      <input type="password" name="passwordConfirm" v-model="passwordConfirm" />
+      <input type="password" name="passwordConfirm" v-model="passwordConfirm">
     </div>
     <div v-show="!passwordsMatch">Passwords Must Match</div>
-    <input type="submit" value="Reset Password" />
+    <input type="submit" value="Reset Password">
   </form>
 </template>
 
@@ -52,7 +52,7 @@ export default {
               this.flash("Password Updated", "info", {
                 timeout: 2000
               });
-              this.$router.push({ name: "Login" });
+              this.$router.push({ name: "Home" });
             }
           })
           .catch(err => {

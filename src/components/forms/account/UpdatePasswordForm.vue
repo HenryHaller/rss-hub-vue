@@ -1,23 +1,27 @@
 <template>
-  <div>
-    <form class="home-form" @submit.prevent="onSubmit">
-      <h3 class="form.title">Update Password</h3>
+  <div class="d-flex justify-content-center">
+    <form @submit.prevent="onSubmit" class="text-light">
+      <fieldset class="form-group form-inline">
+        <legend class="justify-content-center d-flex">Update Password</legend>
+        <label for="password" class="form-control-label"
+          >Current Password</label
+        >
+        <input type="password" v-model="password" class="form-control" />
 
-      <div class="label-group">
-        <label for="password">Current Password</label>
-        <input type="password" v-model="password" />
-      </div>
+        <label for="newPassword" class="form-control-label">New Password</label>
+        <input type="password" v-model="newPassword" class="form-control" />
 
-      <div class="label-group">
-        <label for="newPassword">New Password</label>
-        <input type="password" v-model="newPassword" />
-      </div>
+        <label for="newPasswordConfirm" class="form-control-label"
+          >Confirm new Password</label
+        >
+        <input
+          type="password"
+          v-model="newPasswordConfirm"
+          class="form-control"
+        />
+      </fieldset>
 
-      <div class="label-group">
-        <label for="newPasswordConfirm">Confirm new Password</label>
-        <input type="password" v-model="newPasswordConfirm" />
-      </div>
-      <input type="submit" value="Reset Password" />
+      <input type="submit" class="form-control" value="Reset Password" />
       <div v-show="!passwordsMatch">Passwords Must Match</div>
     </form>
   </div>
