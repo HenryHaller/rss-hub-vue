@@ -1,5 +1,5 @@
 <template>
-  <button type="submit" @click="onClick" class="logout">Logout</button>
+  <button type="submit" @click="onClick" class="btn btn-danger">Logout</button>
 </template>
 
 <script>

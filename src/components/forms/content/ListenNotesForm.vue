@@ -1,15 +1,18 @@
 <template>
-  <div class="lightning-notes">
-    <form @submit.prevent="onSubmit">
-      <label for="searchString">Search for a Podcast</label>
-      <input
-        type="text"
-        v-model="searchString"
-        name="searchString"
-        placeholder="podcast name"
-      />
+  <div class="text-light">
+    <form @submit.prevent="onSubmit" class="form-inline d-flex flex-column align-items-center">
+      <h3>Search for a Podcast</h3>
+      <fieldset class="form-group form-inline">
+        <input
+          type="text"
+          class="form-control my-3"
+          v-model="searchString"
+          name="searchString"
+          placeholder="podcast name"
+        >
+      </fieldset>
     </form>
-    <div class="results-area">
+    <div class="container">
       <transition name="fade" mode="out-in">
         <div class="big-size" v-if="pending > 0">
           <div class="rotate-forever">&#x27F3;</div>

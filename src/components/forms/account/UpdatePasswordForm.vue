@@ -2,26 +2,18 @@
   <div class="d-flex justify-content-center">
     <form @submit.prevent="onSubmit" class="text-light">
       <fieldset class="form-group form-inline">
-        <legend class="justify-content-center d-flex">Update Password</legend>
-        <label for="password" class="form-control-label"
-          >Current Password</label
-        >
-        <input type="password" v-model="password" class="form-control" />
+        <legend class="justify-content-center d-flex mb-3">Update Password</legend>
+        <label for="password" class="form-control-label">Current Password</label>
+        <input type="password" v-model="password" class="form-control">
 
         <label for="newPassword" class="form-control-label">New Password</label>
-        <input type="password" v-model="newPassword" class="form-control" />
+        <input type="password" v-model="newPassword" class="form-control">
 
-        <label for="newPasswordConfirm" class="form-control-label"
-          >Confirm new Password</label
-        >
-        <input
-          type="password"
-          v-model="newPasswordConfirm"
-          class="form-control"
-        />
+        <label for="newPasswordConfirm" class="form-control-label">Confirm new Password</label>
+        <input type="password" v-model="newPasswordConfirm" class="form-control">
       </fieldset>
 
-      <input type="submit" class="form-control" value="Reset Password" />
+      <input type="submit" class="btn btn-warning" value="Reset Password">
       <div v-show="!passwordsMatch">Passwords Must Match</div>
     </form>
   </div>

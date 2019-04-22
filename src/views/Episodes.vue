@@ -1,5 +1,5 @@
 <template>
-  <div class="episodes-view" style="min-height: calc(100vh - 60px)">
+  <div class="episodes-view" style="min-height: calc(100vh - 120px)">
     <div class="nav nav-pills nav-fill">
       <a
         href="#"
@@ -47,7 +47,8 @@
           >
         </div>
         <div class="tab-content clearfix">
-          <div class="tab-pane active" id="current">
+          <div class="tab-pane text-center active mt-5" id="current">
+            <h3 class="text-light mb-4">Subscriptions</h3>
             <ShowCard
               v-for="show in shows"
               :title="show.title"
@@ -74,16 +75,16 @@
               >
             </div>
             <div class="tab-content clearfix">
-              <div class="tab-pane active" id="search">
-                <ListenNotesForm />
+              <div class="tab-pane active mt-5" id="search">
+                <ListenNotesForm class="mt-5" />
               </div>
               <div class="tab-pane" id="direct">
-                <SubscribeForm />
+                <SubscribeForm class="mt-5" />
               </div>
             </div>
           </div>
-          <div class="tab-pane" id="account">
-            <UpdatePasswordForm />
+          <div class="tab-pane text-center mt-5" id="account">
+            <UpdatePasswordForm class="mb-5" />
             <LogoutButton />
           </div>
         </div>
