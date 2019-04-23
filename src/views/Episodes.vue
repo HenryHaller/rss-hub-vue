@@ -1,5 +1,6 @@
 <template>
   <div class="episodes-view" style="min-height: calc(100vh - 120px)">
+    <!-- feed/manage -->
     <div class="nav nav-pills nav-fill">
       <a
         href="#"
@@ -23,13 +24,15 @@
         </div>
       </div>
       <div id="manage" class="tab-pane">
+        <!-- Inside of Manage tab -->
+        <!-- subscriptions/add/account tabs -->
         <div class="nav nav-pills nav-fill">
           <a
             href="#"
             class="nav-item nav-link active"
-            v-on:click="toggleManage('#current', '#currentLink')"
-            id="currentLink"
-            >Current</a
+            v-on:click="toggleManage('#subscriptions', '#subscriptionsLink')"
+            id="subscriptionsLink"
+            >Subscriptions</a
           >
           <a
             href="#"
@@ -47,7 +50,11 @@
           >
         </div>
         <div class="tab-content clearfix">
-          <div class="tab-pane text-center active mt-5" id="current">
+          <div
+            class="tab-pane text-center active-flex flex-column justify-content-center"
+            id="subscriptions"
+            style="min-height: calc(100vh - 120px - 80px)"
+          >
             <h3 class="text-light mb-4">Subscriptions</h3>
             <ShowCard
               v-for="show in shows"
@@ -57,7 +64,12 @@
               v-on:delete-me="unSubscribe"
             />
           </div>
-          <div class="tab-pane" id="add">
+          <div
+            class="tab-pane text-center flex-column justify-content-start"
+            id="add"
+          >
+            <!-- Inside of SPECIAL! add tab -->
+            <!-- search/direct tabs -->
             <div class="nav nav-pills nav-fill">
               <a
                 href="#"
@@ -74,7 +86,10 @@
                 >Direct Link</a
               >
             </div>
-            <div class="tab-content clearfix">
+            <div
+              class="tab-content clearfix justify-content-center d-flex flex-column"
+              style="min-height: calc(100vh - 120px - 120px)"
+            >
               <div class="tab-pane active mt-5" id="search">
                 <ListenNotesForm class="mt-5" />
               </div>
@@ -83,9 +98,15 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane text-center mt-5" id="account">
-            <UpdatePasswordForm class="mb-5" />
-            <LogoutButton />
+          <div
+            class="tab-pane text-center text-center flex-column justify-content-center"
+            id="account"
+            style="min-height: calc(100vh - 120px - 80px)"
+          >
+            <div>
+              <UpdatePasswordForm class="mb-5" />
+              <LogoutButton />
+            </div>
           </div>
         </div>
       </div>
@@ -126,15 +147,14 @@ export default {
         .querySelectorAll("#feedLink, #manageLink, #feed, #manage")
         .forEach(elem => elem.classList.toggle("active"));
     },
-    toggleManage(t1, t2) {
+    toggleManage(target, targetLink) {
       document
         .querySelectorAll(
-          "#addLink, #currentLink, #accountLink, #add, #current, #account"
+          "#addLink, #subscriptionsLink, #accountLink, #add, #subscriptions, #account"
         )
-        .forEach(elem => elem.classList.remove("active"));
-      document
-        .querySelectorAll([t1, t2])
-        .forEach(elem => elem.classList.add("active"));
+        .forEach(elem => elem.classList.remove("active", "active-flex"));
+      document.querySelector(target).classList.add("active-flex");
+      document.querySelector(targetLink).classList.add("active");
     },
     toggleAdd() {
       document
@@ -181,44 +201,11 @@ export default {
   justify-content: center;
 }
 
-.management-buttons {
+.active-flex {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  position: sticky;
-  bottom: 0px;
-  height: 100%;
-  background: black;
+}
 
-  button {
-    transition: background-color 2.5s;
-    font-size: 32px;
-    padding: 0 30px;
-    height: 70%;
-    border-radius: 25%;
-    box-shadow: 2px 2px;
-    color: white;
-    font-weight: bold;
-  }
-
-  button.bounce {
-    animation: 1s ease-out 2s infinite bounce;
-  }
-
-  .disabled {
-    background-color: grey;
-  }
-
-  .green {
-    background-color: green;
-  }
-
-  .red {
-    background-color: red;
-  }
-
-  .black {
-    background-color: black;
-  }
+.h-1rem {
+  height: 1rem;
 }
 </style>

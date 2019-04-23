@@ -12,61 +12,24 @@ a:hover {
   font-weight: bold;
 }
 
-.modal-background {
-  background-color: lightgrey;
-  opacity: 0.5;
-  z-index: 10;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
+label {
+  margin-bottom: 0;
 }
 
-.modal {
-  z-index: 11;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.btn-primary {
+  color: #f5edf0;
+  background-color: #0f2c33;
+  border: none;
 }
 
-.modal-pad {
-  overflow: scroll;
-  height: 85vh;
-  width: 85vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: green;
-  border-radius: 4%;
-  align-items: center;
+.btn-primary:hover {
+  color: #0f2c33;
+  background-color: #f5edf0;
 }
 
-.upper-modal {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-}
-
-.modal-content {
-  //   padding: 25vh 2vw;
-  //   width: 93vw;
-  //   opacity: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 8fr 1fr;
-  width: 75%;
-  height: 100%;
-  //   background-color: green;
-  //   border-radius: 3%;
+.nav-link.active {
+  color: #0f2c33 !important;
+  background-color: #f5edf0 !important;
 }
 
 @keyframes appear {

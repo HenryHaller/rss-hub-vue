@@ -2,17 +2,32 @@
   <div>
     <form
       @submit.prevent="onSubmit"
-      class="d-flex flex-column align-items-center"
+      class="d-flex flex-column align-items-sm-center"
     >
-      <fieldset class="form-group form-inline">
+      <fieldset class="form-group form-inline text-center">
         <label for="email" class="form-control-label">Email</label>
-        <input type="email" v-model="email" class="form-control" />
+        <input
+          type="email"
+          v-model="email"
+          class="form-control"
+          placeholder="example@gmail.com"
+        />
         <label for="password" class="form-control-label">Password</label>
-        <input type="password" v-model="password" class="form-control" />
+        <input
+          type="password"
+          v-model="password"
+          class="form-control"
+          placeholder="********"
+        />
         <label for="password-confirm" class="form-control-label"
           >Confirm Password</label
         >
-        <input type="password" v-model="passwordConfirm" class="form-control" />
+        <input
+          type="password"
+          v-model="passwordConfirm"
+          class="form-control"
+          placeholder="********"
+        />
         <div v-show="!passwordsMatch" class="text-muted">
           Passwords Must Match
         </div>

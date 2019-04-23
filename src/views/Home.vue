@@ -1,41 +1,60 @@
 <template>
   <div
-    class="forms text-light d-flex flex-column justify-content-between align-items-center"
-    style="min-height: calc(100vh - 120px)"
+    class="text-light"
+    style="min-height: calc(100vh - 120px);
+      display: grid;
+      grid-template-rows: 0.5fr 1fr;
+      grid-template-columns: 1fr;
+  "
   >
-    <div></div>
-    <p>Welcome to RSSHub, your personal podcast tracker.</p>
-    <div>
-      <div class="nav nav-pills nav-fill">
-        <a
-          class="nav-item nav-link active"
-          v-on:click="toggleMode('#login', '#loginLink')"
-          id="loginLink"
-        >Login</a>
-        <a
-          class="nav-item nav-link"
-          v-on:click="toggleMode('#signup', '#signupLink')"
-          id="signupLink"
-        >Sign Up</a>
-        <a
-          class="nav-item nav-link"
-          v-on:click="toggleMode('#recover', '#recoveryLink')"
-          id="recoveryLink"
-        >Recover Password</a>
-      </div>
-      <div class="tab-content clearfix">
-        <div class="tab-pane active" id="login">
-          <LoginForm/>
-        </div>
-        <div class="tab-pane" id="signup">
-          <SignUpForm/>
-        </div>
-        <div class="tab-pane" id="recover">
-          <PasswordRecoveryRequest/>
-        </div>
-      </div>
+    <div class="text-center d-flex flex-column justify-content-center">
+      <p>Welcome to RSSHub, your personal podcast tracker.</p>
     </div>
-    <div></div>
+
+    <div class="w-100">
+      <div class="container-fluid" style="flex: 1 4 80%;">
+        <div class="row">
+          <div
+            class="col-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6 offset-lg-4 col-lg-4"
+          >
+            <div class="nav nav-pills nav-justified d-flex align-items-center">
+              <a
+                class="nav-item nav-link active"
+                v-on:click="toggleMode('#login', '#loginLink')"
+                id="loginLink"
+                >Login</a
+              >
+              <a
+                class="nav-item nav-link"
+                v-on:click="toggleMode('#signup', '#signupLink')"
+                id="signupLink"
+                >Sign Up</a
+              >
+              <a
+                class="nav-item nav-link"
+                v-on:click="toggleMode('#recover', '#recoveryLink')"
+                id="recoveryLink"
+                >Password Recovery</a
+              >
+            </div>
+            <div class="tab-content clearfix">
+              <div class="tab-pane active" id="login">
+                <LoginForm />
+              </div>
+              <div class="tab-pane" id="signup">
+                <SignUpForm />
+              </div>
+              <div class="tab-pane" id="recover">
+                <PasswordRecoveryRequest />
+              </div>
+            </div>
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+      </div>
+      <!--container-->
+    </div>
   </div>
 </template>
 

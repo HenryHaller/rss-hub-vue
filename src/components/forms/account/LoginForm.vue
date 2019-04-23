@@ -1,14 +1,29 @@
 <template>
   <div>
-    <form class="d-flex flex-column align-items-center" @submit.prevent="onSubmit">
-      <fieldset class="form-group form-inline">
+    <form
+      class="d-flex flex-column align-items-sm-center"
+      @submit.prevent="onSubmit"
+    >
+      <fieldset class="form-group form-inline text-center">
         <!-- <legend class="d-flex justify-content-center">Login</legend> -->
         <label for="email" class="form-control-label">Email</label>
-        <input type="email" name="email" class="form-control" v-model="email">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          placeholder="example@gmail.com"
+          v-model="email"
+        />
         <label for="password" class="form-control-label">Password</label>
-        <input type="password" class="form-control" name="password" v-model="password">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="*********"
+          v-model="password"
+        />
       </fieldset>
-      <input type="submit" class="btn btn-primary" value="Login">
+      <input type="submit" class="btn btn-primary" value="Login" />
     </form>
   </div>
 </template>

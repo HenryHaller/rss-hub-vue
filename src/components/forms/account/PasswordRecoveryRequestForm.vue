@@ -1,11 +1,22 @@
 <template>
   <form
     @submit.prevent="onSubmit"
-    class="d-flex flex-column align-items-center"
+    class="d-flex flex-column align-items-sm-center"
   >
-    <fieldset class="form-group form-inline">
-      <label for="email" class="form-control-label">Email</label>
-      <input type="email" name="email" v-model="email" class="form-control" />
+    <fieldset class="form-group form-inline text-center">
+      <label
+        for="email"
+        class="form-control-label"
+        placeholder="example@gmail.com"
+        >Email</label
+      >
+      <input
+        type="email"
+        name="email"
+        v-model="email"
+        class="form-control"
+        placeholder="example@gmail.com"
+      />
     </fieldset>
     <input type="submit" value="Recover Password" class="btn btn-primary" />
   </form>
