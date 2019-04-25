@@ -18,7 +18,11 @@
       >
     </div>
     <div class="tab-content clearfix">
-      <div id="feed" class="tab-pane active">
+      <div
+        id="feed"
+        class="tab-pane active-flex flex-column justify-content-center"
+        style="min-height: calc(100vh - 120px - 24px)"
+      >
         <div class="episodes-wrapper">
           <EpisodeList />
         </div>
@@ -144,8 +148,10 @@ export default {
   methods: {
     toggleMain() {
       document
-        .querySelectorAll("#feedLink, #manageLink, #feed, #manage")
+        .querySelectorAll("#feedLink, #manageLink, #manage")
         .forEach(elem => elem.classList.toggle("active"));
+
+      document.querySelector("#feed").classList.toggle("active-flex");
     },
     toggleManage(target, targetLink) {
       document

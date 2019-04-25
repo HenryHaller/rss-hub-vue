@@ -8,7 +8,11 @@
   "
   >
     <div class="text-center d-flex flex-column justify-content-center">
-      <p>Welcome to RSSHub, your personal podcast tracker.</p>
+      <p>
+        Welcome to RSSHub, your personal podcast tracker. Here you can easily
+        follow and download your favorite podcasts! Please make an account, it
+        only takes a minute.
+      </p>
     </div>
 
     <div class="w-100">
