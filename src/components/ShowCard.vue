@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit("close-me");
+      this.$emit("show-clicked");
     },
     onClick() {
       this.$emit("delete-me", this);
