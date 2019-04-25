@@ -28,7 +28,9 @@ export default {
         this.loginCheckCompleted = true;
 
         if (response.status === 204) {
-          this.$router.push({ name: "Episodes" });
+          if (this.$route.name !== "Show") {
+            this.$router.push({ name: "Episodes" });
+          }
         } else {
           this.$router.push({ name: "Home" });
         }
