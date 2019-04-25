@@ -1,10 +1,15 @@
 <template>
   <div class="show-card">
-    <div></div>
-    <router-link :to="{ name: 'Show', params: { id: id } }">
-      <div class="title-box" @click="close">{{ title }}</div>
-    </router-link>
-    <button type="submit" @click="onClick">Delete</button>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center">
+      <router-link :to="{ name: 'Show', params: { id: id } }">
+        <span @click="close">{{ title }}</span>
+      </router-link>
+    </div>
+    <div style="align-self: center; justify-self:center">
+      <button type="submit" class="btn btn-danger" @click="deleteShow">
+        Delete
+      </button>
+    </div>
   </div>
 </template>
 
@@ -19,7 +24,7 @@ export default {
     close() {
       this.$emit("show-clicked");
     },
-    onClick() {
+    deleteShow() {
       this.$emit("delete-me", this);
     }
   }
@@ -27,10 +32,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.show-card:nth-child(even) {
+  div:first-of-type {
+    background-color: #4c3f3f;
+  }
+}
+
+.show-card:nth-child(odd) {
+  div:first-of-type {
+    background-color: darkslategray;
+  }
+}
+
 .show-card {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr;
   margin-bottom: 1vh;
   .title-box {
     justify-self: center;
