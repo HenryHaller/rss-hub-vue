@@ -1,18 +1,49 @@
 <template>
-  <form class="home-form" @submit.prevent="onSubmit">
-    <h3 class="form.title">Recover Password</h3>
+  <div class="w-100 text-light">
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6 offset-lg-4 col-lg-4"
+        >
+          <form class="d-flex flex-column align-items-sm-center">
+            <fieldset class="form-group form-inline text-center">
+              <legend>Recover Password</legend>
+              <label class="form-control-label" for="password"
+                >New Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="*********"
+                v-model="password"
+              />
 
-    <div class="label-group">
-      <label for="password">New Password</label>
-      <input type="password" name="password" v-model="password">
+              <label class="form-control-label" for="passwordConfirm"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="passwordConfirm"
+                placeholder="*********"
+                v-model="passwordConfirm"
+              />
+            </fieldset>
+
+            <div v-show="!passwordsMatch" class="text-muted">
+              Passwords Must Match
+            </div>
+            <input
+              type="submit"
+              value="Reset Password"
+              class="btn btn-primary"
+            />
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="label-group">
-      <label for="passwordConfirm">Confirm Password</label>
-      <input type="password" name="passwordConfirm" v-model="passwordConfirm">
-    </div>
-    <div v-show="!passwordsMatch">Passwords Must Match</div>
-    <input type="submit" value="Reset Password">
-  </form>
+  </div>
 </template>
 
 <script>

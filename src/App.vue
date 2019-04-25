@@ -32,7 +32,8 @@ export default {
             this.$router.push({ name: "Episodes" });
           }
         } else {
-          this.$router.push({ name: "Home" });
+          if (this.$route.name !== "Recover")
+            this.$router.push({ name: "Home" });
         }
       })
       .catch(err => {
