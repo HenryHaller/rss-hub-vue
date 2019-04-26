@@ -21,7 +21,7 @@ footer {
   position: sticky;
   bottom: 0px;
   height: 60px;
-  background: black;
+  background: darkslategray;
   color: moccasin;
 }
 </style>

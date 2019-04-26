@@ -1,6 +1,9 @@
 <template>
   <div class="text-light">
-    <form @submit.prevent="onSubmit" class="form-inline d-flex flex-column align-items-center">
+    <form
+      @submit.prevent="onSubmit"
+      class="form-inline d-flex flex-column align-items-center"
+    >
       <h3>Search for a Podcast</h3>
       <fieldset class="form-group form-inline">
         <input
@@ -9,7 +12,7 @@
           v-model="searchString"
           name="searchString"
           placeholder="podcast name"
-        >
+        />
       </fieldset>
     </form>
     <div class="container">

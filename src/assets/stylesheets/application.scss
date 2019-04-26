@@ -8,6 +8,15 @@ a {
   color: silver;
 }
 
+.nav-link {
+  background-color: darkslategray;
+}
+
+.nav-link:hover {
+  color: black !important;
+  background-color: yellow;
+}
+
 a:hover {
   font-weight: bold;
   text-decoration: none;
@@ -20,12 +29,12 @@ label {
 
 .btn-primary {
   color: #f5edf0;
-  background-color: #0f2c33;
+  background-color: #554a4a;
   border: none;
 }
 
 .btn-primary:hover {
-  color: #0f2c33;
+  color: black;
   background-color: #f5edf0;
 }
 

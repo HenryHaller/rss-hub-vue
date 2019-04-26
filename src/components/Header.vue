@@ -44,7 +44,7 @@ header {
   z-index: 10;
   position: sticky;
   top: 0;
-  background-color: black;
+  background-color: darkslategray;
   display: flex;
   align-items: center;
   justify-content: space-around;

@@ -1,11 +1,14 @@
 <template>
-  <div class="show-card">
-    <div class="h-100 w-100 d-flex justify-content-center align-items-center">
+  <div class="show-card d-flex">
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="width: 90%"
+    >
       <router-link :to="{ name: 'Show', params: { id: id } }">
         <span @click="close">{{ title }}</span>
       </router-link>
     </div>
-    <div style="align-self: center; justify-self:center">
+    <div class="ml-3">
       <button type="submit" class="btn btn-danger" @click="deleteShow">
         Delete
       </button>
@@ -46,11 +49,6 @@ export default {
 
 .show-card {
   width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
   margin-bottom: 1vh;
-  .title-box {
-    justify-self: center;
-  }
 }
 </style>

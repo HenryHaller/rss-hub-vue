@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <Header/>
+    <Header />
     <flash-message class="flash-messages"></flash-message>
-    <router-view/>
-    <Footer text="Copyright 2019 Henry Haller"/>
+    <router-view />
+    <Footer text="Copyright 2019 Henry Haller" />
   </div>
 </template>
 
@@ -45,15 +45,16 @@ export default {
 
 <style lang="scss">
 @import "src/assets/stylesheets/application.scss";
-$background-lighter: #0b3337;
-$background-darker: #13262f;
+// $background-lighter: #0b3337;
+// $background-darker: #13262f;
 
 .main {
-  background-image: linear-gradient(
-    $background-darker,
-    $background-lighter,
-    $background-darker
-  );
+  // background-image: linear-gradient(
+  //   $background-darker,
+  //   $background-lighter,
+  //   $background-darker
+  // );
+  background-color: black;
 }
 
 .flash-messages {

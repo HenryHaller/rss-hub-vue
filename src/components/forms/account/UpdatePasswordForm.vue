@@ -1,40 +1,53 @@
 <template>
   <div class="d-flex justify-content-center">
-    <form @submit.prevent="onSubmit" class="text-light">
-      <fieldset class="form-group form-inline">
-        <legend class="justify-content-center d-flex mb-3">
-          Update Password
-        </legend>
-        <label for="password" class="form-control-label"
-          >Current Password</label
-        >
-        <input type="password" v-model="password" class="form-control" />
+    <div
+      class="text-light p-4 rounded"
+      style="background-color: darkslategrey;"
+    >
+      <form @submit.prevent="onSubmit" class="mb-4">
+        <fieldset class="form-group form-inline">
+          <legend class="justify-content-center d-flex mb-3">
+            Update Password
+          </legend>
+          <label for="password" class="form-control-label"
+            >Current Password</label
+          >
+          <input type="password" v-model="password" class="form-control" />
 
-        <label for="newPassword" class="form-control-label">New Password</label>
-        <input type="password" v-model="newPassword" class="form-control" />
+          <label for="newPassword" class="form-control-label"
+            >New Password</label
+          >
+          <input type="password" v-model="newPassword" class="form-control" />
 
-        <label for="newPasswordConfirm" class="form-control-label"
-          >Confirm new Password</label
-        >
-        <input
-          type="password"
-          v-model="newPasswordConfirm"
-          class="form-control"
-        />
-      </fieldset>
+          <label for="newPasswordConfirm" class="form-control-label"
+            >Confirm new Password</label
+          >
+          <input
+            type="password"
+            v-model="newPasswordConfirm"
+            class="form-control"
+          />
+          <div v-show="!passwordsMatch" class="text-muted mt-3">
+            Passwords Must Match
+          </div>
+        </fieldset>
 
-      <input type="submit" class="btn btn-warning" value="Reset Password" />
-      <div v-show="!passwordsMatch" class="text-muted">
-        Passwords Must Match
-      </div>
-    </form>
+        <input type="submit" class="btn btn-warning" value="Reset Password" />
+      </form>
+      <LogoutButton />
+    </div>
   </div>
 </template>
 
 <script>
 import UserService from "@/services/UserService.js";
+import LogoutButton from "@/components/LogoutButton.vue";
+
 // import { mapGetters } from "vuex";
 export default {
+  components: {
+    LogoutButton
+  },
   data() {
     return {
       password: null,

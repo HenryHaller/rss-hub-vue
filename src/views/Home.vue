@@ -21,25 +21,40 @@
           <div
             class="col-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6 offset-lg-4 col-lg-4"
           >
-            <div class="nav nav-pills nav-justified d-flex align-items-center">
-              <a
-                class="nav-item nav-link active"
-                v-on:click="toggleMode('#login', '#loginLink')"
-                id="loginLink"
-                >Login</a
+            <div
+              class="nav nav-pills"
+              style="display:grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr; column-gap: 1rem"
+            >
+              <div
+                class="nav-item nav-link h-100 w-100 d-flex justify-content-center align-items-center text-center"
               >
-              <a
-                class="nav-item nav-link"
-                v-on:click="toggleMode('#signup', '#signupLink')"
-                id="signupLink"
-                >Sign Up</a
+                <a
+                  class="active"
+                  v-on:click="toggleMode('#login', '#loginLink')"
+                  id="loginLink"
+                  >Login</a
+                >
+              </div>
+              <div
+                class="nav-item nav-link h-100 w-100 d-flex justify-content-center align-items-center text-center"
               >
-              <a
-                class="nav-item nav-link"
-                v-on:click="toggleMode('#recover', '#recoveryLink')"
-                id="recoveryLink"
-                >Password Recovery</a
+                <a
+                  class
+                  v-on:click="toggleMode('#signup', '#signupLink')"
+                  id="signupLink"
+                  >Sign Up</a
+                >
+              </div>
+              <div
+                class="nav-item nav-link h-100 w-100 d-flex justify-content-center align-items-center text-center"
               >
+                <a
+                  class
+                  v-on:click="toggleMode('#recover', '#recoveryLink')"
+                  id="recoveryLink"
+                  >Password Recovery</a
+                >
+              </div>
             </div>
             <div class="tab-content clearfix">
               <div class="tab-pane active" id="login">

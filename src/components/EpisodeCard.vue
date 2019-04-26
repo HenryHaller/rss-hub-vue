@@ -2,24 +2,32 @@
   <transition name="ep">
     <div class="episode-box">
       <div class="icon-box">
-        <div
-          class="episode-icon"
-          :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"
-        ></div>
-        <h4 class="title-font" style="display: none">
-          {{ episode.show_title }}
-        </h4>
+        <div class="episode-icon" :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"></div>
+        <h4 class="title-font" style="display: none">{{ episode.show_title }}</h4>
       </div>
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
         <div class="description-text-box">
-          <div class="description-text" v-html="episode.description"></div>
+          <div class="description-text" v-if="showDescription" v-html="episode.description"></div>
         </div>
+        <div class="text-center my-3">
+          <button
+            class="btn btn-primary"
+            type="button"
+            v-if="showDescription === false"
+            @click="showDescription = true"
+          >Show description</button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            v-else
+            @click="showDescription = false"
+          >Hide Description</button>
+        </div>
+
         <div class="download-box">
           <a :href="episode.url">&#x2B73; Download &#x2B73;</a>
-          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }"
-            >All Episodes</router-link
-          >
+          <router-link :to="{ name: 'Show', params: { id: episode.show_id } }">All Episodes</router-link>
         </div>
       </div>
     </div>
@@ -29,6 +37,11 @@
 <script>
 export default {
   name: "EpisodeCard",
+  data() {
+    return {
+      showDescription: false
+    };
+  },
   props: {
     episode: Object
   },
@@ -36,6 +49,13 @@ export default {
     backgroundUrl() {
       if (this.episode.show_img !== null) {
         return this.episode.show_img;
+      } else {
+        return "";
+      }
+    },
+    description() {
+      if (this.showDescription) {
+        return this.showDescription;
       } else {
         return "";
       }
@@ -52,7 +72,7 @@ export default {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: #333;
+  background-color: #352d2d;
   display: flex;
   margin: 1rem 0;
   @media screen and (min-width: 900px) {
