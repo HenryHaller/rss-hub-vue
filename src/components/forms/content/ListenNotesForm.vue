@@ -4,7 +4,6 @@
       @submit.prevent="onSubmit"
       class="form-inline d-flex flex-column align-items-center"
     >
-      <h3>Search for a Podcast</h3>
       <fieldset class="form-group form-inline">
         <input
           type="text"

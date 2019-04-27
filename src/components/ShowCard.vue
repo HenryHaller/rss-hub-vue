@@ -1,14 +1,14 @@
 <template>
   <div class="show-card d-flex">
     <div
-      class="d-flex justify-content-center align-items-center"
+      class="d-flex justify-content-center align-items-center text-center"
       style="width: 90%"
     >
       <router-link :to="{ name: 'Show', params: { id: id } }">
         <span @click="close">{{ title }}</span>
       </router-link>
     </div>
-    <div class="ml-3">
+    <div class="ml-3 d-flex align-items-center">
       <button type="submit" class="btn btn-danger" @click="deleteShow">
         Delete
       </button>

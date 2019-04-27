@@ -2,8 +2,20 @@
   <div class="episodes-view" style="min-height: calc(100vh - 120px - 1rem)">
     <!-- feed/manage -->
     <div class="nav nav-pills nav-fill mt-3">
-      <a href="#" class="nav-item nav-link mx-3 active" v-on:click="toggleMain()" id="feedLink">Feed</a>
-      <a href="#" class="nav-item nav-link mx-3" v-on:click="toggleMain()" id="manageLink">Manage</a>
+      <a
+        href="#"
+        class="nav-item nav-link mx-3 active"
+        v-on:click="toggleMain()"
+        id="feedLink"
+        >Feed</a
+      >
+      <a
+        href="#"
+        class="nav-item nav-link mx-3"
+        v-on:click="toggleMain()"
+        id="manageLink"
+        >Manage</a
+      >
     </div>
     <div class="tab-content clearfix">
       <div
@@ -12,31 +24,34 @@
         style="min-height: calc(100vh - 120px - 24px - 1rem)"
       >
         <div class="episodes-wrapper">
-          <EpisodeList/>
+          <EpisodeList />
         </div>
       </div>
       <div id="manage" class="tab-pane">
         <!-- Inside of Manage tab -->
         <!-- subscriptions/add/account tabs -->
-        <div class="nav nav-pills nav-fill my-3">
+        <div class="nav nav-pills nav-justified m-3">
           <a
             href="#"
-            class="nav-item nav-link mx-3 active"
+            class="nav-link nav-item active"
             v-on:click="toggleManage('#subscriptions', '#subscriptionsLink')"
             id="subscriptionsLink"
-          >Subscriptions</a>
+            >Subscriptions</a
+          >
           <a
             href="#"
-            class="nav-item nav-link mx-3"
+            class="mx-3 nav-link nav-item"
             v-on:click="toggleManage('#add', '#addLink')"
             id="addLink"
-          >Add</a>
+            >Add</a
+          >
           <a
             href="#"
-            class="nav-item nav-link mx-3"
+            class="nav-link nav-item"
             v-on:click="toggleManage('#account', '#accountLink')"
             id="accountLink"
-          >Account</a>
+            >Account</a
+          >
         </div>
         <div class="tab-content clearfix">
           <div
@@ -72,7 +87,10 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane text-center flex-column justify-content-start" id="add">
+          <div
+            class="tab-pane text-center flex-column justify-content-start"
+            id="add"
+          >
             <!-- Inside of SPECIAL! add tab -->
             <!-- search/direct tabs -->
             <div class="nav nav-pills nav-fill">
@@ -81,24 +99,40 @@
                 class="nav-item nav-link mx-3 active"
                 v-on:click="toggleAdd()"
                 id="searchLink"
-              >Search</a>
+                >Search</a
+              >
               <a
                 href="#"
                 class="nav-item nav-link mx-3"
                 v-on:click="toggleAdd()"
                 id="directLink"
-              >Direct Link</a>
+                >Direct Link</a
+              >
             </div>
-            <div
-              class="tab-content clearfix justify-content-center d-flex flex-column"
-              style="min-height: calc(100vh - 120px - 120px - 3rem);
-"
-            >
-              <div class="tab-pane active mt-5" id="search">
-                <ListenNotesForm class="mt-5"/>
+            <div class="tab-content clearfix">
+              <div
+                class="tab-pane active flex-column justify-content-center align-items-center d-flex py-5"
+                style="min-height: calc(100vh - 120px - 120px - 3rem)"
+                id="search"
+              >
+                <div
+                  style="display: grid; grid-template-rows:60px 1fr; grid-template-columns: 1fr; flex-grow: 2; flex-basis: 100px; background-color: darkslategray;"
+                  class="p-3"
+                >
+                  <div>
+                    <h3 class="text-light">Search for a podcast</h3>
+                  </div>
+                  <div>
+                    <ListenNotesForm />
+                  </div>
+                </div>
               </div>
-              <div class="tab-pane" id="direct">
-                <SubscribeForm class="mt-5"/>
+              <div
+                class="tab-pane justify-content-center flex-column"
+                style="min-height: calc(100vh - 120px - 120px - 3rem);"
+                id="direct"
+              >
+                <SubscribeForm class="mt-5" />
               </div>
             </div>
           </div>
@@ -108,7 +142,7 @@
             style="min-height: calc(100vh - 120px - 80px - 3rem)"
           >
             <div>
-              <UpdatePasswordForm/>
+              <UpdatePasswordForm />
             </div>
           </div>
         </div>
@@ -161,8 +195,12 @@ export default {
     },
     toggleAdd() {
       document
-        .querySelectorAll("#direct, #search, #directLink, #searchLink")
+        .querySelectorAll("#directLink, #searchLink")
         .forEach(elem => elem.classList.toggle("active"));
+      document.querySelectorAll("#direct, #search").forEach(elem => {
+        elem.classList.toggle("active");
+        elem.classList.toggle("d-flex");
+      });
     },
     unSubscribe(show) {
       this.$store
