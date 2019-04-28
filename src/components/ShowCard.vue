@@ -1,10 +1,13 @@
 <template>
   <div class="show-card d-flex">
-    <div class="d-flex justify-content-center align-items-center text-center" style="width: 90%">
+    <div
+      class="d-flex justify-content-between justify-content-sm-center align-items-center text-center px-3 py-2"
+      style="width: 90%"
+    >
       <router-link :to="{ name: 'Show', params: { id: id } }">
         <span @click="close">{{ title }}</span>
       </router-link>
-      <img :src="showImageUrl" alt style="height: 2.5rem" class="ml-4" />
+      <img :src="showImageUrl" alt style="height: 2.5rem" class="ml-4">
     </div>
     <div class="ml-3 d-flex align-items-center">
       <button type="submit" class="btn btn-danger" @click="deleteShow">Delete</button>
