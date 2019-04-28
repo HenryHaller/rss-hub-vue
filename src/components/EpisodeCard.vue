@@ -7,22 +7,22 @@
       </div>
       <div class="description-box">
         <h3 class="title">{{ episode.title }}</h3>
-        <div class="description-text-box">
-          <div class="description-text" v-if="showDescription" v-html="episode.description"></div>
-        </div>
         <div class="text-center my-3">
           <button
             class="btn btn-primary"
             type="button"
             v-if="showDescription === false"
             @click="showDescription = true"
-          >Show description</button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            v-else
-            @click="showDescription = false"
-          >Hide Description</button>
+          >
+            Show description
+          </button>
+          <button class="btn btn-primary" type="button" v-else @click="showDescription = false">
+            Hide Description
+          </button>
+        </div>
+
+        <div class="description-text-box">
+          <div class="description-text" v-if="showDescription" v-html="episode.description"></div>
         </div>
 
         <div class="download-box">
@@ -36,11 +36,11 @@
 
 <script>
 export default {
-  name: "EpisodeCard",
+  name: 'EpisodeCard',
   data() {
     return {
       showDescription: false
-    };
+    }
   },
   props: {
     episode: Object
@@ -48,20 +48,20 @@ export default {
   computed: {
     backgroundUrl() {
       if (this.episode.show_img !== null) {
-        return this.episode.show_img;
+        return this.episode.show_img
       } else {
-        return "";
+        return ''
       }
     },
     description() {
       if (this.showDescription) {
-        return this.showDescription;
+        return this.showDescription
       } else {
-        return "";
+        return ''
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

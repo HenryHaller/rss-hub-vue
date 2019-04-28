@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main d-none">
     <Header />
     <flash-message class="flash-messages"></flash-message>
     <router-view />
@@ -26,6 +26,7 @@ export default {
     UserService.checkLogin()
       .then(response => {
         this.loginCheckCompleted = true;
+        this.$el.classList.remove("d-none");
 
         if (response.status === 204) {
           if (this.$route.name !== "Show") {

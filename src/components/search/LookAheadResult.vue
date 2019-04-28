@@ -1,24 +1,23 @@
 <template>
-  <div class="look-ahead-candidate">
-    <div class="publisher-title">
-      <div v-html="candidate.publisher_highlighted"></div>
-      <div v-html="candidate.title_highlighted"></div>
-    </div>
-    <div class="subscribe">
-      <button class="subscribe-button" @click.prevent="subscribe">
-        Subscribe
-      </button>
-    </div>
+  <div
+    class="look-ahead-candidate my-4 p-4 rounded d-flex flex-column flex-sm-row align-items-center justify-content-sm-between"
+  >
     <div class="thumbnail">
       <img :src="candidate.thumbnail" />
     </div>
+
+    <div class="m-4">
+      <div v-html="candidate.publisher_highlighted"></div>
+      <div v-html="candidate.title_highlighted"></div>
+    </div>
+    <button class="btn btn-success" @click.prevent="subscribe">Subscribe</button>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
-import ListenNotesService from "@/services/ListenNotesService.js";
+import ListenNotesService from '@/services/ListenNotesService.js'
 
 export default {
   props: {
@@ -26,7 +25,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      subscribeShow: "RSSHub/subscribeShow"
+      subscribeShow: 'RSSHub/subscribeShow'
     }),
 
     subscribe() {
@@ -34,46 +33,35 @@ export default {
         .then(response => {
           const params = {
             rss_url: response.data.rss
-          };
-          this.flash(`Subscribing to ${response.data.title}`, "info", {
+          }
+          this.flash(`Subscribing to ${response.data.title}`, 'info', {
             timeout: 2000
-          });
+          })
 
-          this.subscribeShow({ input: params, flash: this.flash });
+          this.subscribeShow({ input: params, flash: this.flash })
         })
         .catch(err => {
-          this.flash("Subscribing Error", "error", {
+          this.flash('Subscribing Error', 'error', {
             timeout: 2000
-          });
-          console.log(`directory lookup for ${this.candidate.id} ` + err);
-        });
-      this.$emit("close-subscribe-modal");
+          })
+          console.log(`directory lookup for ${this.candidate.id} ` + err)
+        })
+      this.$emit('close-subscribe-modal')
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
-div.publisher-title {
-  flex: 0 0 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-div.subscribe {
-  flex: 0 0 20%;
-}
-
-div.thumbnail {
-  flex: 0 0 20%;
-  justify-content: flex-end;
-  display: flex;
-}
-
 div.look-ahead-candidate {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  background-color: #352d2d;
+
+  // @media screen and (min-width: 578px) {
+  //   flex-direction: row;
+  // }
 }
 
 img {
