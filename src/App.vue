@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
-import UserService from "@/services/UserService";
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import UserService from '@/services/UserService'
 
 export default {
   components: {
@@ -18,34 +18,58 @@ export default {
     Footer
   },
   beforeCreate() {
-    document.title = "RSSHub";
+    document.title = 'RSSHub'
 
-    if (process.env.NODE_ENV === "development")
-      document.title += "(development)";
+    if (process.env.NODE_ENV === 'development') document.title += '(development)'
 
     UserService.checkLogin()
       .then(response => {
-        this.loginCheckCompleted = true;
-        this.$el.classList.remove("d-none");
+        this.loginCheckCompleted = true
+        this.$el.classList.remove('d-none')
 
         if (response.status === 204) {
-          if (this.$route.name !== "Show") {
-            this.$router.push({ name: "Episodes" });
+          //set up push notifications
+          if ('Notification' in window) {
+            navigator.serviceWorker.ready.then(reg => {
+              Notification.requestPermission(status => {
+                console.log(status)
+                if (status === 'granted') {
+                  console.log(reg)
+                  reg.pushManager.subscribe({ userVisibleOnly: true }).then(sub => {
+                    console.log(JSON.stringify(sub))
+                    console.log(sub.endpoint)
+                    UserService.subscribeEndpoint({ endpoint: sub.endpoint })
+                      .then(response => {
+                        console.log(response)
+                        console.log('user subscribed')
+                      })
+                      .catch(err => {
+                        if (err.response.status == 409) {
+                          console.log('endpoint already exists')
+                        }
+                      })
+                  })
+                }
+              })
+            })
+          }
+
+          if (this.$route.name !== 'Show') {
+            this.$router.push({ name: 'Episodes' })
           }
         } else {
-          if (this.$route.name !== "Recover")
-            this.$router.push({ name: "Home" });
+          if (this.$route.name !== 'Recover') this.$router.push({ name: 'Home' })
         }
       })
       .catch(err => {
-        this.loginCheckCompleted = true;
-      });
+        this.loginCheckCompleted = true
+      })
   }
-};
+}
 </script>
 
 <style lang="scss">
-@import "src/assets/stylesheets/application.scss";
+@import 'src/assets/stylesheets/application.scss';
 // $background-lighter: #0b3337;
 // $background-darker: #13262f;
 
