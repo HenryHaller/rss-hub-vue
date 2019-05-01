@@ -1,8 +1,9 @@
 <template>
-  <div class="main d-none">
+  <div class="main">
     <Header />
     <flash-message class="flash-messages"></flash-message>
-    <router-view />
+    <div v-if="loading" style="min-height: calc(100vh - 120px);">!</div>
+    <router-view v-else />
     <Footer text="Copyright 2019 Henry Haller" />
   </div>
 </template>
@@ -17,6 +18,12 @@ export default {
     Header,
     Footer
   },
+  data() {
+    return {
+      loading: true
+    }
+  },
+
   beforeCreate() {
     document.title = 'RSSHub'
 
@@ -24,9 +31,6 @@ export default {
 
     UserService.checkLogin()
       .then(response => {
-        this.loginCheckCompleted = true
-        this.$el.classList.remove('d-none')
-
         if (response.status === 204) {
           //set up push notifications
           if ('Notification' in window) {
@@ -53,7 +57,9 @@ export default {
               })
             })
           }
+        }
 
+        if (response.status === 204) {
           if (this.$route.name !== 'Show') {
             this.$router.push({ name: 'Episodes' })
           }
@@ -62,7 +68,11 @@ export default {
         }
       })
       .catch(err => {
-        this.loginCheckCompleted = true
+        console.log(err)
+        this.$router.push({ name: 'ApplicationError' })
+      })
+      .finally(() => {
+        this.loading = false
       })
   }
 }
