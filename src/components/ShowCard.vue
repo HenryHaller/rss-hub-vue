@@ -2,20 +2,28 @@
   <div class="show-card d-flex">
     <div
       class="d-flex justify-content-between justify-content-sm-center align-items-center text-center px-3 py-2"
-      style="width: 90%"
+      style="flex: 0 0 60%"
     >
       <router-link :to="{ name: 'Show', params: { id: id } }">
         <span @click="close">{{ title }}</span>
       </router-link>
-      <img :src="showImageUrl" alt style="height: 2.5rem" class="ml-4">
+      <img :src="showImageUrl" alt style="height: 2.5rem" class="ml-4" />
     </div>
-    <div class="ml-3 d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-center px-4" style="flex: 0 0 40%">
       <button type="submit" class="btn btn-danger" @click="deleteShow">Delete</button>
+      <button type="submit" class="btn btn-secondary" @click="setNotifications(true)" v-show="!show.notifications">
+        Notify
+      </button>
+      <button type="submit" class="btn btn-secondary" @click="setNotifications(false)" v-show="show.notifications">
+        Silence
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import RSSHubService from '@/services/RSSHubService.js'
+
 export default {
   name: 'ShowCard',
   props: {
@@ -29,6 +37,17 @@ export default {
     },
     deleteShow() {
       this.$emit('delete-me', this)
+    },
+    setNotifications(status) {
+      RSSHubService.setNotifications({ show_id: this.show.id, subscribed: status })
+        .then(() => {
+          console.log('updated status for: ' + this.show.title)
+        })
+        .then(() => {
+          this.$store.dispatch('RSSHub/fetchShows').then(() => {
+            console.log('Shows updated for subscription')
+          })
+        })
     }
   },
   computed: {

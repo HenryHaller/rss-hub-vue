@@ -12,6 +12,7 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import UserService from '@/services/UserService'
+import EndPointService from '@/services/EndPointService'
 
 export default {
   components: {
@@ -32,39 +33,16 @@ export default {
     UserService.checkLogin()
       .then(response => {
         if (response.status === 204) {
-          //set up push notifications
-          if ('Notification' in window) {
-            navigator.serviceWorker.ready.then(reg => {
-              Notification.requestPermission(status => {
-                console.log(status)
-                if (status === 'granted') {
-                  console.log(reg)
-                  reg.pushManager.subscribe({ userVisibleOnly: true }).then(sub => {
-                    console.log(JSON.stringify(sub))
-                    console.log(sub.endpoint)
-                    UserService.subscribeEndpoint({ endpoint: sub.endpoint })
-                      .then(response => {
-                        console.log(response)
-                        console.log('user subscribed')
-                      })
-                      .catch(err => {
-                        if (err.response.status == 409) {
-                          console.log('endpoint already exists')
-                        }
-                      })
-                  })
-                }
-              })
-            })
-          }
+          EndPointService.configureEndpoint()
         }
+        //set up push notifications
 
         if (response.status === 204) {
           if (this.$route.name !== 'Show') {
             this.$router.push({ name: 'Episodes' })
           }
         } else {
-          if (this.$route.name !== 'Recover') this.$router.push({ name: 'Home' })
+          if (this.$route.name !== 'PendingActivation') this.$router.push({ name: 'Home' })
         }
       })
       .catch(err => {
